@@ -336,16 +336,18 @@ main{
     }
 
     .top-saler-profile-pic {
-      width: 45px;
-      height: 45px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid #ddd;
     }
-
+    .top-saler-container table td{
+        padding: .4rem;
+    }
     .top-saler-text-main {
       color: #ff0000;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .table th {
@@ -354,4 +356,16 @@ main{
 
     .table-hover tbody tr:hover {
       background-color: #f9f9f9;
+    }
+
+
+
+    .chart-card {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 25px;
+    }
+    .graph{
+        margin: 0px !important;
     }

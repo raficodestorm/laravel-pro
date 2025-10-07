@@ -5,3 +5,5 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Bootstrap JS
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+ // chart js
+ import Chart from 'chart.js/auto';

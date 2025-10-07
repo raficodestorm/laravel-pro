@@ -17,6 +17,8 @@
     @yield('content')
   </div>
   @include('components.adminfooter')
+  @yield('scripts')
+  <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/admin.js') }}"></script>
 </body>
 
