@@ -1,5 +1,5 @@
 <main>
-  <nav class="navbar sticky-top bg-body-tertiary" id="header">
+  <nav class="navbar sticky-top " id="header">
     <div class="container-fluid d-flex align-items-center justify-content-between">
       <form class="d-flex" role="search">
         <input class="form-control " type="search" placeholder="Search" aria-label="Search" />

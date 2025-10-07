@@ -1,11 +1,11 @@
 :root {
-        --bg: #0f1724;
-        /* dark navy */
-        --panel: #0b1220;
-        /* slightly darker */
+    --main-color: #ff0000;
+    --second-color: #780116;
+    --bg-color: #fffffc;
+    --back-color: #edf6f9af;
+    --text-color: #220901;
+    --light-hover: #ff0101ca;
         --muted: #9aa6b2;
-        --accent: #5eead4;
-        /* mint */
         --radius: 12px;
         --gap: 24px;
         --max-width: 1200px;
@@ -16,13 +16,130 @@
     .container-fluid {
   --bs-gutter-x: 0 !important;
 }
-/* ----------------------------------------- navbar style -------------------------------------------- */
-.navbar{
-    padding: 5px 15px 5px 15px !important;
-}
-    /* -----------------------------------------Footer style-------------------------------------------- */
+
+/* ---------------------------------- navbar style ----------------------------------------- */
+    .navbar {
+      background: linear-gradient(135deg, var(--second-color), var(--main-color));
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 0.8rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--section-bg-color);
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+    }
+
+    .navbar-brand span {
+      color: var(--second-color);
+      background: var(--section-bg-color);
+      padding: 2px 10px;
+      border-radius: 8px;
+    }
+
+    .navbar-nav .nav-link {
+      color: var(--section-bg-color);
+      font-weight: 500;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+      border-radius: 6px;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      background: var(--section-bg-color);
+      color: var(--main-color);
+      padding: 6px 12px;
+    }
+
+    /* Dropdowns */
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+      background-color: #fff;
+      animation: dropdownFade 0.3s ease;
+    }
+
+    @keyframes dropdownFade {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dropdown-item {
+      color: var(--second-color);
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--main-color);
+      color: #fff;
+      border-radius: 6px;
+    }
+
+    /* Submenu Style */
+    .dropdown-submenu {
+      position: relative;
+    }
+
+    .dropdown-submenu .dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-top: -5px;
+      display: none;
+      border-radius: 10px;
+    }
+
+    .dropdown-submenu:hover > .dropdown-menu {
+      display: block;
+    }
+
+    /* User Dropdown */
+    .user-dropdown img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 8px;
+      border: 2px solid var(--section-bg-color);
+    }
+
+    .user-dropdown .dropdown-toggle {
+      color: var(--section-bg-color);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .user-dropdown .dropdown-toggle:hover {
+      color: var(--section-bg-color);
+      opacity: 0.9;
+    }
+
+    @media (max-width: 992px) {
+      .navbar-nav .nav-link {
+        text-align: center;
+        margin: 6px 0;
+      }
+      .user-dropdown {
+        justify-content: center;
+      }
+      .dropdown-submenu .dropdown-menu {
+        position: static;
+        margin-left: 1rem;
+        display: none;
+      }
+      .dropdown-submenu.show > .dropdown-menu {
+        display: block;
+      }
+    }
+    /* ------------------------------Footer style--------------------------------------- */
     .site-footer {
-        background: linear-gradient(180deg, var(--bg), #071021 120%);
+        background: linear-gradient(180deg, var(--second-color), #071021 120%);
         color: var(--text);
         padding: 48px 20px 20px;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -151,7 +268,7 @@
         min-width: 0;
         padding: 10px 12px;
         border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.224);
         background: transparent;
         color: var(--text);
         font-size: 0.95rem;
@@ -166,8 +283,8 @@
         border-radius: 10px;
         border: 0;
         cursor: pointer;
-        background: linear-gradient(180deg, var(--accent), #34d3b8);
-        color: #042024;
+        background: linear-gradient(180deg, var(--main-color), var(--second-color), var(--main-color));
+        color: #ffffff !important;
         font-weight: 600;
     }
 
