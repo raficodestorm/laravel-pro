@@ -3,6 +3,8 @@
 /* font-family: "Roboto", sans-serif; */
 /* font-family: "El Messiri", sans-serif; */
 
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
 :root{
     --main-color: #ff0000;
     --second-color: #780116;
@@ -26,14 +28,17 @@ body{
     grid-template-columns: auto 1fr;
     min-width: 100vh;
 }
+/* .page-main-div{
+    z-index: 9999;
+} */
 h1, h2, h3, h4, h5{
     font-family: "El Messiri", sans-serif;
     font-weight: 800;
 }
 main{
     padding: 0;
-    z-index: -5;
-    background-color: var(--back-color);
+    background-color: transparent;
+    height: 100vh;
 }
 
 /* =================== Sidebar style start =================== */
@@ -313,8 +318,8 @@ main{
 
 
 .footeer{
-    background-color: black;
-    color: white;
+    background-color: var(--bg-color);
+    color: var(--second-color);
     text-align: center;
     margin-top: 50px;
 }

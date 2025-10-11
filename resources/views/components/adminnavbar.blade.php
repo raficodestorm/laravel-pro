@@ -1,4 +1,4 @@
-<main>
+
   <nav class="navbar sticky-top " id="header">
     <div class="container-fluid d-flex align-items-center justify-content-between">
       <form class="d-flex" role="search">

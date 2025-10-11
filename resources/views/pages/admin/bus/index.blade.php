@@ -1,7 +1,7 @@
 @extends('layouts.adminlayout')
 
 @section('content')
-<div class="container">
+<div class="container ">
   @if(session('success'))
   <div class="alert alert-success">{{ session('success') }}</div>
   @endif
@@ -26,7 +26,7 @@
     <tbody>
       @forelse($buses as $bus)
       <tr>
-        <td>{{ $bus->id }}</td>
+        <th scope="row">{{ $loop->iteration }}</th>
         <td>{{ $bus->name }}</td>
         <td>{{ $bus->coach_no }}</td>
         <td>{{ $bus->license }}</td>

@@ -36,14 +36,13 @@
         <div class="col-md-6">
           <label for="company" class="form-label">Company Name</label>
           <input type="text" name="company" id="company" class="form-control" placeholder="e.g. Green Line" required
-            value="{{  old('company', $bus->company) }}>
+            value="{{  old('company', $bus->company) }}">
           </div>
         </div>
 
         <div class=" mb-4">
           <label for="route" class="form-label">Route</label>
-          <input type="text" name="route" id="route" class="form-control" placeholder="e.g. Dhaka – Chittagong" required
-            {{ old('route', $bus->route) }}>
+          <input type="text" name="route" id="route" class="form-control" placeholder="e.g. Dhaka – Chittagong" required value="{{ old('route', $bus->route) }}">
         </div>
 
         <div class="text-end">

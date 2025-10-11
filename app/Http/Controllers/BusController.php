@@ -41,7 +41,7 @@ class BusController extends Controller
      */
     public function show(Bus $bus)
     {
-        return view('bus.show', compact('bus'));
+        return view('pages.admin.bus.show', compact('bus'));
     }
 
     /**
@@ -49,7 +49,7 @@ class BusController extends Controller
      */
     public function edit(Bus $bus)
     {
-        return view('bus.edit', compact('bus'));
+        return view('pages.admin.bus.edit', compact('bus'));
     }
 
     /**

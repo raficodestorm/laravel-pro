@@ -11,7 +11,7 @@ class Bus extends Model
         'name',
         'coach_no',
         'license',
-        'conpany',
+        'company',
         'route',
     ];
 }
