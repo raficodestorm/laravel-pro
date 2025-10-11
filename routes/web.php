@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\BusController;
+use App\Http\Controllers\BusController;
 
 Route::get('/', function () {
     return view('pages.user.userfront');
@@ -9,10 +9,11 @@ Route::get('/', function () {
 
 Route::get('/admindashboard', function () {
     return view('pages.admin.admindashboard');
-});
+})->name('pages.admin.admindashboard');
 
-Route::get('/all-buses', function () {
-    return view('pages.admin.bus.index');
-});
+
+// Route::get('/all-buses', function () {
+//     return view('pages.admin.bus.index');
+// })->name('buses.index');
 
 Route::resource('buses', BusController::class);

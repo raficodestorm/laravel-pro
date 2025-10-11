@@ -13,12 +13,12 @@ class BusController extends Controller
     public function index()
     {
         $buses = Bus::all();
-        return view('bus.index', compact('buses'));
+        return view('pages.admin.bus.index', compact('buses'));
     }
 
     public function create()
     {
-        return view('bus.create');
+        return view('pages.admin.bus.create');
     }
 
     public function store(Request $request)
