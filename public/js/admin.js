@@ -1,6 +1,3 @@
-
-
-
 //  -------------------------------- for sale chart --------------------------------
 
 // public/js/sales.js
@@ -28,5 +25,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+
+//  -------------------------------- for sale navbar --------------------------------s
+
+
 
 // ==========this script for =========================

@@ -2,7 +2,7 @@ import './bootstrap';
 
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './admin/dashboard.js';
+import './user/front.js';
 
 // Bootstrap JS
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';

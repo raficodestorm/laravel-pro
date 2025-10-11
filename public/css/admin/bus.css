@@ -1,0 +1,153 @@
+/* =================== google-font-Roboto & Ek-mesirri =================== */
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* font-family: "Roboto", sans-serif; */
+/* font-family: "El Messiri", sans-serif; */
+
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+:root{
+    --main-color: #ff0000;
+    --second-color: #780116;
+    --bg-color: #fffffc;
+    --back-color: #edf6f9af;
+    --text-color: #220901;
+    --light-hover: #ff0101ca;
+}
+.main-area{
+  min-height: 100vh;
+  width: 100%;
+  padding: 3rem;
+  background-color: var(--back-color);
+}
+
+/* =================== start styling for bus/index =================== */
+.index-card{
+  border: .5px solid var(--main-color);
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-color);
+}
+/* ------------------------------
+   Table Styling
+------------------------------ */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Table Header */
+.table thead th {
+  background-color: #ff0000;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  padding: 12px 10px;
+}
+
+/* Table Body */
+.table tbody td,
+.table tbody th {
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Hover Row Effect */
+.table tbody tr:hover {
+  background-color: #f6f6e1;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Empty State */
+.table td.text-muted {
+  color: #999;
+  font-style: italic;
+}
+
+/* ------------------------------
+   Buttons
+------------------------------ */
+.btn {
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-success {
+  background-color: #780116;
+  border-color: #780116;
+}
+
+.btn-success:hover {
+  background-color: #ff0000;
+  border-color: #ff0000;
+}
+
+.btn-info {
+  background-color: #ff0000;
+  border: none;
+  color: #fff;
+}
+
+.btn-info:hover {
+  background-color: #cc0000;
+}
+
+.btn-warning {
+  background-color: #ffb300;
+  border: none;
+  color: #fff;
+}
+
+.btn-warning:hover {
+  background-color: #ff9500;
+}
+
+.btn-danger {
+  background-color: #780116;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #ff0000;
+}
+
+/* ------------------------------
+   Table Title & Header Row
+------------------------------ */
+h2.text-center {
+  font-weight: 700;
+  color: #780116;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ------------------------------
+   Alert Message
+------------------------------ */
+.alert-success {
+  background-color: #d1f7d1;
+  border: 1px solid #9be79b;
+  color: #217a21;
+  font-weight: 500;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* ------------------------------
+   Responsive Design
+------------------------------ */
+
+
+
+/* =================== start styling for bus/create =================== */
