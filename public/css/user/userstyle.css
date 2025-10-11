@@ -19,9 +19,9 @@
 
 /* ---------------------------------- navbar style ----------------------------------------- */
     .navbar {
-      background: linear-gradient(135deg, var(--second-color), var(--main-color));
+      background-color: #fffffc63;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      padding: 0.8rem 0;
+      padding: 0.5rem 0;
     }
 
     .navbar-brand {
@@ -137,6 +137,234 @@
         display: block;
       }
     }
+
+
+    /* ------------------------------banner style--------------------------------------- */
+    .master-background {
+  background-image: url("/image/bus-2.png"); /* change path */
+  background-size: cover;
+  background-position: center;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -60px;
+  padding: 100px 10px 20px 10px;
+}
+.heading{
+  margin-top: 6rem;
+}
+.heading h1{
+  color: #fffdf7;
+  font-size: 3.3rem;
+  text-align: start;
+  font-family: "El Messiri", sans-serif;
+  font-weight: bolder;
+}
+.heading p{
+  color: #fffdf7;
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+}
+.form-part{
+  position: relative;
+}
+.light1{
+  position: absolute;
+  height: .7rem;
+  width: .7rem;
+  border-radius: 50%;
+  background-color: white;
+  bottom: 28%;
+  left: -44%;
+  animation: light1 .2s ease-in-out infinite;
+}
+.light2{
+  position: absolute;
+  height: .5rem;
+  width: .5rem;
+  border-radius: 50%;
+  background-color: white;
+  bottom: 28%;
+  left: -1%;
+  animation: light2 .2s ease-in-out infinite;
+}
+@keyframes light1{
+  0%{box-shadow: 0 0 20px 5px rgb(247, 240, 209);
+    background-color: rgba(255, 255, 255, 0.774);}
+  50%{box-shadow: 0 0 20px 15px rgb(247, 240, 209);}
+  100%{box-shadow: 0 0 20px 5px rgb(247, 240, 209);
+    background-color: rgba(255, 255, 255, 0.774);}
+}
+@keyframes light2{
+  0%{box-shadow: 0 0 20px 4px rgb(247, 240, 209);
+    background-color: rgba(255, 255, 255, 0.774);}
+  50%{box-shadow: 0 0 20px 10px rgb(247, 240, 209);}
+  100%{box-shadow: 0 0 20px 4px rgb(247, 240, 209);
+    background-color: rgba(255, 255, 255, 0.774);}
+}
+
+
+/* ----------------------------- Responsive Design ------------------------- */
+
+/* Tablets */
+@media (max-width: 991px) {
+  .master-background {
+    
+    flex-direction: column;
+    text-align: center;
+    padding: 80px 20px 40px 20px;
+  }
+
+  .heading {
+    margin-top: 1rem;
+  }
+
+  .heading h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .heading p {
+    line-height: 0;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .form-part {
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
+
+  .light1,
+  .light2 {
+    display: none; /* hide glowing lights for smaller screens */
+  }
+  .bg-light.navbar-toggler.collapsed {
+  background: none !important;
+  border: none;
+}
+.navbar-toggler:focus {
+  text-decoration: none;
+  outline: 0;
+  box-shadow: none;
+  border: none;
+}
+
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+  .master-background {
+    position: relative;
+    min-height: auto;
+    margin-top: -60px;
+    padding: 18px 18px;
+    height: 18rem;
+  }
+  .heading{
+    margin-top: 0;
+  }
+  .heading h1 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+
+  .heading p {
+    font-size: 0.8rem;
+  }
+  .form-part {
+    margin-top: 0;
+    padding: 0 2rem !important;
+  }
+
+  .card {
+    position: absolute;
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    background: linear-gradient(180deg, #ff0000,#ff0000, #edf6f9,#edf6f9);
+    left: 0;
+    top: 25px;
+    box-shadow: 0 0 10px rgba(128, 128, 128, 0.808) !important;
+  }
+
+  .form-label {
+    display: none;
+  }
+
+  input.form-control {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  .bus-src {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 1260px) {
+  .light1{
+    bottom: 30%;
+  }
+  .light2{
+    bottom: 30%;
+  }
+}
+@media (max-width: 1160px) {
+  .light1{
+    bottom: 32%;
+  }
+  .light2{
+    bottom: 32%;
+  }
+}
+@media (max-width: 1050px) {
+  .light1{
+    bottom: 34%;
+  }
+  .light2{
+    bottom: 34%;
+  }
+}
+
+
+
+
+
+.card{
+  background-color: #fffffc75;
+}
+.form-label{
+  color: #070200 !important;
+}
+input.form-control{
+  background-color: #fffffc93;
+  font-size: small;
+}
+input.form-control:focus{
+  background-color: #fffffc93;
+  border: 1px solid var(--main-color);
+  box-shadow: none;
+}
+.bus-src{
+  background: linear-gradient(90deg, #ff0000, #780116);
+  border: none; 
+  color: white;
+  animation: wiggl 1s ease-in-out infinite;
+}
+@keyframes wiggl {
+  0%  { transform: translateX(-3px); }
+  50%  { transform: translateX(3px); }
+  100%  { transform: translateX(-3px); }
+}
+.bus-src:hover{
+  background: linear-gradient(90deg, #780116, #ff0000);
+  color: white;
+}
+
+
     /* ------------------------------Footer style--------------------------------------- */
     .site-footer {
         background: linear-gradient(180deg, var(--second-color), #071021 120%);
