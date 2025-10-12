@@ -13,7 +13,7 @@ class LocationController extends Controller
     public function index()
     {
         $locations = Location::orderBy('id', 'desc')->paginate(10);
-        return view('route.index', compact('locations'));
+        return view('pages.admin.location.index', compact('locations'));
     }
 
     /**
@@ -21,7 +21,7 @@ class LocationController extends Controller
      */
     public function create()
     {
-        return view('route.create');
+        return view('pages.admin.location.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class LocationController extends Controller
      */
     public function show(Location $location)
     {
-        return view('route.show', compact('location'));
+        return view('pages.admin.location.show', compact('location'));
     }
 
     /**
@@ -52,7 +52,7 @@ class LocationController extends Controller
      */
     public function edit(Location $location)
     {
-        return view('route.edit', compact('location'));
+        return view('pages.admin.location.edit', compact('location'));
     }
 
     /**

@@ -5,7 +5,7 @@
     <div class="index-card shadow">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3>All Locations</h3>
-            <a href="{{ route('routes.create') }}" class="btn btn-info">+ Add Route</a>
+            <a href="{{ route('locations.create') }}" class="btn btn-info">+ Add Location</a>
         </div>
 
         @if (session('success'))
@@ -13,9 +13,9 @@
         @endif
 
         <table class="table table-bordered align-middle" id="table-same">
-            <thead class="table-dark text-center">
+            <thead>
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>District</th>
                     <th>Division</th>
                     <th>Actions</th>

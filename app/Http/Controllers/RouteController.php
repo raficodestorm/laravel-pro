@@ -12,7 +12,8 @@ class RouteController extends Controller
      */
     public function index()
     {
-        //
+        $routes = Route::all()->paginate(10);
+        return view('pages.admin.route.index', compact('routes'));
     }
 
     /**
@@ -20,7 +21,7 @@ class RouteController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.route.create');
     }
 
     /**
@@ -28,7 +29,14 @@ class RouteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'route_code' => 'required|string|max:100',
+            'start_location' => 'required|string|max:100',
+            'end_location' => 'required|string|max:100',
+        ]);
+
+        Route::create($validated);
+        return redirect()->route('routes.index')->with('success', 'Route added successfully!');
     }
 
     /**
@@ -36,7 +44,7 @@ class RouteController extends Controller
      */
     public function show(Route $route)
     {
-        //
+        return view('pages.admin.route.show', compact('route'));
     }
 
     /**
@@ -44,7 +52,7 @@ class RouteController extends Controller
      */
     public function edit(Route $route)
     {
-        //
+        return view('pages.admin.route.adit', compact('route'));
     }
 
     /**
@@ -52,7 +60,14 @@ class RouteController extends Controller
      */
     public function update(Request $request, Route $route)
     {
-        //
+        $validated = $request->validate([
+            'route_code' => 'required|string|max:100',
+            'start_location' => 'required|string|max:100',
+            'end_location' => 'required|string|max:100',
+        ]);
+
+        $route->update($validated);
+        return redirect()->route('routes.index')->with('success', 'Route updated successfully');
     }
 
     /**
@@ -60,6 +75,7 @@ class RouteController extends Controller
      */
     public function destroy(Route $route)
     {
-        //
+        $route->delete();
+        return redirect()->route('routes.index')->with('success', 'Route deleted successfully!');
     }
 }

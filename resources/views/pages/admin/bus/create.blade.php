@@ -1,9 +1,10 @@
 @extends('layouts.adminlayout')
 
 @section('content')
-<div class="container mt-5 " style="min-height: 100vh;">
-  <div class="card shadow-lg border-0 rounded-4">
-    <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+<div class="container main-area">
+  <div class="index-card shadow">
+    <div class="card-header text-white fw-bold p-2 mb-3 text-center py-3 rounded-top-4"
+      style="background-color: #ff0000">
       <h4 class="mb-0">🚌 Add New Bus</h4>
     </div>
 
@@ -61,4 +62,5 @@
     </div>
   </div>
 </div>
+
 @endsection

@@ -1,9 +1,10 @@
 @extends('layouts.adminlayout')
 
 @section('content')
-<div class="container mt-5">
-  <div class="card shadow-lg border-0 rounded-4">
-    <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+<div class="container main-area">
+  <div class="index-card shadow">
+    <div class="card-header text-white fw-bold p-2 mb-3 text-center py-3 rounded-top-4"
+      style="background-color: #ff0000">
       <h4 class="mb-0">🚌 Edit Bus information</h4>
     </div>
 
@@ -37,17 +38,18 @@
           <label for="company" class="form-label">Company Name</label>
           <input type="text" name="company" id="company" class="form-control" placeholder="e.g. Green Line" required
             value="{{  old('company', $bus->company) }}">
-          </div>
         </div>
+      </div>
 
-        <div class=" mb-4">
-          <label for="route" class="form-label">Route</label>
-          <input type="text" name="route" id="route" class="form-control" placeholder="e.g. Dhaka – Chittagong" required value="{{ old('route', $bus->route) }}">
-        </div>
+      <div class=" mb-4">
+        <label for="route" class="form-label">Route</label>
+        <input type="text" name="route" id="route" class="form-control" placeholder="e.g. Dhaka – Chittagong" required
+          value="{{ old('route', $bus->route) }}">
+      </div>
 
-        <div class="text-end">
-          <button type="submit" class="btn btn-success px-4">Update</button>
-        </div>
+      <div class="text-end">
+        <button type="submit" class="btn btn-success px-4">Update</button>
+      </div>
     </form>
   </div>
 </div>

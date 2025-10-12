@@ -9,10 +9,10 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2 class="text-center">All Buses</h2>
-      <a href="{{ route('buses.create') }}" class="btn btn-success">Add New Bus</a>
+      <a href="{{ route('buses.create') }}" class="btn btn-info">Add New Bus</a>
     </div>
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover" id="table-same">
       <thead>
         <tr>
           <th>ID</th>
