@@ -1,7 +1,7 @@
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
       <a class="navbar-brand" href="#">
-        Bus<span>Hub</span>
+      <span>RunStar</span>
       </a>
       <button class="navbar-toggler text-light border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -9,7 +9,7 @@
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav align-items-lg-center">
-          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Book Ticket</a></li>
 
           <!-- ✅ Dropdown with Submenu -->
@@ -36,7 +36,7 @@
           <!-- ✅ User Dropdown -->
           <li class="nav-item dropdown user-dropdown ms-lg-3">
             <a class="dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://i.pravatar.cc/100?img=12" alt="User"> S A Rafi
+              <img src="{{ asset('image/rishad.png') }}" alt="User">Rishad
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
               <li><a class="dropdown-item" href="#">My Profile</a></li>

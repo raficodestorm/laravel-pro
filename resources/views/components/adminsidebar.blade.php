@@ -22,9 +22,9 @@
       </a>
     </li>
     <li>
-      <a href="#" title="Booking">
+      <a href="{{ route('locations.index') }}" title="Booking">
       <i class="fa-solid fa-bus"></i>
-        <span>Booking</span>
+        <span>location</span>
       </a>
     </li>
     <li class="dropdown">

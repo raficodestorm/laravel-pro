@@ -1,3 +1,10 @@
+
+/* =================== google-font-Roboto & Ek-mesirri =================== */
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* font-family: "Roboto", sans-serif; */
+/* font-family: "El Messiri", sans-serif; */
+
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 :root {
     --main-color: #ff0000;
     --second-color: #780116;
@@ -19,7 +26,7 @@
 
 /* ---------------------------------- navbar style ----------------------------------------- */
     .navbar {
-      background-color: #fffffc63;
+      background-color: #fffffc91;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       padding: 0.5rem 0;
     }
@@ -33,7 +40,6 @@
 
     .navbar-brand span {
       color: var(--second-color);
-      background: var(--section-bg-color);
       padding: 2px 10px;
       border-radius: 8px;
     }
@@ -46,11 +52,10 @@
       border-radius: 6px;
     }
 
-    .navbar-nav .nav-link:hover,
-    .navbar-nav .nav-link.active {
+    .navbar-nav .nav-link:hover{
       background: var(--section-bg-color);
-      color: var(--main-color);
-      padding: 6px 12px;
+      color: white;
+      font-weight: 600;
     }
 
     /* Dropdowns */

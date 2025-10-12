@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusController;
+use App\Http\Controllers\LocationController;
+
 
 Route::get('/', function () {
     return view('pages.user.userfront');
@@ -12,8 +14,6 @@ Route::get('/admindashboard', function () {
 })->name('pages.admin.admindashboard');
 
 
-// Route::get('/all-buses', function () {
-//     return view('pages.admin.bus.index');
-// })->name('buses.index');
+Route::resource('locations', LocationController::class);
 
 Route::resource('buses', BusController::class);
