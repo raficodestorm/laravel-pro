@@ -14,7 +14,7 @@
     --light-hover: #ff0101ca;
 }
 .main-area{
-  min-height: 100vh;
+  min-height: 90vh;
   width: 100%;
   padding: 3rem;
   background-color: var(--back-color);

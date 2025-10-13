@@ -12,7 +12,7 @@ class RouteController extends Controller
      */
     public function index()
     {
-        $routes = Route::all()->paginate(10);
+        $routes = Route::paginate(10);
         return view('pages.admin.route.index', compact('routes'));
     }
 
@@ -52,7 +52,7 @@ class RouteController extends Controller
      */
     public function edit(Route $route)
     {
-        return view('pages.admin.route.adit', compact('route'));
+        return view('pages.admin.route.edit', compact('route'));
     }
 
     /**

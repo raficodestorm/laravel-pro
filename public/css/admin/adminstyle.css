@@ -43,12 +43,12 @@ main{
 
 /* =================== Sidebar style start =================== */
 .sidebar{
-    min-height: 200vh;
+    min-height: 100vh;
     width: 220px;
     background-color: var(--bg-color);
     padding:5px .5rem;
     border-right: 0.5px solid var(--main-color);
-    position: sticky;
+    position: sticky !important;
     top: 0;
     z-index: 2;
     align-self: self-start;

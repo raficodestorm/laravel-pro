@@ -15,22 +15,25 @@
         <table class="table table-bordered align-middle" id="table-same">
             <thead class="table-dark text-center">
                 <tr>
-                    <th>#</th>
-                    <th>District</th>
-                    <th>Division</th>
-                    <th>Actions</th>
+                    <th>ID</th>
+                    <th>Route code</th>
+                    <th>Start location</th>
+                    <th>End location</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($locations as $location)
+                @forelse($routes as $route)
                 <tr class="text-center">
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $location->district }}</td>
-                    <td>{{ $location->division ?? '-' }}</td>
+                    <th scope="row">{{ $loop->iteration }}</th>
+                    <td>{{ $route->route_code }}</td>
+                    <td>{{ $route->start_location }}</td>
+                    <td>{{ $route->end_location }}</td>
+                    
                     <td>
-                        <a href="{{ route('locations.show', $location->id) }}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{ route('locations.edit', $location->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('locations.destroy', $location->id) }}" method="POST" class="d-inline">
+                        <a href="{{ route('routes.show', $route->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('routes.edit', $route->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('routes.destroy', $route->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button onclick="return confirm('Are you sure?')"
@@ -46,7 +49,7 @@
             </tbody>
         </table>
 
-        {{ $locations->links() }}
+        {{ $routes->links() }}
     </div>
 </div>
 

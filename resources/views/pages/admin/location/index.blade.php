@@ -24,7 +24,7 @@
             <tbody>
                 @forelse($locations as $location)
                 <tr class="text-center">
-                    <td>{{ $loop->iteration }}</td>
+                    <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $location->district }}</td>
                     <td>{{ $location->division ?? '-' }}</td>
                     <td>

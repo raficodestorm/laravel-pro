@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
             $table->string('route_code')->unique();
-            $table->foreignId('start_location');
-            $table->foreignId('end_location');
+            $table->string('start_location');
+            $table->string('end_location');
             $table->timestamps();
         });
     }

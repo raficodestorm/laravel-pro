@@ -64,6 +64,12 @@
         <span>location</span>
       </a>
     </li>
+    <li>
+      <a href="{{ route('routes.index') }}" title="Booking">
+        <i class="fa-solid fa-bus"></i>
+        <span>Route</span>
+      </a>
+    </li>
 
     <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="Stations" id="drop">
