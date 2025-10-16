@@ -316,8 +316,6 @@ main{
   font-weight: bold;
 }
 
-
-
 .footeer{
     background-color: var(--bg-color);
     color: var(--second-color);
@@ -325,7 +323,7 @@ main{
     margin-top: 50px;
 }
 
-/* --------------------------style for top box---------------------------- */
+/* --------------------------style for top boxes ---------------------------- */
 .hello{
     border: 0.3px solid var(--main-color);
     background-color: var(--bg-color);
