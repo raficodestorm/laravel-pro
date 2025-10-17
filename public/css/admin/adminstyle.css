@@ -38,7 +38,8 @@ h1, h2, h3, h4, h5{
 main{
     padding: 0;
     background-color: transparent;
-    height: 100vh;
+    min-height: 100vh;
+    border-left: 0.5px solid var(--main-color);
 }
 
 /* =================== Sidebar style start =================== */
@@ -47,7 +48,7 @@ main{
     width: 220px;
     background-color: var(--bg-color);
     padding:5px .5rem;
-    border-right: 0.5px solid var(--main-color);
+    /* border-right: 0.5px solid var(--main-color); */
     position: sticky !important;
     top: 0;
     z-index: 2;

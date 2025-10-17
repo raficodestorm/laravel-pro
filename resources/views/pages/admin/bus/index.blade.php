@@ -1,7 +1,7 @@
 @extends('layouts.adminlayout')
 
 @section('content')
-<div class="container main-area">
+<div class="container-fluid main-area">
   <div class="index-card">
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -20,6 +20,8 @@
           <th>Coach</th>
           <th>License</th>
           <th>Company</th>
+          <th>Bus type</th>
+          <th>Seat layout</th>
           <th>Route</th>
           <th>Action</th>
         </tr>
@@ -32,6 +34,8 @@
           <td>{{ $bus->coach_no }}</td>
           <td>{{ $bus->license }}</td>
           <td>{{ $bus->company }}</td>
+          <td>{{ $bus->bus_type }}</td>
+          <td>{{ $bus->seat_layout }}</td>
           <td>{{ $bus->route }}</td>
           <td>
             <a href="{{ route('buses.show', $bus) }}" class="btn btn-sm btn-info">View</a>

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('coach_no');
             $table->string('license');
             $table->string('company');
+            $table->string('bus_type');
+            $table->string('seat_layout');
             $table->string('route');
             $table->timestamps();
         });

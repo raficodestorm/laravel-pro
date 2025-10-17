@@ -10,5 +10,6 @@ class Location extends Model
         'id',
         'district',
         'division',
+
     ];
 }

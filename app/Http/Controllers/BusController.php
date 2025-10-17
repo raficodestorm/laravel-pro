@@ -28,6 +28,8 @@ class BusController extends Controller
             'coach_no' => 'required|integer',
             'license' => 'required|string|max:255',
             'company' => 'required|string|max:255',
+            'bus_type' => 'required|string|max:255',
+            'seat_layout' => 'required|string|max:255',
             'route' => 'required|string|max:255',
         ]);
 
@@ -62,6 +64,8 @@ class BusController extends Controller
             'coach_no' => 'required|string|max:10',
             'license' => 'required|string|max:255',
             'company' => 'required|string|max:255',
+            'bus_type' => 'required|string|max:255',
+            'seat_layout' => 'required|string|max:255',
             'route' => 'required|string|max:255',
         ]);
         $bus->update($validated);

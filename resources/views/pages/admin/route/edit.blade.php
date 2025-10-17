@@ -1,7 +1,7 @@
 @extends('layouts.adminlayout')
 @section('content')
 
-<div class="container main-area">
+<div class="container-fluid main-area">
     <div class="index-card shadow">
         <div class="card-header p-2 mb-3 text-white fw-bold" style="background-color: #ff0000">Edit Route</div>
         <div class="card-body">
@@ -32,6 +32,15 @@
                 <div class="mb-3">
                     <label class="form-label fw-semibold">End location</label>
                     <input type="text" name="end_location" class="form-control" value="{{ $route->end_location }}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Distance</label>
+                    <input type="text" name="distance" class="form-control" placeholder="distance">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Duration</label>
+                    <input type="text" name="duration" class="form-control" placeholder="duration">
                 </div>
 
                 <button type="submit" class="btn btn-success px-4">Update</button>

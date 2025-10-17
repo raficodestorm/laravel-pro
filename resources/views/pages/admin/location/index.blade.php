@@ -1,7 +1,7 @@
 @extends('layouts.adminlayout')
 @section('content')
 
-<div class="container main-area">
+<div class="container-fluid main-area">
     <div class="index-card shadow">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3>All Locations</h3>

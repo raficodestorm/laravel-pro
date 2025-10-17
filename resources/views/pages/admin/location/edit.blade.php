@@ -1,7 +1,7 @@
 @extends('layouts.adminlayout')
 @section('content')
 
-<div class="container main-area">
+<div class="container-fluid main-area">
     <div class="index-card shadow">
         <div class="card-header p-2 mb-3 text-white fw-bold" style="background-color: #ff0000">Edit Location</div>
         <div class="card-body">

@@ -11,14 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('routes', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('route_code')->unique();
+            $table->date('set_date');
+            $table->time('set_time');
+            $table->string('route_code');
             $table->string('start_location');
             $table->string('end_location');
             $table->string('distance')->nullable();
             $table->string('duration')->nullable();
+            $table->decimal('price', 10, 2);
+            $table->string('bus_type');
+            $table->string('coach_no');
             $table->timestamps();
+            $table->foreign('route_code')->references('route_code')->on('routes')->onDelete('cascade');
         });
     }
 
@@ -27,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('routes');
+        Schema::dropIfExists('schedules');
     }
 };

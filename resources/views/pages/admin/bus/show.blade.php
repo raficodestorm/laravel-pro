@@ -1,7 +1,7 @@
 @extends('layouts.adminlayout')
 
 @section('content')
-<div class="container main-area ">
+<div class="container-fluid main-area ">
   <div class="justify-center">
     <div class="index-card shadow">
       <h2>Bus Detail</h2>
@@ -10,6 +10,8 @@
       <p><strong>Coach No:</strong> {{ $bus->coach_no }}</p>
       <p><strong>License:</strong> {{ $bus->license }}</p>
       <p><strong>Company:</strong> {{ $bus->company }}</p>
+      <p><strong>Company:</strong> {{ $bus->bus_type }}</p>
+      <p><strong>Company:</strong> {{ $bus->seat_layout }}</p>
       <p><strong>Route:</strong> {{ $bus->route }}</p>
       <p><strong>added at:</strong> {{ $bus->created_at }}</p>
 

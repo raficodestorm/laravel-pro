@@ -33,6 +33,8 @@ class RouteController extends Controller
             'route_code' => 'required|string|max:100',
             'start_location' => 'required|string|max:100',
             'end_location' => 'required|string|max:100',
+            'distance' => 'nullable|string|max:50',
+            'duration' => 'nullable|string|max:50',
         ]);
 
         Route::create($validated);
@@ -64,6 +66,8 @@ class RouteController extends Controller
             'route_code' => 'required|string|max:100',
             'start_location' => 'required|string|max:100',
             'end_location' => 'required|string|max:100',
+            'distance' => 'nullable|string|max:50',
+            'duration' => 'nullable|string|max:50',
         ]);
 
         $route->update($validated);

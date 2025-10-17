@@ -19,7 +19,7 @@
     <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="Stations" id="drop">
         <i class="fa-solid fa-bus"></i>
-        <span>Stations</span>
+        <span>Schedule</span>
         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#0000F5">
           <path d="M480-360 280-560h400L480-360Z" />
@@ -27,9 +27,9 @@
       </a>
       <ul class="submenu">
         <div>
-          <li><a href="#" title="Booking" id="sub">
+          <li><a href="{{ route('schedules.create') }}" title="Booking" id="sub">
               <i class="fa-solid fa-bus"></i>
-              <span>add</span>
+              <span>Create shedule</span>
             </a>
           </li>
           <li><a href="#" title="Booking" id="sub">
