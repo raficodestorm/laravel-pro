@@ -5,6 +5,10 @@ use App\Http\Controllers\BusController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\Frontend\SearchScheduleBusController;
+
+
+
 
 
 Route::get('/', function () {
@@ -19,6 +23,11 @@ Route::resource('buses', BusController::class);
 Route::resource('locations', LocationController::class);
 Route::resource('routes', RouteController::class);
 
+// ------------------------for bus schedule----------------------------------------
 Route::resource('schedules', ScheduleController::class);
 Route::get('/get-route-info', [ScheduleController::class, 'getRouteInfo'])->name('get.route.info');
 Route::get('/get-coaches', [ScheduleController::class, 'getCoachesByBusType'])->name('get.coaches');
+
+// ------------------------for search chedule bus ----------------------------------------
+Route::get('/find-bus', [SearchScheduleBusController::class, 'index'])->name('bus.search.form');
+Route::post('/find-bus', [SearchScheduleBusController::class, 'search'])->name('bus.search');

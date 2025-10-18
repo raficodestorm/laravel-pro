@@ -603,3 +603,37 @@ input.form-control:focus{
     }
 
 /* -----------------------------------------  style -------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.btn-danger {
+  background-color: #ff0000 !important;
+  border: none;
+}
+
+.btn-outline-danger:hover {
+  background-color: #ff0000 !important;
+  color: #fff !important;
+}

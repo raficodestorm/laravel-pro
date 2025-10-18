@@ -14,31 +14,34 @@
     <div class="col-md-4 p-5 form-part">
       <div class="light1"></div>
       <div class="light2"></div>
-      {{-- form --}}
+
+
+
+      {{-------------------------------- form ---------------------------------------------------------}}
       <div class="card shadow-sm p-4 rounded-3">
         <h5 class="fw-bold mb-3 text-center" style="color: #220901;">
           Find Your Bus
         </h5>
-        <form onSubmit={handleSubmit}>
+        <form action="{{ route('bus.search') }}" method="POST">
+          @csrf
           {{-- {/* From */} --}}
           <div class="mb-3 form-in">
             <label class="form-label fw-semibold">From</label>
             <input type="text" name="from" class="form-control rounded-3" placeholder="Enter departure city..."
-              value={searchData.from} onChange={handleChange} required />
+              required>
           </div>
 
           {{-- {/* To */} --}}
           <div class="mb-3 form-in">
             <label class="form-label fw-semibold">To</label>
             <input type="text" name="to" class="form-control rounded-3" placeholder="Enter destination city..."
-              value={searchData.to} onChange={handleChange} required />
+              required>
           </div>
 
           {{-- {/* Date */} --}}
           <div class="mb-3 form-in">
             <label class="form-label fw-semibold">Date of Journey</label>
-            <input type="date" name="date" class="form-control rounded-3" value={searchData.date}
-              onChange={handleChange} required />
+            <input type="date" name="date" class="form-control rounded-3" required>
           </div>
 
           {{-- {/* Button */} --}}
@@ -49,6 +52,7 @@
           </div>
         </form>
       </div>
+
 
     </div>
   </div>
