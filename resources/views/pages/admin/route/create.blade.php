@@ -47,8 +47,8 @@
 </div>
 
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
   const startInput = document.querySelector('input[name="start_location"]');
   const endInput = document.querySelector('input[name="end_location"]');
   const startList = document.getElementById('start');
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function fetchLocationss(query, datalist) {
     if (query.length < 1) return; // এক অক্ষর টাইপ না করলে রিকোয়েস্ট পাঠাবে না
 
-    fetch(`/locations?q=${query}`)
+    fetch(`/locations/search?q=${query}`)
       .then(res => res.json())
       .then(data => {
         datalist.innerHTML = ''; // পুরনো সাজেস্ট ক্লিয়ার
@@ -72,5 +72,5 @@ document.addEventListener('DOMContentLoaded', function() {
   startInput.addEventListener('input', () => fetchLocationss(startInput.value, startList));
   endInput.addEventListener('input', () => fetchLocationss(endInput.value, endList));
 });
-</script>
+</script> --}}
 @endsection

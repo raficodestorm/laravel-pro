@@ -22,7 +22,8 @@ Route::get('/admindashboard', function () {
 Route::resource('buses', BusController::class);
 Route::resource('locations', LocationController::class);
 
-Route::get('/locations/get', [RouteController::class, 'getLocationss'])->name('locations.get');
+// Route::get('/locations/get', [RouteController::class, 'getLocationss'])->name('locations.create');
+// Route::get('/locations/get', [RouteController::class, 'getLocationss'])->name('locations.get');
 Route::resource('routes', RouteController::class);
 
 // ------------------------for bus schedule----------------------------------------
@@ -34,4 +35,3 @@ Route::get('/get-coaches', [ScheduleController::class, 'getCoachesByBusType'])->
 Route::get('/locations/search', [SearchScheduleBusController::class, 'getLocations'])->name('locations.get');
 Route::get('/', [SearchScheduleBusController::class, 'index'])->name('bus.search.form');
 Route::post('/find-bus', [SearchScheduleBusController::class, 'search'])->name('bus.search');
-

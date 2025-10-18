@@ -334,10 +334,7 @@
   }
 }
 
-
-
-
-
+/* --------------------------style for bus search form------------------------------ */
 .card{
   background-color: #fffffc75;
 }
@@ -354,7 +351,7 @@ input.form-control:focus{
   box-shadow: none;
 }
 .bus-src{
-  background: linear-gradient(90deg, #ff0000, #780116);
+  background: linear-gradient(180deg, #ff0000, #780116);
   border: none; 
   color: white;
   animation: wiggl 1s ease-in-out infinite;
@@ -367,6 +364,129 @@ input.form-control:focus{
 .bus-src:hover{
   background: linear-gradient(90deg, #780116, #ff0000);
   color: white;
+}
+
+/* ---------------------------------  style for populer routes ------------------------------------ */
+.popular-title {
+  margin-top: 4rem;
+  font-weight: 700;
+  font-size: 2.5rem;
+  font-family: "El Messiri", sans-serif;
+}
+
+.main-card {
+  background: var(--section-bg-color);
+  min-height: 110px;
+  border-radius: 12px;
+  border: 1px solid var(--main-color);
+  transition: 0.3s ease-in-out;
+}
+.main-card:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,.35);
+  transform: translateY(-4px);
+}
+
+.route-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-grow: 1;
+  position: relative;
+}
+.route-line::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: #ddd;
+  z-index: 0;
+}
+.start-icon,
+.end-icon,
+.bus-icon {
+  font-size: 1.4rem;
+  color: #999;
+  z-index: 1;
+}
+.int {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 1rem;
+  font-family: "El Messiri", sans-serif;
+  font-size: small;
+  color: #999;
+}
+@media (max-width: 768px) {
+  .p-routes {
+    padding-top: 11rem;
+  }
+  .popular-title {
+    margin-top: 4rem;
+    font-weight: 600;
+    font-size: 2rem;
+  }
+}
+
+/* ---------------------------------  style for all services ------------------------------------ */
+.service-col {
+  position: relative;
+}
+
+.service-card {
+  border-radius: 1rem;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.service-img {
+  border-radius: 1rem;
+  width: 100%;
+  height: 20rem !important;
+  transition: transform 0.5s ease;
+}
+
+.service-card:hover .service-img {
+  transform: scale(1.1);
+}
+
+.service-ins {
+  width: 70%;
+  text-align: center;
+  height: auto;
+  border-radius: 1rem;
+  position: absolute;
+  bottom: -2%;
+  left: 15%;
+  background: var(--bg-color);
+  padding: 1rem;
+  border: 1px solid var(--main-color);
+  z-index: 999;
+  color: #220901;
+  box-shadow: 0 10px 20px rgba(248, 40, 40, 0.317);
+}
+
+.service-ins h3 {
+  font-family: "El Messiri", sans-serif;
+  font-weight: 700;
+  color: var(--second-color);
+}
+
+.service-ins p {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  margin: 0;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .service-ins {
+    width: 80%;
+    left: 10%;
+    bottom: -8%;
+  }
 }
 
 
@@ -602,23 +722,7 @@ input.form-control:focus{
         outline-offset: 3px;
     }
 
-/* -----------------------------------------  style -------------------------------------------- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ---------------------  style for search schedule result ------------------------------------ */
 .card {
   transition: all 0.3s ease;
 }
@@ -637,3 +741,6 @@ input.form-control:focus{
   background-color: #ff0000 !important;
   color: #fff !important;
 }
+
+
+
