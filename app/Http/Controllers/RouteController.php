@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Route;
 use Illuminate\Http\Request;
+use App\Models\Location;
 
 class RouteController extends Controller
 {
@@ -82,4 +83,13 @@ class RouteController extends Controller
         $route->delete();
         return redirect()->route('routes.index')->with('success', 'Route deleted successfully!');
     }
+    
+    public function getLocationss(Request $request)
+{
+    $search = $request->get('q'); // 'q' মানে query string থেকে পাঠানো টেক্সট
+    $locationss = Location::where('district', 'LIKE', "%{$search}%")
+        ->pluck('district');
+
+    return response()->json($locationss);
+}
 }

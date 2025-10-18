@@ -27,15 +27,16 @@
           {{-- {/* From */} --}}
           <div class="mb-3 form-in">
             <label class="form-label fw-semibold">From</label>
-            <input type="text" name="from" class="form-control rounded-3" placeholder="Enter departure city..."
-              required>
+            <input type="text" name="from" class="form-control rounded-3" list="fromList" placeholder="Enter departure city..." required> 
+            <datalist id="fromList"></datalist>
           </div>
 
           {{-- {/* To */} --}}
           <div class="mb-3 form-in">
             <label class="form-label fw-semibold">To</label>
-            <input type="text" name="to" class="form-control rounded-3" placeholder="Enter destination city..."
-              required>
+            <input type="text" name="to" class="form-control rounded-3" list="toList" placeholder="Enter destination city..." required>
+            
+            <datalist id="toList"></datalist>
           </div>
 
           {{-- {/* Date */} --}}
@@ -57,4 +58,35 @@
     </div>
   </div>
 </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const fromInput = document.querySelector('input[name="from"]');
+  const toInput = document.querySelector('input[name="to"]');
+  const fromList = document.getElementById('fromList');
+  const toList = document.getElementById('toList');
+
+  function fetchLocations(query, datalist) {
+    if (query.length < 1) return; // এক অক্ষর টাইপ না করলে রিকোয়েস্ট পাঠাবে না
+
+    fetch(`/locations?q=${query}`)
+      .then(res => res.json())
+      .then(data => {
+        datalist.innerHTML = ''; // পুরনো সাজেস্ট ক্লিয়ার
+        data.forEach(location => {
+          const option = document.createElement('option');
+          option.value = location;
+          datalist.appendChild(option);
+        });
+      });
+  }
+
+  fromInput.addEventListener('input', () => fetchLocations(fromInput.value, fromList));
+  toInput.addEventListener('input', () => fetchLocations(toInput.value, toList));
+});
+</script>
+
 @endsection
+
+

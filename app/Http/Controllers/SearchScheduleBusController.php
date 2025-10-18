@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
+use App\Models\Location;
 
 class SearchScheduleBusController extends Controller
 {
     // Show search form
     public function index()
     {
-        return view('pages.frontend.find-bus');
+        return view('pages.user.userfront');
     }
 
     // Handle search request
@@ -33,6 +34,15 @@ class SearchScheduleBusController extends Controller
             ->where('end_location', 'LIKE', "%$to%")
             ->get();
 
-        return view('pages.frontend.search-results', compact('schedules', 'from', 'to', 'date'));
+        return view('pages.user.search-schedule-result', compact('schedules', 'from', 'to', 'date'));
     }
+
+    public function getLocations(Request $request)
+{
+    $search = $request->get('q'); // 'q' মানে query string থেকে পাঠানো টেক্সট
+    $locations = Location::where('district', 'LIKE', "%{$search}%")
+        ->pluck('district');
+
+    return response()->json($locations);
+}
 }
