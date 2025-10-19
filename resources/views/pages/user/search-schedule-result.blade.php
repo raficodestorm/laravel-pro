@@ -1,7 +1,7 @@
 @extends('layouts.userlayout')
 
 @section('content')
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" style="min-height: 100vh;">
   <h3 class="fw-bold text-center mb-4" style="color:#780116;">
     Available Buses on {{ date('d M, Y', strtotime($date)) }}
   </h3>

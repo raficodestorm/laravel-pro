@@ -18,7 +18,7 @@
 
     <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="Stations" id="drop">
-        <i class="fa-solid fa-bus"></i>
+      <i class="fa fa-calendar"></i>
         <span>Schedule</span>
         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#0000F5">
@@ -27,24 +27,14 @@
       </a>
       <ul class="submenu">
         <div>
-          <li><a href="{{ route('schedules.create') }}" title="Booking" id="sub">
-              <i class="fa-solid fa-bus"></i>
+          <li class="{{request()->routeIs('schedules.create')?'active':''}}"><a href="{{ route('schedules.create') }}" title="Booking" id="sub">
+              <i class="fa-regular fa-clock"></i>
               <span>Create shedule</span>
             </a>
           </li>
           <li><a href="#" title="Booking" id="sub">
-              <i class="fa-solid fa-bus"></i>
-              <span>remove</span>
-            </a>
-          </li>
-          <li><a href="#" title="Booking" id="sub">
-              <i class="fa-solid fa-bus"></i>
-              <span>edit</span>
-            </a>
-          </li>
-          <li><a href="#" title="Booking" id="sub">
-              <i class="fa-solid fa-bus"></i>
-              <span>show</span>
+              <i class="fa-solid fa-calendar-days"></i>
+              <span>All schedules</span>
             </a>
           </li>
         </div>
