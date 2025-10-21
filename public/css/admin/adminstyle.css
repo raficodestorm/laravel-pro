@@ -57,6 +57,10 @@ main{
     transition: 0.2s ease-in-out;
 
 }
+i{
+    font-size: large;
+    color: var(--second-color);
+}
 .sidebar ul{
     list-style: none;
     padding-left: 0;
