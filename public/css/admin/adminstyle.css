@@ -70,10 +70,40 @@ i{
     justify-content: flex-end;
     margin-bottom: 25px;
 }
-.nav-logo{
-    font-weight: 700;
-    font-size: 1.5rem;
+
+.nav-logo {
+  font-family: "El Messiri", sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(90deg, #ff0000, #fae103, #ff0000);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowShift 3s ease-in-out infinite;
+  transition: transform 0.4s ease, text-shadow 0.4s ease;
 }
+
+/* subtle glowing animation */
+@keyframes glowShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* elegant hover effect */
+.nav-logo:hover {
+  transform: scale(1.05);
+animation: glowShift .8s ease-in-out infinite;
+}
+
+
+
 .sidebar a, .sidebar .nav-logo{
     border-bottom-right-radius: 1.5rem;
     border-top-right-radius: 1.5rem;

@@ -11,14 +11,42 @@
     </li>
     <li>
       <a href="{{ route('pages.admin.admindashboard') }}" title="Dashboard">
-        <i class="fa-solid fa-gauge"></i>
+        <img src="{{asset('svg/dashboard.svg')}}" alt="Dashboard" />
         <span>Dashboard</span>
       </a>
     </li>
 
+
+
+    <li class="dropdown">
+      <a href="#" onclick="toggleSubmenu(event)" title="Buses" id="drop">
+        <img src="{{asset('svg/bus.svg')}}" />
+        <span>Buses</span>
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+          fill="#0000F5">
+          <path d="M480-360 280-560h400L480-360Z" />
+        </svg>
+      </a>
+      <ul class="submenu">
+        <div>
+          <li><a href="{{ route('buses.create') }}" title="Add New Bus" id="sub">
+              <img src="{{asset('svg/addbus.svg')}}" />
+              <span>Add New Bus</span>
+            </a>
+          </li>
+          <li><a href="{{ route('buses.index') }}" title="All Buses" id="sub">
+              <img src="{{asset('svg/list.svg')}}" />
+              <span>All Buses</span>
+            </a>
+          </li>
+        </div>
+      </ul>
+    </li>
+
+
     <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="Stations" id="drop">
-        <i class="fa fa-calendar"></i>
+        <img src="{{asset('svg/schedule.svg')}}" />
         <span>Schedule</span>
         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#0000F5">
@@ -29,12 +57,12 @@
         <div>
           <li class="{{request()->routeIs('schedules.create')?'active':''}}"><a href="{{ route('schedules.create') }}"
               title="Booking" id="sub">
-              <i class="fa-regular fa-clock"></i>
+              <img src="{{asset('svg/addschedule.svg')}}" />
               <span>Create shedule</span>
             </a>
           </li>
           <li><a href="{{ route('schedules.index') }}" title="All schedules" id="sub">
-              <i class="fa-solid fa-calendar-days"></i>
+              <img src="{{asset('svg/list.svg')}}" />
               <span>All schedules</span>
             </a>
           </li>
@@ -42,38 +70,9 @@
       </ul>
     </li>
 
-
-
-    <li class="dropdown">
-      <a href="#" onclick="toggleSubmenu(event)" title="Buses" id="drop">
-        <i class="fa fa-bus"></i>
-        <span>Buses</span>
-        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-          fill="#0000F5">
-          <path d="M480-360 280-560h400L480-360Z" />
-        </svg>
-      </a>
-      <ul class="submenu">
-        <div>
-          <li><a href="{{ route('buses.create') }}" title="Add New Bus" id="sub">
-              <i class="fa fa-bus" aria-hidden="true"></i>
-              <span>Add New Bus</span>
-            </a>
-          </li>
-          <li><a href="{{ route('buses.index') }}" title="All Buses" id="sub">
-              <i class="fa fa-bus-side"></i>
-              <span>All Buses</span>
-            </a>
-          </li>
-        </div>
-      </ul>
-    </li>
-
-
-
     <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="location" id="drop">
-        <i class="fa-solid fa-location-dot"></i>
+        <img src="{{asset('svg/location.svg')}}" />
         <span>location</span>
         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#0000F5">
@@ -83,12 +82,12 @@
       <ul class="submenu">
         <div>
           <li><a href="{{ route('locations.create') }}" title="Add location" id="sub">
-              <i class="fa-solid fa-location-dot"></i>
+              <img src="{{asset('svg/addlocation.svg')}}" />
               <span>Add location</span>
             </a>
           </li>
           <li><a href="{{ route('locations.index') }}" title="All locations" id="sub">
-              <i class="fa-solid fa-map"></i>
+              <img src="{{asset('svg/list.svg')}}" />
               <span>All locations</span>
             </a>
           </li>
@@ -100,7 +99,7 @@
 
     <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="route" id="drop">
-        <i class="fa-solid fa-route"></i>
+        <img src="{{asset('svg/route.svg')}}" />
         <span>Route</span>
         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#0000F5">
@@ -110,12 +109,12 @@
       <ul class="submenu">
         <div>
           <li><a href="{{ route('routes.create') }}" title="Add route" id="sub">
-              <i class="fa-solid fa-route"></i>
+              <img src="{{asset('svg/addroute.svg')}}" />
               <span>Add Route</span>
             </a>
           </li>
           <li><a href="{{ route('routes.index') }}" title="All routes" id="sub">
-              <i class="fa-solid fa-list"></i>
+              <img src="{{asset('svg/list.svg')}}" />
               <span>All Routes</span>
             </a>
           </li>
@@ -126,7 +125,7 @@
 
     <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="Stations" id="drop">
-        <i class="fa-solid fa-ticket"></i>
+        <img src="{{asset('svg/list.svg')}}" />
         <span>Stations</span>
         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#0000F5">
@@ -136,23 +135,13 @@
       <ul class="submenu">
         <div>
           <li><a href="#" title="Booking" id="sub">
-              <i class="fa-solid fa-bus"></i>
+              <img src="{{asset('svg/list.svg')}}" />
               <span>add</span>
             </a>
           </li>
           <li><a href="#" title="Booking" id="sub">
-              <i class="fa-solid fa-bus"></i>
+              <img src="{{asset('svg/list.svg')}}" />
               <span>remove</span>
-            </a>
-          </li>
-          <li><a href="#" title="Booking" id="sub">
-              <i class="fa-solid fa-bus"></i>
-              <span>edit</span>
-            </a>
-          </li>
-          <li><a href="#" title="Booking" id="sub">
-              <i class="fa-solid fa-bus"></i>
-              <span>show</span>
             </a>
           </li>
         </div>
@@ -162,13 +151,14 @@
 
     <li>
       <a href="#" title="Companies">
-        <i class="fa-solid fa-bus"></i>
+        <img src="{{asset('svg/addbus.svg')}}" />
         <span>Companies</span>
       </a>
     </li>
+
     <li>
       <a href="#" title="Caleder">
-        <i class="fa-solid fa-calendar"></i>
+        <img src="{{asset('svg/schedule.svg')}}" />
         <span>Calender</span>
       </a>
     </li>
@@ -189,6 +179,7 @@
             menu.classList.remove("showmenu");
         }
     });
+    
 
     // Toggle this one
     submenu.classList.toggle("showmenu");
@@ -201,6 +192,9 @@ document.addEventListener("click", function(e) {
     if (!isClickInside) {
         document.querySelectorAll(".submenu.showmenu").forEach(menu => {
             menu.classList.remove("showmenu");
+        });
+        document.querySelectorAll(".arrow").forEach(menu => {
+            menu.classList.remove("rotate");
         });
     }
 });
