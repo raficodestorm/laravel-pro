@@ -19,6 +19,7 @@ Route::get('/admindashboard', function () {
     return view('pages.admin.admindashboard');
 })->name('pages.admin.admindashboard');
 
+
 Route::resource('buses', BusController::class);
 Route::resource('locations', LocationController::class);
 
