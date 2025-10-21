@@ -96,7 +96,6 @@ i{
   }
 }
 
-/* elegant hover effect */
 .nav-logo:hover {
   transform: scale(1.05);
 animation: glowShift .8s ease-in-out infinite;
