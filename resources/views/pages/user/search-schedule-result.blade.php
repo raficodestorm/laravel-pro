@@ -35,7 +35,9 @@
 
           <div class="text-center">
             <h5 class="fw-bold mb-1 text-danger">৳ {{ number_format($schedule->price, 2) }}</h5>
-            <button class="btn btn-outline-danger btn-sm rounded-3 mt-1">View Seats</button>
+            <a href="{{ route('seat.reservation', ['id' => $schedule->id]) }}">
+              <button class="btn btn-outline-danger btn-sm rounded-3 mt-1">View Seats</button>
+            </a>
           </div>
         </div>
       </div>

@@ -23,7 +23,11 @@
     .container-fluid {
   --bs-gutter-x: 0 !important;
 }
-
+h1, h2, h3, h4, h5{
+    font-family: "El Messiri", sans-serif;
+    font-weight: 800;
+    color: var(--second-color);
+}
 /* ---------------------------------- navbar style ----------------------------------------- */
     .navbar {
       background-color: #fffffcbd;
@@ -743,4 +747,228 @@ input.form-control:focus{
 }
 
 
+/* ---------------------  style for seat Resrvation ------------------------------------ */
+.seat-reservation {
+  margin-top: 35px;
+  margin-bottom: 30px;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(128, 128, 128, 0.854) !important;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: .5rem 0 1rem 0;
+}
+
+.legend .seat {
+  text-align: center;
+  line-height: 1rem;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: default;
+  height: 45px;
+  width: 55px;
+}
+
+.seat.blocked { background: #333; color: white; border: .5px solid var(--main-color);}
+.seat.available { background: #fffffc; color: #333; border: .5px solid var(--main-color); }
+.seat.selected { background: #4CAF50; color: white; border: .5px solid var(--main-color);} /* green */
+.seat.soldM { background: #ff0000; color: white; border: .5px solid var(--main-color);}    /* red */
+.seat.soldF { background: #ff2ecc; color: white; border: .5px solid var(--main-color);}    /* pink */
+
+.bus-front {
+  display: flex;
+  justify-content: space-between;
+  margin:0 20px 20px 20px;
+}
+
+.driver {
+  font-weight: bold;
+  width: 60px;
+  text-align: center;
+}
+
+.driver svg {
+  font-size: 40px;
+  animation: steering-spin 2s linear infinite, fill-change 3s ease-in-out infinite;
+}
+
+/* Spin animation */
+@keyframes steering-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animate fill color */
+@keyframes fill-change {
+  0%   { fill: red; }
+  25%  { fill: blue; }
+  50%  { fill: #780116; }
+  75%  { fill: green; }
+  100% { fill: red; }
+}
+
+.door {
+  color: gray;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  width: 60px;
+  text-align: center;
+}
+
+.seats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.seat {
+  width: 50px;
+  height: 50px;
+  color: var(--second-color);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--main-color);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.seat:hover {
+  transform: scale(1.05);
+}
+
+.seat.selected {
+  background: #4caf50; /* Green for selected */
+}
+
+.aisle {
+  width: 40px; /* space for walking */
+}
+
+.summary {
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  text-align: center;
+}
+.reservation-form {
+  margin-top: 4.4rem;
+  margin-right: 4rem;
+  margin-bottom: 1rem;
+}
+.reservation-form select,
+.reservation-form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: var(--bg-color);
+  border: .5px solid var(--light-hover);
+}
+/* .reservation-form select, */
+input:focus{
+  border: none;
+}
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #ff0000, #780116);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  animation: wiggle 1s ease-in-out infinite;
+}
+
+/* Wiggle animation */
+@keyframes wiggle {
+  0%  { transform: translateX(-3px); background: linear-gradient(90deg, #ff0000, #780116);}
+  50%  { transform: translateX(3px); background: linear-gradient(90deg, #780116, #ff0000);}
+  100%  { transform: translateX(-3px); background: linear-gradient(90deg, #ff0000, #780116);}
+}
+
+/* Apply on hover */
+.submit-btn:hover {
+  box-shadow: 0 0 10px var(--main-color);
+}
+
+.bus-container {
+  width: 350px;
+  margin: auto;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background: var(--bg-color);
+}
+.inline{
+  display: inline-block !important;
+}
+.hidein{
+  border: none !important;
+  display: inline-block !important;
+  width: 50% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* -------------------------style for user payment---------------------------- */
+
+
+/* -------------------------style for ticket---------------------------- */
+/* .ticket-card {
+  border: 2px solid var(--main-color);
+  background: white;
+}
+
+.section-title {
+  background: var(--main-color);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.table {
+  margin-bottom: 0;
+  background: #fdfdfd;
+}
+
+.table td {
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .table td {
+  vertical-align: middle;
+  font-size: 0.7rem;
+  padding: .1rem .5rem;
+}
+.ticket-header p{
+  font-size: small;
+  line-height: 0;
+}
+.instruction{
+  font-size: smaller;
+  text-align: center;
+}
+} */
 

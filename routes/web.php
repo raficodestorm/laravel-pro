@@ -6,6 +6,10 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SearchScheduleBusController;
+use App\Http\Controllers\SeatReservationController;
+use App\Http\Controllers\PaymentController;
+
+
 
 
 
@@ -36,3 +40,11 @@ Route::get('/get-coaches', [ScheduleController::class, 'getCoachesByBusType'])->
 Route::get('/locations/search', [SearchScheduleBusController::class, 'getLocations'])->name('locations.get');
 Route::get('/', [SearchScheduleBusController::class, 'index'])->name('bus.search.form');
 Route::post('/find-bus', [SearchScheduleBusController::class, 'search'])->name('bus.search');
+
+// ------------------------for seat Reservation ----------------------------------------
+Route::get('/seat-reservation/{id}', [SeatReservationController::class, 'see']);
+Route::post('/payment', [SeatReservationController::class, 'payment'])->name('payment.page');
+
+// ------------------------for Payment ----------------------------------------
+Route::post('/payment', [PaymentController::class, 'showPaymentPage'])->name('payment.page');
+Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
