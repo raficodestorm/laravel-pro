@@ -15,6 +15,7 @@ class SeatReservation extends Model
         'coach_no',
         'route',
         'seat_price',
+        'departure',
         'selected_seats',
         'total',
         'boarding',

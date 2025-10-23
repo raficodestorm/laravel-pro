@@ -14,23 +14,23 @@
       <div class="card shadow-lg p-4 rounded-4 mb-4">
         <h4 class="mb-3">🚌 Booking Summary</h4>
         <p>
-          <strong>Passenger:</strong> {{ $bookingData['name'] ?? '' }} <br>
-          <strong>Mobile:</strong> {{ $bookingData['mobile'] ?? '' }} <br>
-          <strong>Boarding:</strong> {{ $bookingData['boarding'] ?? '' }} <br>
-          <strong>Dropping:</strong> {{ $bookingData['dropping'] ?? '' }} <br>
+          <strong>Passenger:</strong> {{ $bookingData->name }} <br>
+          <strong>Mobile:</strong> {{ $bookingData->mobile }} <br>
+          <strong>Boarding:</strong> {{ $bookingData->boarding }} <br>
+          <strong>Dropping:</strong> {{ $bookingData->dropping }} <br>
         </p>
 
         <p>
-          <strong>Bus Type:</strong> {{ $bookingData['Bus_type'] ?? '' }} <br>
-          <strong>Coach No:</strong> {{ $bookingData['coach_no'] ?? '' }} <br>
-          <strong>Route:</strong> {{ $bookingData['route'] ?? '' }} <br>
-          <strong>Departure:</strong> {{ $bookingData['departure'] ?? '' }}
+          <strong>Bus Type:</strong> {{ $bookingData->Bus_type }} <br>
+          <strong>Coach No:</strong> {{ $bookingData->coach_no }} <br>
+          <strong>Route:</strong> {{ $bookingData->route }} <br>
+          <strong>Departure:</strong> {{ $bookingData->departure }}
         </p>
 
         <p>
           <strong>Seats:</strong>
-          @if(!empty($bookingData['selectedSeats']))
-          {{ $bookingData['selectedSeats'] }}
+          @if(!empty($bookingData->selected_seats))
+          {{ $bookingData->selected_seats }}
           @else
           No seats selected
           @endif
@@ -43,7 +43,7 @@
 
         <div class="fare-summary mt-3">
           <h5>Total Fare:</h5>
-          <h3 class="text-success">৳ {{ number_format($totalAmount, 2) }}</h3>
+          <h3 class="text-success">৳ {{ number_format($bookingData->total, 2) }}</h3>
         </div>
       </div>
     </div>

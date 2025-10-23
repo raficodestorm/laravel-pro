@@ -27,7 +27,26 @@ class SeatReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'schedule_id' => 'required|exists:schedules,id',
+            'bus_type' => 'required|string',
+            'coach_no' => 'required|string',
+            'route' => 'required|string',
+            'seat_price' => 'required|string',
+            'departure' => 'required|string',
+            'selected_seats' => 'required|string',
+            'total' => 'required|string',
+            'boarding' => 'required|string',
+            'dropping' => 'required|string',
+            'name' => 'required|string|max:100',
+            'mobile' => 'required|string|max:20',
+        ]);
+
+        $reservation = SeatReservation::create($validated);
+        return redirect()->route('payment.for', ['id' => $reservation->id]);
+    }
 
     /**
      * Display the specified resource.
@@ -68,40 +87,5 @@ class SeatReservationController extends Controller
         //
     }
 
-    public function payment(Request $request)
-    {
-        $validated = $request->validate([
-            'schedule_id' => 'required|exists:schedules,id',
-            'Bus_type' => 'required|string',
-            'coach_no' => 'required|string',
-            'route' => 'required|string',
-            'seat_price' => 'required|string',
-            'selectedSeats' => 'required|string',
-            'total' => 'required|string',
-            'boarding' => 'required|string',
-            'dropping' => 'required|string',
-            'name' => 'required|string|max:100',
-            'mobile' => 'required|string|max:20',
-        ]);
-
-        // Remove currency symbol and spaces
-        $seatPrice = floatval(preg_replace('/[^0-9.]/', '', $validated['seat_price']));
-        $totalAmount = floatval(preg_replace('/[^0-9.]/', '', $validated['total']));
-
-        SeatReservation::create([
-            'schedule_id' => $validated['schedule_id'],
-            'bus_type' => $validated['Bus_type'],
-            'coach_no' => $validated['coach_no'],
-            'route' => $validated['route'],
-            'seat_price' => $seatPrice,
-            'selected_seats' => $validated['selectedSeats'],
-            'total' => $totalAmount,
-            'boarding' => $validated['boarding'],
-            'dropping' => $validated['dropping'],
-            'name' => $validated['name'],
-            'mobile' => $validated['mobile'],
-        ]);
-
-        redirect()->back()->with('success', 'Seat reservation completed successfully!');
-    }
+    public function payment(Request $request) {}
 }

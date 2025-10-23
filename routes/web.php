@@ -42,9 +42,10 @@ Route::get('/', [SearchScheduleBusController::class, 'index'])->name('bus.search
 Route::post('/find-bus', [SearchScheduleBusController::class, 'search'])->name('bus.search');
 
 // ------------------------for seat Reservation ----------------------------------------
-Route::get('/seat-reservation/{id}', [SeatReservationController::class, 'see']);
-Route::post('/payment', [SeatReservationController::class, 'payment'])->name('payment.page');
+Route::get('/seat-reservation/{id}', [SeatReservationController::class, 'see'])->name('seat.reservation');
+Route::post('/go-to-payment', [SeatReservationController::class, 'store'])->name('go.payment');
 
 // ------------------------for Payment ----------------------------------------
+Route::get('/payment/{id}', [PaymentController::class, 'showPaymentPage'])->name('payment.for');
 Route::post('/payment', [PaymentController::class, 'showPaymentPage'])->name('payment.page');
 Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');

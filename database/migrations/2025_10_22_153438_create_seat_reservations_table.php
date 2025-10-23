@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('coach_no');
             $table->string('route');
             $table->decimal('seat_price', 10, 2);
+            $table->string('departure');
             $table->string('selected_seats');
             $table->decimal('total', 10, 2);
             $table->string('boarding');

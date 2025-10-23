@@ -7,15 +7,10 @@ use Illuminate\Http\Request;
 class PaymentController extends Controller
 {
     // Step 1: Show payment page with dynamic data
-    public function showPaymentPage(Request $request)
+    public function showPaymentPage($id)
     {
-        // Receive booking data from reservation form
-        $bookingData = $request->all();
-
-        // Ensure at least seats are selected
-        if (empty($bookingData['selectedSeats'])) {
-            return redirect()->back()->with('error', 'Please select at least one seat.');
-        }
+        // Fetch reservation from DB
+        $bookingData = \App\Models\SeatReservation::findOrFail($id);
 
         return view('pages.user.payment', compact('bookingData'));
     }

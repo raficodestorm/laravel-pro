@@ -39,22 +39,22 @@
     {{-- RIGHT SIDE - Reservation Form --}}
     <div class="col-md-6">
       <div class="reservation-form">
-        <form id="reservationForm" action="{{ route('payment.page') }}" method="POST">
+        <form id="reservationForm" action="{{ route('go.payment') }}" method="POST">
           @csrf
           <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
 
           <h4 class="mb-3 text-center" style="color:#780116;">BUS INFORMATION</h4>
           <div class="ticket-card p-3 mb-3">
             <p class="inline"><strong>Bus type:</strong></p>
-            <input class="hidein" type="text" name="Bus_type" value="{{ $schedule->bus_type }}" readonly><br>
+            <input class="hidein" type="text" name="bus_type" value="{{ $schedule->bus_type }}" readonly><br>
             <p class="inline"><strong>Coach No:</strong></p>
             <input class="hidein" type="text" name="coach_no" value="{{ $schedule->coach_no }}" readonly><br>
             <p class="inline"><strong>Route:</strong></p>
             <input class="hidein" type="text" name="route"
               value="{{ $schedule->start_location }} to {{ $schedule->end_location }}" readonly> <br>
 
-            <p class="inline"><strong>Fare per Seat:</strong></p>
-            <input class="hidein" type="text" name="seat_price" value="৳ {{ number_format($schedule->price, 2) }}"
+            <p class="inline"><strong>Fare per Seat: ৳</strong></p>
+            <input class="hidein" type="text" name="seat_price" value="{{ number_format($schedule->price, 2) }}"
               readonly> <br>
             <p class="inline"><strong>Departure:</strong></p>
             <input class="hidein" type="text" name="departure"
@@ -63,7 +63,7 @@
 
           <h4>SEAT INFORMATION:</h4>
           <span>Selected Seats:</span>
-          <input type="text" id="selectedSeatsInput" name="selectedSeats" readonly>
+          <input type="text" id="selectedSeatsInput" name="selected_seats" readonly>
 
           <span>Total amount:</span>
           <input type="text" id="totalAmount" name="total" readonly>
@@ -138,7 +138,7 @@
     selectedSeatsDisplay.textContent = selectedSeats.length ? selectedSeats.join(", ") : "None";
     selectedSeatsInput.value = selectedSeats.join(", ");
     const total = selectedSeats.length * seatPrice;
-    totalAmount.value = "৳ " + total;
+    totalAmount.value =total;
   }
 
   function playHorn() {
