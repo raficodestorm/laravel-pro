@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5{
 }
 /* ---------------------------------- navbar style ----------------------------------------- */
     .navbar {
-      background-color: #fffffcbd;
+      background-color: #fffffccb;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       padding: 0.5rem 0;
     }
@@ -355,7 +355,7 @@ input.form-control:focus{
   box-shadow: none;
 }
 .bus-src{
-  background: linear-gradient(180deg, #ff0000, #780116);
+  background: linear-gradient(90deg, #ff0000, #780116);
   border: none; 
   color: white;
   animation: wiggl 1s ease-in-out infinite;
@@ -635,14 +635,17 @@ input.form-control:focus{
         color: rgba(255, 255, 255, 0.35);
     }
 
-    .btn {
+    .btn-subscribe {
         padding: 10px 14px;
         border-radius: 10px;
         border: 0;
         cursor: pointer;
-        background: linear-gradient(180deg, var(--main-color), var(--second-color), var(--main-color));
-        color: #ffffff !important;
+        background-color: #99999971;
+        color: var(--muted);
         font-weight: 600;
+    }
+    .btn-subscribe:hover{
+        background: linear-gradient(90deg, #ff0000, #780116);
     }
 
     .btn:focus {
