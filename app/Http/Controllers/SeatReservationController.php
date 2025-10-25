@@ -44,6 +44,9 @@ class SeatReservationController extends Controller
             'mobile' => 'required|string|max:20',
         ]);
 
+        $validated['seat_price'] = str_replace(',', '', $validated['seat_price']);
+        $validated['total'] = str_replace(',', '', $validated['total']);
+
         $reservation = SeatReservation::create($validated);
         return redirect()->route('payment.for', ['id' => $reservation->id]);
     }

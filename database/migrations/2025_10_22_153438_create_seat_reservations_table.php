@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('departure');
             $table->string('selected_seats');
             $table->decimal('total', 10, 2);
+            $table->string('status')->nullable();
             $table->string('boarding');
             $table->string('dropping');
             $table->string('name');

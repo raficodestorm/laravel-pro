@@ -1,0 +1,321 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('seat_reservations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('schedule_id')->constrained()->onDelete('cascade');
+            $table->string('bus_type');
+            $table->string('coach_no');
+            $table->string('route');
+            $table->decimal('seat_price', 10, 2);
+            $table->string('departure');
+            $table->string('selected_seats');
+            $table->decimal('total', 10, 2);
+            $table->string('status')->nullable();
+            $table->string('boarding');
+            $table->string('dropping');
+            $table->string('name');
+            $table->string('mobile');
+            $table->timestamps(); 
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('seat_reservations');
+    }
+};      this is my seat_reservation table.                                      <?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('booked_seats', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('schedule_id')->references('id')->on('schedules');
+            $table->string('coach_no');
+            $table->string('booked_seats');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('booked_seats');
+    }
+};      this is my booked_seats table.                                                  $table->decimal('tatal_amount');    this is my payment table.       <?php
+
+namespace App\Http\Controllers;
+
+use App\Models\SeatReservation;
+use Illuminate\Http\Request;
+use App\Models\Schedule;
+
+class SeatReservationController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'schedule_id' => 'required|exists:schedules,id',
+            'bus_type' => 'required|string',
+            'coach_no' => 'required|string',
+            'route' => 'required|string',
+            'seat_price' => 'required|string',
+            'departure' => 'required|string',
+            'selected_seats' => 'required|string',
+            'total' => 'required|string',
+            'boarding' => 'required|string',
+            'dropping' => 'required|string',
+            'name' => 'required|string|max:100',
+            'mobile' => 'required|string|max:20',
+        ]);
+
+        $validated['seat_price'] = str_replace(',', '', $validated['seat_price']);
+        $validated['total'] = str_replace(',', '', $validated['total']);
+
+        $reservation = SeatReservation::create($validated);
+        return redirect()->route('payment.for', ['id' => $reservation->id]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(SeatReservation $seatReservation)
+    {
+        //
+    }
+
+    public function see($id)
+    {
+        $schedule = Schedule::findOrFail($id);
+
+        return view('pages.user.seat-reservation', compact('schedule'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(SeatReservation $seatReservation)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, SeatReservation $seatReservation)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(SeatReservation $seatReservation)
+    {
+        //
+    }
+
+    public function payment(Request $request) {}
+}    this is my seatReservationController,                                  <?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PaymentController extends Controller
+{
+    // Step 1: Show payment page with dynamic data
+    public function showPaymentPage($id)
+    {
+        // Fetch reservation from DB
+        $bookingData = \App\Models\SeatReservation::findOrFail($id);
+
+        return view('pages.user.payment', compact('bookingData'));
+    }
+
+    // Step 2: Process payment
+    public function process(Request $request)
+    {
+        $method = $request->paymentMethod;
+
+        // Basic validation
+        if ($method === 'card') {
+            $request->validate([
+                'cardNumber' => 'required',
+                'expiry' => 'required',
+                'cvv' => 'required',
+            ]);
+        } elseif ($method === 'wallet') {
+            $request->validate(['walletNumber' => 'required']);
+        }
+
+        // Simulate success (later you can integrate bKash/Nagad gateway)
+        return redirect()->route('confirmation')->with('success', '✅ Payment Successful! Your ticket is confirmed.');
+    }
+}       this is my paymentController.                           @extends('layouts.userlayout')
+
+@section('content')
+<div class="container payment-page my-5">
+  @if(session('success'))
+  <div class="alert alert-success">
+    {{ session('success') }}
+  </div>
+  @endif
+
+  <div class="row">
+    {{-- LEFT SIDE - Booking Summary --}}
+    <div class="col-md-5">
+      <div class="card shadow-lg p-4 rounded-4 mb-4">
+        <h4 class="mb-3">🚌 Booking Summary</h4>
+        <p>
+          <strong>Passenger:</strong> {{ $bookingData->name }} <br>
+          <strong>Mobile:</strong> {{ $bookingData->mobile }} <br>
+          <strong>Boarding:</strong> {{ $bookingData->boarding }} <br>
+          <strong>Dropping:</strong> {{ $bookingData->dropping }} <br>
+        </p>
+
+        <p>
+          <strong>Bus Type:</strong> {{ $bookingData->Bus_type }} <br>
+          <strong>Coach No:</strong> {{ $bookingData->coach_no }} <br>
+          <strong>Route:</strong> {{ $bookingData->route }} <br>
+          <strong>Departure:</strong> {{ $bookingData->departure }}
+        </p>
+
+        <p>
+          <strong>Seats:</strong>
+          @if(!empty($bookingData->selected_seats))
+          {{ $bookingData->selected_seats }}
+          @else
+          No seats selected
+          @endif
+        </p>
+
+        @php
+        // Extract total amount (remove currency symbol if present)
+        $totalAmount = preg_replace('/[^\d.]/', '', $bookingData['total'] ?? 0);
+        @endphp
+
+        <div class="fare-summary mt-3">
+          <h5>Total Fare:</h5>
+          <h3 class="text-success">৳ {{ number_format($bookingData->total, 2) }}</h3>
+        </div>
+      </div>
+    </div>
+
+    {{-- RIGHT SIDE - Payment Options --}}
+    <div class="col-md-7">
+      <div class="card shadow-lg p-4 rounded-4">
+        <h4 class="mb-3">💳 Payment Details</h4>
+
+        <form method="POST" action="{{ route('payment.process') }}">
+          @csrf
+          <input type="hidden" name="bookingData" value='@json($bookingData)'>
+
+          {{-- Payment Method --}}
+          <div class="mb-3">
+            <label class="form-label">Select Payment Method:</label>
+            <select class="form-select" id="paymentMethod" name="paymentMethod" required
+              onchange="togglePaymentFields(this.value)">
+              <option value="">-- Choose Method --</option>
+              <option value="card">Credit/Debit Card</option>
+              <option value="wallet">Mobile Wallet (bKash, Nagad, Rocket)</option>
+              <option value="netbanking">Net Banking</option>
+              <option value="cod">Cash at Counter</option>
+            </select>
+          </div>
+
+          {{-- Card Payment --}}
+          <div id="cardFields" style="display: none;">
+            <div class="mb-3">
+              <label class="form-label">Card Number</label>
+              <input type="text" name="cardNumber" class="form-control" placeholder="1234 5678 9012 3456">
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Expiry Date</label>
+                <input type="text" name="expiry" class="form-control" placeholder="MM/YY">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">CVV</label>
+                <input type="password" name="cvv" class="form-control" placeholder="123">
+              </div>
+            </div>
+          </div>
+
+          {{-- Wallet --}}
+          <div id="walletFields" style="display: none;">
+            <div class="mb-3">
+              <label class="form-label">Wallet Number</label>
+              <input type="text" name="walletNumber" class="form-control" placeholder="01XXXXXXXXX">
+            </div>
+          </div>
+
+          {{-- Cash on Counter --}}
+          <div id="codNotice" style="display: none;">
+            <div class="alert alert-info">
+              You have chosen <strong>Cash at Counter</strong>. Please pay at the bus counter before departure.
+            </div>
+          </div>
+
+          {{-- Confirm Button --}}
+          <button type="submit" class="btn btn-success w-100 rounded-3 py-2 mt-3">
+            Confirm & Pay ৳{{ number_format($totalAmount, 2) }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- Inline Script --}}
+<script>
+  function togglePaymentFields(method) {
+    document.getElementById('cardFields').style.display = (method === 'card') ? 'block' : 'none';
+    document.getElementById('walletFields').style.display = (method === 'wallet') ? 'block' : 'none';
+    document.getElementById('codNotice').style.display = (method === 'cod') ? 'block' : 'none';
+}
+</script>
+@endsection     this is my payment.blade.php file.               Now , i want that when user confirm payment then it will update "status" column in seat_reservation table.
