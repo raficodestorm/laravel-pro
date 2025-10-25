@@ -3,24 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SeatReservation;
 
 class PaymentController extends Controller
 {
-    // Step 1: Show payment page with dynamic data
+    /**
+     * Step 1: Show payment page with dynamic booking data
+     */
     public function showPaymentPage($id)
     {
         // Fetch reservation from DB
-        $bookingData = \App\Models\SeatReservation::findOrFail($id);
+        $bookingData = SeatReservation::findOrFail($id);
 
         return view('pages.user.payment', compact('bookingData'));
     }
 
-    // Step 2: Process payment
-    public function process(Request $request)
+    /**
+     * Step 2: Process payment form submission
+     */
+    public function processPayment(Request $request)
     {
+        // Validate payment method
         $method = $request->paymentMethod;
 
-        // Basic validation
         if ($method === 'card') {
             $request->validate([
                 'cardNumber' => 'required',
@@ -28,10 +33,23 @@ class PaymentController extends Controller
                 'cvv' => 'required',
             ]);
         } elseif ($method === 'wallet') {
-            $request->validate(['walletNumber' => 'required']);
+            $request->validate([
+                'walletNumber' => 'required',
+            ]);
+        } elseif (empty($method)) {
+            return back()->withErrors(['paymentMethod' => 'Please select a payment method.']);
         }
 
-        // Simulate success (later you can integrate bKash/Nagad gateway)
-        return redirect()->route('confirmation')->with('success', '✅ Payment Successful! Your ticket is confirmed.');
+        // Decode booking data (sent as hidden input JSON)
+        $bookingData = json_decode($request->bookingData);
+
+        // (Optional) Save payment status in DB here
+        // Example:
+        // SeatReservation::where('id', $bookingData->id)->update(['status' => 'paid']);
+
+        // Redirect to ticket page with success message
+        return redirect()->route('user.ticket')
+            ->with('success', '✅ Payment Successful! Your ticket is confirmed.')
+            ->with('bookingData', $bookingData);
     }
 }
