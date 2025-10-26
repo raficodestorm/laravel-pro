@@ -980,43 +980,8 @@ input:focus{
 /* -------------------------style for user payment---------------------------- */
 
 
+/* -------------------------style for user payment---------------------------- */
+
 /* -------------------------style for ticket---------------------------- */
-/* .ticket-card {
-  border: 2px solid var(--main-color);
-  background: white;
-}
 
-.section-title {
-  background: var(--main-color);
-  color: white;
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.table {
-  margin-bottom: 0;
-  background: #fdfdfd;
-}
-
-.table td {
-  vertical-align: middle;
-  font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-  .table td {
-  vertical-align: middle;
-  font-size: 0.7rem;
-  padding: .1rem .5rem;
-}
-.ticket-header p{
-  font-size: small;
-  line-height: 0;
-}
-.instruction{
-  font-size: smaller;
-  text-align: center;
-}
-} */
 
