@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.userlayout')
 @section('content')
 
 <style>
@@ -18,14 +18,10 @@
         border-radius: var(--radius-lg);
         padding: 28px;
         box-shadow: var(--card-shadow);
-        width: 70%;
+        width: 50%;
         max-width: 700px;
         margin: 40px auto;
         animation: enter .6s cubic-bezier(.2, .9, .2, 1) both;
-    }
-
-    h2 {
-        margin-bottom: 6px;
     }
 
     p.lead {
@@ -33,7 +29,7 @@
         margin-bottom: 18px;
     }
 
-    form {
+    .form-regi {
         display: flex;
         flex-direction: column;
         gap: 14px;
@@ -73,7 +69,7 @@
         border-color: rgba(120, 1, 22, 0.2);
     }
 
-    .btn {
+    /* .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -85,7 +81,7 @@
         font-weight: 600;
         font-size: 15px;
         transition: transform 0.1s ease-in-out;
-    }
+    } */
 
     .btn:hover {
         transform: translateY(-1px);
@@ -128,10 +124,10 @@
 </style>
 
 <div class="register-form-card">
-    <h2>Join With Runstar</h2>
-    <p class="lead">Create your account to start using the dashboard</p>
+    <h2 class="text-center">Join With Runstar</h2>
+    <p class="lead text-center">Create your account to start using the dashboard</p>
 
-    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+    <form class="form-regi" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="field">

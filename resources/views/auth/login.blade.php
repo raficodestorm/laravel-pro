@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.userlayout')
 <!-- Session Status -->
 <x-auth-session-status class="mb-4" :status="session('status')" />
 @section('content')
@@ -19,15 +19,19 @@
         --max-width: 980px;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-
-
-    /* Right panel: login card */
+    .login-main{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .login-form-card {
         background: white;
         border-radius: var(--radius-lg);
         padding: 28px;
         box-shadow: var(--card-shadow);
-        width: 60%;
+        width: 40%;
     }
 
     .login-form-card h2 {
@@ -39,7 +43,7 @@
         color: var(--muted)
     }
 
-    form {
+    #loginForm {
         display: flex;
         flex-direction: column;
         gap: 14px
@@ -51,16 +55,15 @@
         gap: 8px
     }
 
-    label {
+    .label-log {
         font-size: 13px;
         color: var(--muted)
     }
 
-    input[type="email"],
-    input[type="password"] {
+    .input-log {
         height: 48px;
         border-radius: 10px;
-        border: 1px solid rgba(16, 16, 16, 0.06);
+        border: .5px solid #ff6d00;
         padding: 12px 14px;
         font-size: 15px;
         outline: none;
@@ -68,7 +71,7 @@
         background: #fff;
     }
 
-    input:focus {
+    .input-log:focus {
         box-shadow: 0 6px 18px rgba(120, 1, 22, 0.06);
         border-color: rgba(120, 1, 22, 0.12)
     }
@@ -88,7 +91,7 @@
         color: var(--muted)
     }
 
-    .btn {
+    /* .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -100,7 +103,7 @@
         cursor: pointer;
         font-weight: 600;
         font-size: 15px;
-    }
+    } */
 
     .btn-primary {
         background: linear-gradient(90deg, var(--main-color), var(--second-color));
@@ -119,31 +122,31 @@
         margin-top: 6px
     }
 
-    .divider {
+    .divider-log {
         display: flex;
         align-items: center;
         gap: 12px;
         margin: 6px 0
     }
 
-    .divider span {
+    .divider-log span {
         flex: 1;
         height: 1px;
         background: rgba(16, 16, 16, 0.04)
     }
 
-    .divider small {
+    .divider-log small {
         color: var(--muted);
         font-size: 13px;
         padding: 0 6px
     }
 
-    .socials {
+    .socials-log {
         display: flex;
         gap: 8px
     }
 
-    .socials button {
+    .socials-log button {
         flex: 1;
         height: 44px
     }
@@ -168,20 +171,7 @@
     }
 
     /* small screen adjustments */
-    @media (max-width:980px) {
-        .container {
-            grid-template-columns: 1fr;
-            padding: 18px
-        }
 
-        .brand-panel {
-            order: 2
-        }
-
-        .card {
-            order: 1
-        }
-    }
 
     @media (max-width:420px) {
         .benefits {
@@ -207,18 +197,8 @@
             opacity: 1
         }
     }
-
-    /* small form validation styles */
-    .invalid {
-        border-color: #d33 !important
-    }
-
-    .error {
-        color: #b32;
-        font-size: 13px
-    }
 </style>
-
+<div class="login-main">
 <div class="login-form-card enter" aria-labelledby="login-title">
     <div style="display:flex; align-items:center; justify-content:space-between; gap:12px">
         <div>
@@ -236,15 +216,15 @@
     <form id="loginForm" method="POST" action="{{ route('login') }}">
         @csrf
         <div class="field">
-            <label for="email">Userename or Email</label>
-            <input name="login" value="{{ old('login') }}" required />
+            <label for="email" class="label-log">Userename or Email</label>
+            <input class="input-log" name="login" value="{{ old('login') }}" required />
             @error('login')<div>{{ $message }}</div>@enderror
         </div>
 
         <div class="field">
-            <label for="password">Password</label>
+            <label for="password" class="label-log">Password</label>
             <div style="position:relative; display:flex; align-items:center">
-                <input id="password" type="password" name="password" placeholder="••••••••" required />
+                <input class="input-log" id="password" type="password" name="password" placeholder="••••••••" required />
                 <button type="button" id="togglePwd" aria-label="Show password" title="Show password"
                     style="position:absolute; right:8px; height:34px; padding:0 8px; border-radius:8px; border:none; background:transparent; cursor:pointer">👁️</button>
             </div>
@@ -252,15 +232,15 @@
         </div>
 
         <div class="actions">
-            <label class="remember"><input type="checkbox" id="remember" /> Remember me</label>
+            <label class="remember label-log"><input type="checkbox" id="remember" /> Remember me</label>
             <a href="{{ route('password.request') }}" class="note">Forgot password?</a>
         </div>
 
         <button class="btn btn-primary" type="submit">Sign in</button>
 
-        <div class="divider"><span></span><small>or continue with</small><span></span></div>
+        <div class="divider-log"><span></span><small>or continue with</small><span></span></div>
 
-        <div class="socials">
+        <div class="socials-log">
             <button type="button" class="btn btn-outline" aria-label="Sign in with Google">Google</button>
             <button type="button" class="btn btn-outline" aria-label="Sign in with Apple">Apple</button>
         </div>
@@ -271,6 +251,7 @@
         </div>
 
     </form>
+</div>
 </div>
 </div>
 <script>

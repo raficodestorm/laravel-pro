@@ -11,4 +11,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
   Route::get('users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
   Route::put('users/{user}', [UserManagementController::class, 'update'])->name('users.update');
   Route::delete('users/{user}', [UserManagementController::class, 'destroy'])->name('users.destroy');
+
+  Route::resource('buses', BusController::class);
+  Route::resource('locations', LocationController::class);
+  Route::resource('routes', RouteController::class);
+
+  Route::resource('schedules', ScheduleController::class);
+  Route::get('/get-route-info', [ScheduleController::class, 'getRouteInfo'])->name('get.route.info');
+  Route::get('/get-coaches', [ScheduleController::class, 'getCoachesByBusType'])->name('get.coaches');
 });

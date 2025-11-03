@@ -1,26 +1,40 @@
 <?php
 
-use App\Http\Controllers\Admin\UserManagementController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\SeatReservationController;
+use App\Http\Controllers\User\SearchScheduleBusController;
+use App\Http\Controllers\Admin\UserManagementController;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('pages.user.userfront');
+})->name('user-main-page');
 
+// ------------------------for search chedule bus ----------------------------------------
+Route::get('/locations/search', [SearchScheduleBusController::class, 'getLocations'])->name('locations.get');
+Route::get('/', [SearchScheduleBusController::class, 'index'])->name('bus.search.form');
+Route::post('/find-bus', [SearchScheduleBusController::class, 'search'])->name('bus.search');
+
+// ------------------------for seat Reservation ----------------------------------------
+Route::get('/seat-reservation/{id}', [SeatReservationController::class, 'see'])->name('seat.reservation');
+Route::post('/go-to-payment', [SeatReservationController::class, 'store'])->name('go.payment');
 
 // dashboards (protected)
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/user', function () {
-        return view('dashboards.user');
-    })->name('dashboard.user')->middleware('role:user,admin,counter_manager'); // user page - accessible by user (admin can also view if needed)
+        return view('pages.dashboard.user');
+    })->name('dashboard.user')->middleware('role:user'); // user page - accessible by user (admin can also view if needed)
 
     Route::get('/dashboard/manager', function () {
-        return view('dashboards.manager');
-    })->name('dashboard.manager')->middleware('role:counter_manager');
+        return view('pages.dashboard.counter_manager');
+    })->name('dashboard.counter_manager')->middleware('role:counter_manager');
+
+    Route::get('/dashboard/controller', function () {
+        return view('pages.dashboard.controller');
+    })->name('dashboard.controller')->middleware('role:controller');
 
     Route::get('/dashboard/admin', function () {
-        return view('dashboards.admin');
+        return view('pages.dashboard.admin');
     })->name('dashboard.admin')->middleware('role:admin');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
