@@ -15,19 +15,28 @@
       </div>
 
       <!-- Profile Dropdown -->
+      @auth
       <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="profileDropdown"
           data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="{{ asset('image/rishad.png') }}" alt="Profile" class="rounded-circle"
-            style="width:40px; height:40px; object-fit:cover; border:2px solid #ff0000;">
+          <img src="{{ asset('storage/' . auth()->user()->profile_photo_path) }}" alt="User"
+            style="width:40px; height:40px; object-fit:cover; border:2px solid #ff0000;">>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
           <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Dashboard</a></li>
+          <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Edit Profile</a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+          <li>
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit" class="dropdown-item text-danger">Logout</button>
+            </form>
+          </li>
+          @endauth
+
         </ul>
       </div>
     </div>

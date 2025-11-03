@@ -6,17 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+
+            // core profile
+            $table->string('fullname');
+            $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // fields for admin-created manager 
+            $table->string('father_name')->nullable();
+            $table->string('phone')->nullable()->index();
+            $table->text('address')->nullable();
+            $table->string('nid_no')->nullable();
+            $table->string('profile_photo_path')->nullable();
+
+            // roles & status
+            $table->enum('role', ['user', 'counter_manager', 'controller', 'admin'])->default('user')->index();
+            $table->enum('status', ['active', 'inactive'])->default('active')->index();
+
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -37,13 +49,10 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
     }
 };
