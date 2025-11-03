@@ -1,0 +1,16 @@
+/* =================== google-font-Roboto & Ek-mesirri =================== */
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* font-family: "Roboto", sans-serif; */
+/* font-family: "El Messiri", sans-serif; */
+:root{
+    --main-color: #ff0000;
+    --second-color: #780116;
+    --bg-color: #fffffc;
+    --back-color: #edf6f9af;
+    --text-color: #220901;
+    --light-hover: #ff0101ca;
+}
+h1, h2, h3, h4, h5{
+    font-family: "El Messiri", sans-serif;
+    font-weight: 800;
+}

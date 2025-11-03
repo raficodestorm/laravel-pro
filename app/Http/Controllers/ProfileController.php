@@ -19,11 +19,16 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+        $user = $request->user();
+        $view = "profile.{$user->role}-edit";
 
+        // fallback if view doesn’t exist
+        if (!view()->exists($view)) {
+            $view = 'profile.user-edit';
+        }
+
+        return view($view, ['user' => $user]);
+    }
     /**
      * Update the user's profile information.
      */
