@@ -55,8 +55,8 @@
       </a>
       <ul class="submenu">
         <div>
-          <li class="{{request()->routeIs('admin.schedules.create')?'active':''}}"><a href="{{ route('admin.schedules.create') }}"
-              title="Booking" id="sub">
+          <li class="{{request()->routeIs('admin.schedules.create')?'active':''}}"><a
+              href="{{ route('admin.schedules.create') }}" title="Booking" id="sub">
               <img src="{{asset('svg/addschedule.svg')}}" />
               <span>Create shedule</span>
             </a>
@@ -126,7 +126,7 @@
     <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="Stations" id="drop">
         <img src="{{asset('svg/list.svg')}}" />
-        <span>Stations</span>
+        <span>Users</span>
         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#0000F5">
           <path d="M480-360 280-560h400L480-360Z" />
@@ -134,14 +134,29 @@
       </a>
       <ul class="submenu">
         <div>
-          <li><a href="#" title="Booking" id="sub">
+          <li><a href="{{route('admin.users.create')}}" title="Booking" id="sub">
               <img src="{{asset('svg/list.svg')}}" />
-              <span>add</span>
+              <span>Add Users</span>
             </a>
           </li>
-          <li><a href="#" title="Booking" id="sub">
+          <li><a href="{{route('admin.index.admins')}}" title="Booking" id="sub">
               <img src="{{asset('svg/list.svg')}}" />
-              <span>remove</span>
+              <span>Manage controllers</span>
+            </a>
+          </li>
+          <li><a href="{{route('admin.index.controllers')}}" title="Booking" id="sub">
+              <img src="{{asset('svg/list.svg')}}" />
+              <span>Manage controllers</span>
+            </a>
+          </li>
+          <li><a href="{{route('admin.index.managers')}}" title="Booking" id="sub">
+              <img src="{{asset('svg/list.svg')}}" />
+              <span>Manage Managers</span>
+            </a>
+          </li>
+          <li><a href="{{route('admin.index.normalUsers')}}" title="Booking" id="sub">
+              <img src="{{asset('svg/list.svg')}}" />
+              <span>Manage Users</span>
             </a>
           </li>
         </div>

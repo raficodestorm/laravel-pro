@@ -15,11 +15,42 @@ class UserManagementController extends Controller
     $this->middleware(['auth', 'role:admin']);
   }
 
-  public function index()
+  public function admins()
   {
-    $users = User::orderBy('created_at', 'desc')->paginate(20);
-    return view('admin.users.index', compact('users'));
+    $users = User::where('role', 'admin')->orderBy('created_at', 'desc')->paginate(20);
+    return view('admin.users.index-admin', [
+      'users' => $users,
+      'roleTitle' => 'Admins'
+    ]);
   }
+
+  public function controllers()
+  {
+    $users = User::where('role', 'controller')->orderBy('created_at', 'desc')->paginate(20);
+    return view('admin.users.index-controller', [
+      'users' => $users,
+      'roleTitle' => 'Controller'
+    ]);
+  }
+
+  public function counterManagers()
+  {
+    $users = User::where('role', 'counter_manager')->orderBy('created_at', 'desc')->paginate(20);
+    return view('admin.users.index-manager', [
+      'users' => $users,
+      'roleTitle' => 'Counter Managers'
+    ]);
+  }
+
+  public function normalUsers()
+  {
+    $users = User::where('role', 'user')->orderBy('created_at', 'desc')->paginate(20);
+    return view('admin.users.index-user', [
+      'users' => $users,
+      'roleTitle' => 'Users'
+    ]);
+  }
+
 
   public function create()
   {
