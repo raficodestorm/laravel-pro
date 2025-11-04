@@ -10,7 +10,7 @@
       </button>
     </li>
     <li>
-      <a href="{{ route('pages.admin.admindashboard') }}" title="Dashboard">
+      <a href="{{ route('dashboard.admin') }}" title="Dashboard">
         <img src="{{asset('svg/dashboard.svg')}}" alt="Dashboard" />
         <span>Dashboard</span>
       </a>
@@ -29,12 +29,12 @@
       </a>
       <ul class="submenu">
         <div>
-          <li><a href="{{ route('buses.create') }}" title="Add New Bus" id="sub">
+          <li><a href="{{ route('admin.buses.create') }}" title="Add New Bus" id="sub">
               <img src="{{asset('svg/addbus.svg')}}" />
               <span>Add New Bus</span>
             </a>
           </li>
-          <li><a href="{{ route('buses.index') }}" title="All Buses" id="sub">
+          <li><a href="{{ route('admin.buses.index') }}" title="All Buses" id="sub">
               <img src="{{asset('svg/list.svg')}}" />
               <span>All Buses</span>
             </a>
@@ -55,13 +55,13 @@
       </a>
       <ul class="submenu">
         <div>
-          <li class="{{request()->routeIs('schedules.create')?'active':''}}"><a href="{{ route('schedules.create') }}"
+          <li class="{{request()->routeIs('admin.schedules.create')?'active':''}}"><a href="{{ route('admin.schedules.create') }}"
               title="Booking" id="sub">
               <img src="{{asset('svg/addschedule.svg')}}" />
               <span>Create shedule</span>
             </a>
           </li>
-          <li><a href="{{ route('schedules.index') }}" title="All schedules" id="sub">
+          <li><a href="{{ route('admin.schedules.index') }}" title="All schedules" id="sub">
               <img src="{{asset('svg/list.svg')}}" />
               <span>All schedules</span>
             </a>
@@ -81,12 +81,12 @@
       </a>
       <ul class="submenu">
         <div>
-          <li><a href="{{ route('locations.create') }}" title="Add location" id="sub">
+          <li><a href="{{ route('admin.locations.create') }}" title="Add location" id="sub">
               <img src="{{asset('svg/addlocation.svg')}}" />
               <span>Add location</span>
             </a>
           </li>
-          <li><a href="{{ route('locations.index') }}" title="All locations" id="sub">
+          <li><a href="{{ route('admin.locations.index') }}" title="All locations" id="sub">
               <img src="{{asset('svg/list.svg')}}" />
               <span>All locations</span>
             </a>
@@ -108,12 +108,12 @@
       </a>
       <ul class="submenu">
         <div>
-          <li><a href="{{ route('routes.create') }}" title="Add route" id="sub">
+          <li><a href="{{ route('admin.routes.create') }}" title="Add route" id="sub">
               <img src="{{asset('svg/addroute.svg')}}" />
               <span>Add Route</span>
             </a>
           </li>
-          <li><a href="{{ route('routes.index') }}" title="All routes" id="sub">
+          <li><a href="{{ route('admin.routes.index') }}" title="All routes" id="sub">
               <img src="{{asset('svg/list.svg')}}" />
               <span>All Routes</span>
             </a>

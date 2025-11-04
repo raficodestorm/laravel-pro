@@ -84,7 +84,7 @@
         resize: vertical;
     }
 
-    img {
+    .img-edit {
         border: 3px solid var(--main-color);
         margin-bottom: 8px;
         border-radius: 50%;
@@ -202,7 +202,7 @@
         <div>
             <label>Profile Photo</label><br>
             @if($user->profile_photo_path)
-            <img src="{{ asset('storage/'.$user->profile_photo_path) }}" width="100" height="100">
+            <img class="img-edit" src="{{ asset('storage/'.$user->profile_photo_path) }}" width="100" height="100">
             @endif
             <input type="file" name="profile_photo">
         </div>

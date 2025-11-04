@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Bus;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class BusController extends Controller
 {
@@ -35,7 +36,7 @@ class BusController extends Controller
 
         Bus::create($validated);
 
-        return redirect()->route('buses.index')->with('success', 'Bus added successfully!');
+        return redirect()->route('admin.buses.index')->with('success', 'Bus added successfully!');
     }
 
     /**
@@ -69,7 +70,7 @@ class BusController extends Controller
             'route' => 'required|string|max:255',
         ]);
         $bus->update($validated);
-        return redirect()->route('buses.index')->with('success', 'Bus updated successfully');
+        return redirect()->route('admin.buses.index')->with('success', 'Bus updated successfully');
     }
 
     /**
@@ -78,6 +79,6 @@ class BusController extends Controller
     public function destroy(Bus $bus)
     {
         $bus->delete();
-        return redirect()->route('buses.index')->with('success', 'Bus deleted successfully');
+        return redirect()->route('admin.buses.index')->with('success', 'Bus deleted successfully');
     }
 }

@@ -20,7 +20,7 @@
         <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="profileDropdown"
           data-bs-toggle="dropdown" aria-expanded="false">
           <img src="{{ asset('storage/' . auth()->user()->profile_photo_path) }}" alt="User"
-            style="width:40px; height:40px; object-fit:cover; border:2px solid #ff0000;">>
+            style="width:40px; height:40px; object-fit:cover; border:2px solid #ff0000; border-radius:50%;">
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
           <li><a class="dropdown-item" href="#">Profile</a></li>

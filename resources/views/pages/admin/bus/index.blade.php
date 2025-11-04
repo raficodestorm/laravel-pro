@@ -9,7 +9,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2 class="text-center">All Buses</h2>
-      <a href="{{ route('buses.create') }}" class="btn btn-info">Add New Bus</a>
+      <a href="{{ route('admin.buses.create') }}" class="btn btn-info">Add New Bus</a>
     </div>
 
     <table class="table table-bordered table-hover" id="table-same">
@@ -38,9 +38,9 @@
           <td>{{ $bus->seat_layout }}</td>
           <td>{{ $bus->route }}</td>
           <td>
-            <a href="{{ route('buses.show', $bus) }}" class="btn btn-sm btn-info">View</a>
-            <a href="{{ route('buses.edit', $bus) }}" class="btn btn-sm btn-warning">Edit</a>
-            <form action="{{ route('buses.destroy', $bus) }}" method="POST" class="d-inline"
+            <a href="{{ route('admin.buses.show', $bus) }}" class="btn btn-sm btn-info">View</a>
+            <a href="{{ route('admin.buses.edit', $bus) }}" class="btn btn-sm btn-warning">Edit</a>
+            <form action="{{ route('admin.buses.destroy', $bus) }}" method="POST" class="d-inline"
               onsubmit="return confirm('Are you sure you want to delete this bus?')">
               @csrf
               @method('DELETE')

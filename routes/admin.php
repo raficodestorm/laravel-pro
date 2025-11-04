@@ -1,7 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\UserManagementController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\BusController;
+use App\Http\Controllers\RouteController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\Admin\UserManagementController;
 
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {

@@ -17,7 +17,7 @@
       @endif
 
       {{-- Form --}}
-      <form action="{{ route('buses.store') }}" method="POST">
+      <form action="{{ route('admin.buses.store') }}" method="POST">
         @csrf
 
         <div class="row mb-3">
@@ -70,7 +70,7 @@
 
         <div class="text-end">
           <button type="submit" class="btn btn-success px-4">Save Bus</button>
-          <a href="{{ route('buses.index') }}" class="btn btn-secondary px-4">Cancel</a>
+          <a href="{{ route('admin.buses.index') }}" class="btn btn-secondary px-4">Cancel</a>
         </div>
       </form>
     </div>

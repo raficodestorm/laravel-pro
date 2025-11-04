@@ -45,7 +45,7 @@ class AuthenticatedSessionController extends Controller
         if ($user->isAdmin()) {
             return redirect()->route('dashboard.admin');
         } elseif ($user->isManager()) {
-            return redirect()->route('dashboard.manager');
+            return redirect()->route('dashboard.counter-manager');
         } elseif ($user->isController()) {
             return redirect()->route('dashboard.controller');
         } else {
