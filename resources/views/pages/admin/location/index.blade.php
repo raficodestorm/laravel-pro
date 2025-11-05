@@ -5,7 +5,7 @@
     <div class="index-card shadow">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3>All Locations</h3>
-            <a href="{{ route('locations.create') }}" class="btn btn-info">+ Add Location</a>
+            <a href="{{ route('admin.locations.create') }}" class="btn btn-info">+ Add Location</a>
         </div>
 
         @if (session('success'))
@@ -28,9 +28,9 @@
                     <td>{{ $location->district }}</td>
                     <td>{{ $location->division ?? '-' }}</td>
                     <td>
-                        <a href="{{ route('locations.show', $location->id) }}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{ route('locations.edit', $location->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('locations.destroy', $location->id) }}" method="POST" class="d-inline">
+                        <a href="{{ route('admin.locations.show', $location->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('admin.locations.edit', $location->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('admin.locations.destroy', $location->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button onclick="return confirm('Are you sure?')"

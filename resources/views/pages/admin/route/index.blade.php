@@ -5,7 +5,7 @@
     <div class="index-card shadow">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3>All Routes</h3>
-            <a href="{{ route('routes.create') }}" class="btn btn-info">+ Add Route</a>
+            <a href="{{ route('admin.routes.create') }}" class="btn btn-info">+ Add Route</a>
         </div>
 
         @if (session('success'))
@@ -35,9 +35,9 @@
                     <td>{{ $route->duration }}</td>
 
                     <td>
-                        <a href="{{ route('routes.show', $route->id) }}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{ route('routes.edit', $route->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('routes.destroy', $route->id) }}" method="POST" class="d-inline">
+                        <a href="{{ route('admin.routes.show', $route->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('admin.routes.edit', $route->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('admin.routes.destroy', $route->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button onclick="return confirm('Are you sure?')"

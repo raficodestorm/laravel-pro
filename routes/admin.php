@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BusController;
-use App\Http\Controllers\RouteController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\Admin\RouteController;
+use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\UserManagementController;
 
 
@@ -23,8 +23,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
   Route::resource('buses', BusController::class);
   Route::resource('locations', LocationController::class);
   Route::resource('routes', RouteController::class);
-
   Route::resource('schedules', ScheduleController::class);
+
   Route::get('/get-route-info', [ScheduleController::class, 'getRouteInfo'])->name('get.route.info');
   Route::get('/get-coaches', [ScheduleController::class, 'getCoachesByBusType'])->name('get.coaches');
 });

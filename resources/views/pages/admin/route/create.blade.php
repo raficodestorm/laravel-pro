@@ -15,7 +15,7 @@
             </div>
             @endif
 
-            <form action="{{ route('routes.store') }}" method="POST">
+            <form action="{{ route('admin.routes.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Route code</label>
@@ -40,7 +40,7 @@
                     <input type="text" name="duration" class="form-control" placeholder="duration">
                 </div>
                 <button type="submit" class="btn btn-success px-4">Save</button>
-                <a href="{{ route('routes.index') }}" class="btn btn-secondary px-4">Back</a>
+                <a href="{{ route('admin.routes.index') }}" class="btn btn-secondary px-4">Back</a>
             </form>
         </div>
     </div>

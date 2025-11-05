@@ -5,7 +5,7 @@
     <div class="index-card shadow">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3>All Schedules</h3>
-            <a href="{{ route('schedules.create') }}" class="btn btn-info">+ Add Shedule</a>
+            <a href="{{ route('admin.schedules.create') }}" class="btn btn-info">+ Add Shedule</a>
         </div>
 
         @if (session('success'))
@@ -45,9 +45,9 @@
                     <td>{{ $schedule->coach_no }}</td>
 
                     <td>
-                        <a href="{{ route('schedules.show', $schedule->id) }}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{ route('schedules.edit', $schedule->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('schedules.destroy', $schedule->id) }}" method="POST" class="d-inline">
+                        <a href="{{ route('admin.schedules.show', $schedule->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('admin.schedules.edit', $schedule->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button onclick="return confirm('Are you sure?')"

@@ -15,7 +15,7 @@
             </div>
             @endif
 
-            <form action="{{ route('locations.store') }}" method="POST">
+            <form action="{{ route('admin.locations.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label class="form-label fw-semibold">District</label>
@@ -26,7 +26,7 @@
                     <input type="text" name="division" class="form-control" placeholder="Enter division (optional)">
                 </div>
                 <button type="submit" class="btn btn-success px-4">Save</button>
-                <a href="{{ route('locations.index') }}" class="btn btn-secondary px-4">Back</a>
+                <a href="{{ route('admin.locations.index') }}" class="btn btn-secondary px-4">Back</a>
             </form>
         </div>
     </div>

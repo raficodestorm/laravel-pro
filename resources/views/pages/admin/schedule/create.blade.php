@@ -15,7 +15,7 @@
     </div>
     @endif
 
-    <form action="{{ route('schedules.store') }}" method="POST" id="scheduleForm">
+    <form action="{{ route('admin.schedules.store') }}" method="POST" id="scheduleForm">
       @csrf
       <div class="row">
         <div class="col-md-6 mb-3">
@@ -92,7 +92,7 @@
 
     // Load all route codes for suggestions
     $.ajax({
-        url: "{{ route('get.route.info') }}",
+        url: "{{ route('admin.get.route.info') }}",
         method: 'GET',
         success: function(response) {
             // We'll skip this because it expects a specific route_code input
@@ -105,7 +105,7 @@
 
         if(code.length > 0) {
             $.ajax({
-                url: "{{ route('get.route.info') }}",
+                url: "{{ route('admin.get.route.info') }}",
                 method: 'GET',
                 data: { route_code: code },
                 success: function(route) {
@@ -126,7 +126,7 @@
 
         if(busType.length > 0) {
             $.ajax({
-                url: "{{ route('get.coaches') }}",
+                url: "{{ route('admin.get.coaches') }}",
                 method: 'GET',
                 data: { bus_type: busType },
                 success: function(coaches) {

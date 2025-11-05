@@ -14,7 +14,7 @@ class UserManagementController extends Controller
   {
     $this->middleware(['auth', 'role:admin']);
   }
-
+  
   public function admins()
   {
     $users = User::where('role', 'admin')->orderBy('created_at', 'desc')->paginate(20);
@@ -55,7 +55,7 @@ class UserManagementController extends Controller
   public function create()
   {
     // form to create admin or counter_manager
-    return view('admin.users.create');
+    return view('pages.admin.users.create');
   }
 
   public function store(Request $request)
@@ -92,7 +92,7 @@ class UserManagementController extends Controller
     ]);
 
     // return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
-    return redirect()->route('/')->with('success', 'User created successfully.');
+    return redirect()->route('admin.index.admins')->with('success', 'User created successfully.');
   }
 
   public function edit(User $user)
