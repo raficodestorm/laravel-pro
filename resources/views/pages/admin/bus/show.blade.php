@@ -15,7 +15,7 @@
       <p><strong>Route:</strong> {{ $bus->route }}</p>
       <p><strong>added at:</strong> {{ $bus->created_at }}</p>
 
-      <a href="{{ route('buses.index') }}" class="btn btn-secondary">Back</a>
+      <a href="{{ route('admin.buses.index') }}" class="btn btn-secondary">Back</a>
     </div>
   </div>
 </div>

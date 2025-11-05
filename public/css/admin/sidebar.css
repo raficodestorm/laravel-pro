@@ -105,7 +105,8 @@ animation: glowShift .8s ease-in-out infinite;
     }
 }
 .submenu a{
-    padding-left: 2.2rem;
+    padding-left: 1.8rem;
+    font-size: 0.8rem;
 }
 .arrow {
     transition: transform 0.3s ease;

@@ -10,7 +10,7 @@
             <p><strong>Division:</strong> {{ $location->division ?? '-' }}</p>
             <p><strong>Created at:</strong> first time</p>
 
-            <a href="{{ route('locations.index') }}" class="btn btn-secondary mt-3 px-4">Back</a>
+            <a href="{{ route('admin.locations.index') }}" class="btn btn-secondary mt-3 px-4">Back</a>
         </div>
     </div>
 </div>

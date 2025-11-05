@@ -13,7 +13,7 @@
             <p><strong>duration:</strong> {{ $route->duration }}</p>
             <p><strong>Created at:</strong> {{ $route->created_at }}</p>
 
-            <a href="{{ route('routes.index') }}" class="btn btn-secondary mt-3 px-4">Back</a>
+            <a href="{{ route('admin.routes.index') }}" class="btn btn-secondary mt-3 px-4">Back</a>
         </div>
     </div>
 </div>

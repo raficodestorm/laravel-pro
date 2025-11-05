@@ -37,7 +37,7 @@ class ScheduleController extends Controller
         ]);
 
         Schedule::create($validated);
-        return redirect()->route('schedules.index')->with('success', 'Schedule added successfully!');
+        return redirect()->route('admin.schedules.index')->with('success', 'Schedule added successfully!');
     }
 
     public function show(Schedule $schedule)
@@ -66,13 +66,13 @@ class ScheduleController extends Controller
         ]);
 
         $schedule->update($validated);
-        return redirect()->route('schedules.index')->with('success', 'Schedule updated successfully!');
+        return redirect()->route('admin.schedules.index')->with('success', 'Schedule updated successfully!');
     }
 
     public function destroy(Schedule $schedule)
     {
         $schedule->delete();
-        return redirect()->route('schedules.index')->with('success', 'Schedule deleted successfully!');
+        return redirect()->route('admin.schedules.index')->with('success', 'Schedule deleted successfully!');
     }
 
     // AJAX: Get Route Info

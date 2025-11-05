@@ -14,11 +14,11 @@ class UserManagementController extends Controller
   {
     $this->middleware(['auth', 'role:admin']);
   }
-  
+
   public function admins()
   {
     $users = User::where('role', 'admin')->orderBy('created_at', 'desc')->paginate(20);
-    return view('admin.users.index-admin', [
+    return view('pages.admin.users.index-admin', [
       'users' => $users,
       'roleTitle' => 'Admins'
     ]);
@@ -27,7 +27,7 @@ class UserManagementController extends Controller
   public function controllers()
   {
     $users = User::where('role', 'controller')->orderBy('created_at', 'desc')->paginate(20);
-    return view('admin.users.index-controller', [
+    return view('pages.admin.users.index-controllers', [
       'users' => $users,
       'roleTitle' => 'Controller'
     ]);
@@ -36,7 +36,7 @@ class UserManagementController extends Controller
   public function counterManagers()
   {
     $users = User::where('role', 'counter_manager')->orderBy('created_at', 'desc')->paginate(20);
-    return view('admin.users.index-manager', [
+    return view('pages.admin.users.index-managers', [
       'users' => $users,
       'roleTitle' => 'Counter Managers'
     ]);
@@ -45,12 +45,16 @@ class UserManagementController extends Controller
   public function normalUsers()
   {
     $users = User::where('role', 'user')->orderBy('created_at', 'desc')->paginate(20);
-    return view('admin.users.index-user', [
+    return view('pages.admin.users.index-users', [
       'users' => $users,
       'roleTitle' => 'Users'
     ]);
   }
 
+  public function show(User $user)
+  {
+    return view('pages.admin.users.show', compact('user'));
+  }
 
   public function create()
   {
@@ -65,7 +69,7 @@ class UserManagementController extends Controller
       'username' => ['required', 'string', 'max:50', 'alpha_dash', 'unique:users,username'],
       'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
       'password' => ['required', 'confirmed', Rules\Password::defaults()],
-      'role' => ['required', 'in:admin,counter_manager'],
+      'role' => ['required', 'in:admin,controller,counter_manager'],
       'father_name' => ['required', 'string', 'max:255'],
       'phone' => ['required', 'string', 'max:30'],
       'address' => ['required', 'string'],
@@ -92,12 +96,12 @@ class UserManagementController extends Controller
     ]);
 
     // return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
-    return redirect()->route('admin.index.admins')->with('success', 'User created successfully.');
+    return redirect()->route('pages.admin.index.admins')->with('success', 'User created successfully.');
   }
 
   public function edit(User $user)
   {
-    return view('admin.users.edit', compact('user'));
+    return view('pages.admin.users.edit', compact('user'));
   }
 
   public function update(Request $request, User $user)
@@ -107,7 +111,7 @@ class UserManagementController extends Controller
       'username' => ['required', 'string', 'max:50', 'alpha_dash', 'unique:users,username,' . $user->id],
       'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
       'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-      'role' => ['required', 'in:user,counter_manager,admin'],
+      'role' => ['required', 'in:user,controller,counter_manager,admin'],
       'father_name' => ['nullable', 'string', 'max:255'],
       'phone' => ['nullable', 'string', 'max:30'],
       'address' => ['nullable', 'string'],

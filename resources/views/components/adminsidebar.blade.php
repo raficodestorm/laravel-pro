@@ -141,7 +141,7 @@
           </li>
           <li><a href="{{route('admin.index.admins')}}" title="Booking" id="sub">
               <img src="{{asset('svg/list.svg')}}" />
-              <span>Manage controllers</span>
+              <span>Manage admins</span>
             </a>
           </li>
           <li><a href="{{route('admin.index.controllers')}}" title="Booking" id="sub">

@@ -41,13 +41,13 @@
         letter-spacing: 0.5px;
     }
 
-    form {
+    .edit-form {
         display: flex;
         flex-direction: column;
         gap: 18px;
     }
 
-    form div {
+    .edit-form div {
         display: flex;
         flex-direction: column;
     }
@@ -58,9 +58,7 @@
         margin-bottom: 5px;
     }
 
-    input,
-    textarea,
-    select {
+    .edit-intput {
         background: var(--back-color);
         color: var(--text-color);
         padding: 12px 14px;
@@ -70,13 +68,29 @@
         transition: all 0.3s ease;
     }
 
-    input:focus,
-    textarea:focus,
-    select:focus {
+    .edit-intput:focus {
         outline: none;
         border-color: var(--main-color);
         box-shadow: 0 0 6px rgba(255, 0, 0, 0.2);
         background-color: #fff;
+    }
+
+    input[type="file"] {
+        border: 1.5px dashed var(--second-color);
+        padding: 0.5rem;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    input[type="file"]::file-selector-button {
+        background: var(--main-color);
+        color: #fff;
+        border: none;
+        padding: 0.4rem 0.9rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
 
     textarea {
@@ -91,7 +105,7 @@
         box-shadow: 0 4px 10px rgba(255, 0, 0, 0.15);
     }
 
-    button {
+    .frofile-edit-btn {
         background: var(--main-color);
         color: #fff;
         padding: 12px 16px;
@@ -105,13 +119,13 @@
         width: 100%;
     }
 
-    button:hover {
+    .frofile-edit-btn:hover {
         background: var(--light-hover);
         transform: translateY(-2px);
         box-shadow: 0 0 12px rgba(255, 0, 0, 0.25);
     }
 
-    button:active {
+    .frofile-edit-btn:active {
         transform: scale(0.98);
     }
 
@@ -141,7 +155,7 @@
             font-size: 22px;
         }
 
-        button {
+        .frofile-edit-btn {
             font-size: 15px;
             padding: 10px;
         }
@@ -155,47 +169,47 @@
     <div style="color:green;">Profile updated successfully!</div>
     @endif
 
-    <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+    <form class="edit-form" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
 
         <div>
             <label>Full Name</label>
-            <input name="fullname" value="{{ old('fullname', $user->fullname) }}" required>
+            <input class="edit-intput" name="fullname" value="{{ old('fullname', $user->fullname) }}" required>
             @error('fullname')<div style="color:red;">{{ $message }}</div>@enderror
         </div>
 
         <div>
             <label>Username</label>
-            <input name="username" value="{{ old('username', $user->username) }}" required>
+            <input class="edit-intput" name="username" value="{{ old('username', $user->username) }}" required>
             @error('username')<div style="color:red;">{{ $message }}</div>@enderror
         </div>
 
         <div>
             <label>Email</label>
-            <input name="email" type="email" value="{{ old('email', $user->email) }}" required>
+            <input class="edit-intput" name="email" type="email" value="{{ old('email', $user->email) }}" required>
             @error('email')<div style="color:red;">{{ $message }}</div>@enderror
         </div>
 
         <div>
             <label>Phone</label>
-            <input name="phone" value="{{ old('phone', $user->phone) }}">
+            <input class="edit-intput" name="phone" value="{{ old('phone', $user->phone) }}">
         </div>
 
         <div>
             <label>Address</label>
-            <textarea name="address">{{ old('address', $user->address) }}</textarea>
+            <textarea class="edit-intput" name="address">{{ old('address', $user->address) }}</textarea>
         </div>
 
         @if(in_array($user->role, ['admin', 'vendor', 'manager']))
         <div>
             <label>Father Name</label>
-            <input name="father_name" value="{{ old('father_name', $user->father_name) }}">
+            <input class="edit-intput" name="father_name" value="{{ old('father_name', $user->father_name) }}">
         </div>
 
         <div>
             <label>NID No</label>
-            <input name="nid_no" value="{{ old('nid_no', $user->nid_no) }}">
+            <input class="edit-intput" name="nid_no" value="{{ old('nid_no', $user->nid_no) }}">
         </div>
         @endif
 
@@ -204,10 +218,10 @@
             @if($user->profile_photo_path)
             <img class="img-edit" src="{{ asset('storage/'.$user->profile_photo_path) }}" width="100" height="100">
             @endif
-            <input type="file" name="profile_photo">
+            <input class="edit-intput" type="file" name="profile_photo">
         </div>
 
         <br>
-        <button type="submit">Update Profile</button>
+        <button class="frofile-edit-btn" type="submit">Update Profile</button>
     </form>
 </div>
