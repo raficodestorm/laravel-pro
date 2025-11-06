@@ -10,7 +10,7 @@
 
 
     {{-- Form --}}
-    <form action="{{ route('buses.update', $bus) }}" method="POST">
+    <form action="{{ route('admin.buses.update', $bus) }}" method="POST">
       @csrf
       @method('PUT')
       <div class="row mb-3">

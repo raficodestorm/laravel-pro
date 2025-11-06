@@ -96,7 +96,7 @@ class UserManagementController extends Controller
     ]);
 
     // return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
-    return redirect()->route('pages.admin.index.admins')->with('success', 'User created successfully.');
+    return redirect()->route('dashboard.admin')->with('success', 'User created successfully.');
   }
 
   public function edit(User $user)

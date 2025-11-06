@@ -6,8 +6,7 @@
     {{-- LEFT SIDE - Seat Layout --}}
     <div class="col-md-6">
       <div class="col-md-12 legend">
-        <span class="seat soldM">Booked (M)</span>
-        <span class="seat soldF">Booked (F)</span>
+        <span class="seat soldM">Booked</span>
         <span class="seat blocked">Blocked</span>
         <span class="seat available">Available</span>
         <span class="seat selected">Selected</span>

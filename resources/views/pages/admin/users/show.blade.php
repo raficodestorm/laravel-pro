@@ -96,7 +96,7 @@
     <p><strong>Joined:</strong> {{ $user->created_at }}</p>
   </div>
 
-  <a href="{{ route('dashboard.admin') }}" class="back-btn">← Back to All Users</a>
+  <a href="{{ route('dashboard.admin') }}" class="back-btn">← Back</a>
 </div>
 
 @endsection
