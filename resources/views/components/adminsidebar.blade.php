@@ -17,6 +17,31 @@
     </li>
 
 
+    <li class="dropdown">
+      <a href="#" onclick="toggleSubmenu(event)" title="location" id="drop">
+        <img src="{{asset('svg/location.svg')}}" />
+        <span>Bus type</span>
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+          fill="#0000F5">
+          <path d="M480-360 280-560h400L480-360Z" />
+        </svg>
+      </a>
+      <ul class="submenu">
+        <div>
+          <li><a href="{{ route('admin.bustypes.create') }}" title="Add location" id="sub">
+              <img src="{{asset('svg/addlocation.svg')}}" />
+              <span>Add Bustype</span>
+            </a>
+          </li>
+          <li><a href="{{ route('admin.bustypes.index') }}" title="All locations" id="sub">
+              <img src="{{asset('svg/list.svg')}}" />
+              <span>All Bustypes</span>
+            </a>
+          </li>
+        </div>
+      </ul>
+    </li>
+
 
     <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="Buses" id="drop">

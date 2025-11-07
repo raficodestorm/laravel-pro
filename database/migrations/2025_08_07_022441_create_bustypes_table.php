@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('counters', function (Blueprint $table) {
+        Schema::create('bustypes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('manager');
-            $table->unsignedBigInteger('location_id');
-            $table->integer('distance');
-            $table->longText('address');
+            $table->string('type')->unique();
             $table->timestamps();
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('counters');
+        Schema::dropIfExists('bustypes');
     }
 };

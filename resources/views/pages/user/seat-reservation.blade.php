@@ -70,12 +70,20 @@
           <h4 style="margin-top:3rem;">BOARDING/DROPPING:</h4>
           <select name="boarding" required>
             <option value="">Select boarding point</option>
-            <option value="{{ $schedule->start_location }}">{{ $schedule->start_location }}</option>
+            @foreach($boardingCounters as $counter)
+            <option value="{{ $counter->location }}">
+              {{ $counter->location }}
+            </option>
+            @endforeach
           </select>
 
           <select name="dropping" required>
             <option value="">Select dropping point</option>
-            <option value="{{ $schedule->end_location }}">{{ $schedule->end_location }}</option>
+            @foreach($droppingCounters as $counter)
+            <option value="{{ $counter->location }}">
+              {{ $counter->location }}
+            </option>
+            @endforeach
           </select>
 
           <input type="text" name="name" placeholder="Your Name*" required>

@@ -18,20 +18,34 @@
             <form action="{{ route('admin.counters.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Location</label>
-                    <input type="text" name="location" class="form-control" placeholder="Enter location" required>
+                    <label class="form-label fw-semibold">Counter name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Enter location" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Manager name</label>
                     <input type="text" name="manager" class="form-control" placeholder="Enter manager name">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">District id</label>
-                    <input type="text" name="district_id" class="form-control" placeholder="Enter district id">
+                    <label class="form-label fw-semibold">Select District</label>
+                    <select name="location_id" class="form-control" required>
+                        <option value="">-- Select District --</option>
+
+                        @foreach($locations as $loc)
+                        <option value="{{ $loc->id }}">
+                            {{ $loc->district }}
+                        </option>
+                        @endforeach
+
+                    </select>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Distance</label>
                     <input type="text" name="distance" class="form-control" placeholder="Enter distance">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Address</label>
+                    <input type="textaria" name="address" class="form-control" placeholder="Enter address">
                 </div>
                 <button type="submit" class="btn btn-success px-4">Save</button>
                 <a href="{{ route('admin.counters.index') }}" class="btn btn-secondary px-4">Back</a>

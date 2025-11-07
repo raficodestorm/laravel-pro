@@ -20,8 +20,8 @@
                 @method('PUT')
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Location</label>
-                    <input type="text" name="location" class="form-control" value="{{ $counter->location }}" required>
+                    <label class="form-label fw-semibold">Counter name</label>
+                    <input type="text" name="name" class="form-control" value="{{ $counter->name }}" required>
                 </div>
 
                 <div class="mb-3">
@@ -29,12 +29,26 @@
                     <input type="text" name="manager" class="form-control" value="{{ $counter->manager }}">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">District id</label>
-                    <input type="text" name="district_id" class="form-control" value="{{ $counter->district_id }}">
+                    <label class="form-label fw-semibold">Select District</label>
+                    <select name="location_id" class="form-control" required>
+                        <option value="">-- Select District --</option>
+
+                        @foreach($locations as $loc)
+                        <option value="{{ $loc->id }}" {{ $counter->location_id == $loc->id ? 'selected' : '' }}>
+                            {{ $loc->district }}
+                        </option>
+                        @endforeach
+
+                    </select>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Distance</label>
                     <input type="text" name="distance" class="form-control" value="{{ $counter->distance }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Address</label>
+                    <input type="text" name="address" class="form-control" value="{{ $counter->address }}">
                 </div>
 
                 <button type="submit" class="btn btn-success px-4">Update</button>

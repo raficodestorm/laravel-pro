@@ -46,6 +46,7 @@
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
             <li><a class="dropdown-item" href="#">My Profile</a></li>
             <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Edit Profile</a></li>
+            <li><a class="dropdown-item" href="{{ route('dashboards') }}">Dashboard</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>

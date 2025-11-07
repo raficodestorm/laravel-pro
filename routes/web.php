@@ -5,13 +5,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\SeatReservationController;
 use App\Http\Controllers\User\SearchScheduleBusController;
 use App\Http\Controllers\Admin\UserManagementController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('pages.user.userfront');
 })->name('user-main-page');
 
 // ------------------------for search chedule bus ----------------------------------------
-Route::get('/locations/search', [SearchScheduleBusController::class, 'getLocations'])->name('locations.get');
+// Route::get('/locations/search', [SearchScheduleBusController::class, 'getLocations'])->name('locations.get');
 Route::get('/', [SearchScheduleBusController::class, 'index'])->name('bus.search.form');
 Route::post('/find-bus', [SearchScheduleBusController::class, 'search'])->name('bus.search');
 
@@ -21,6 +22,9 @@ Route::post('/go-to-payment', [SeatReservationController::class, 'store'])->name
 
 // dashboards (protected)
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboards');
+
     Route::get('/dashboard/user', function () {
         return view('pages.dashboard.user');
     })->name('dashboard.user')->middleware('role:user'); // user page - accessible by user (admin can also view if needed)

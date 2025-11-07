@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('seat_layout');
             $table->string('route');
             $table->timestamps();
+            $table->foreign('bus_type')->references('type')->on('bustypes');
         });
     }
 

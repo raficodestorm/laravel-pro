@@ -12,7 +12,8 @@ class SearchScheduleBusController extends Controller
     // Show search form
     public function index()
     {
-        return view('pages.user.userfront');
+        $location = Location::orderBy('district')->get();
+        return view('pages.user.userfront', compact('location'));
     }
 
     // Handle search request
@@ -38,11 +39,11 @@ class SearchScheduleBusController extends Controller
     }
 
     public function getLocations(Request $request)
-{
-    $search = $request->get('q'); // 'q' মানে query string থেকে পাঠানো টেক্সট
-    $locations = Location::where('district', 'LIKE', "%{$search}%")
-        ->pluck('district');
+    {
+        $search = $request->get('q'); // 'q' মানে query string থেকে পাঠানো টেক্সট
+        $locations = Location::where('district', 'LIKE', "%{$search}%")
+            ->pluck('district');
 
-    return response()->json($locations);
-}
+        return response()->json($locations);
+    }
 }

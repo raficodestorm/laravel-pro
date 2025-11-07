@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
+use App\Models\Counter;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
@@ -12,16 +14,18 @@ class CounterController extends Controller
      */
     public function index()
     {
-        $counters = Counter::orderBy('id', 'asc')->paginate(10);
+        $counters = Counter::with('locationinfo')->orderBy('id', 'asc')->paginate(10);
         return view('pages.admin.counter.index', compact('counters'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
-        return view('pages.admin.counter.create');
+        $locations = Location::orderBy('district')->get();
+        return view('pages.admin.counter.create', compact('locations'));
     }
 
     /**
@@ -30,15 +34,16 @@ class CounterController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'location' => 'required|string|max:100',
+            'name' => 'required|string|max:100',
             'manager' => 'required|string|max:100',
-            'district_id' => 'nullable|integer',
+            'location_id' => 'nullable|integer',
             'distance' => 'nullable|integer',
+            'address' => 'nullable|string',
         ]);
 
-        Counter::create($request->only('location', 'manager','district_id','distance'));
+        Counter::create($request->only('name', 'manager', 'location_id', 'distance', 'address'));
 
-        return redirect()->route('admin.locations.index')->with('success', 'Counter added successfully!');
+        return redirect()->route('admin.counters.index')->with('success', 'Counter added successfully!');
     }
 
     /**
@@ -52,9 +57,13 @@ class CounterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Counter $counter)
+
+    public function edit($id)
     {
-        return view('pages.admin.counter.edit', compact('counter'));
+        $counter = Counter::findOrFail($id);
+        $locations = Location::orderBy('district')->get();
+
+        return view('pages.admin.counter.edit', compact('counter', 'locations'));
     }
 
     /**
@@ -63,13 +72,14 @@ class CounterController extends Controller
     public function update(Request $request, Counter $counter)
     {
         $request->validate([
-            'location' => 'required|string|max:100',
+            'name' => 'required|string|max:100',
             'manager' => 'required|string|max:100',
-            'district_id' => 'nullable|integer',
+            'location_id' => 'nullable|integer',
             'distance' => 'nullable|integer',
+            'address' => 'required|string',
         ]);
 
-        $counter->update($request->only('location', 'manager','district_id','distance'));
+        $counter->update($request->only('name', 'manager', 'location_id', 'distance', 'address'));
 
         return redirect()->route('admin.counters.index')->with('success', 'Counter updated successfully!');
     }

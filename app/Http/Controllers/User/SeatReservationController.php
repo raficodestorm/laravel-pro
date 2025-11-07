@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SeatReservation;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
+use App\Models\Counter;
 
 class SeatReservationController extends Controller
 {
@@ -62,9 +63,22 @@ class SeatReservationController extends Controller
 
     public function see($id)
     {
+        // $schedule = Schedule::findOrFail($id);
+
+        // return view('pages.user.seat-reservation', compact('schedule'));
         $schedule = Schedule::findOrFail($id);
 
-        return view('pages.user.seat-reservation', compact('schedule'));
+        // start_location এর counters
+        $boardingCounters = Counter::where('location_id', $schedule->start_location)->get();
+
+        // end_location এর counters
+        $droppingCounters = Counter::where('location_id', $schedule->end_location)->get();
+
+        return view('pages.user.seat-reservation', [
+            'schedule' => $schedule,
+            'boardingCounters' => $boardingCounters,
+            'droppingCounters' => $droppingCounters,
+        ]);
     }
 
     /**
@@ -92,4 +106,5 @@ class SeatReservationController extends Controller
     }
 
     public function payment(Request $request) {}
+    public function showReservationPage($schedule_id) {}
 }

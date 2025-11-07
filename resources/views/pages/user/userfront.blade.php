@@ -27,18 +27,31 @@
           {{-- {/* From */} --}}
           <div class="mb-3 form-in">
             <label class="form-label fw-semibold">From</label>
-            <input type="text" name="from" class="form-control rounded-3" list="fromList"
-              placeholder="Enter departure city..." required>
-            <datalist id="fromList"></datalist>
+            <select name="from" class="form-control rounded-3" required>
+              <option value="">-- Select Location --</option>
+
+              @foreach($location as $loc)
+              <option value="{{ $loc->district }}">
+                {{ $loc->district }}
+              </option>
+              @endforeach
+
+            </select>
           </div>
 
           {{-- {/* To */} --}}
           <div class="mb-3 form-in">
             <label class="form-label fw-semibold">To</label>
-            <input type="text" name="to" class="form-control rounded-3" list="toList"
-              placeholder="Enter destination city..." required>
+            <select name="to" class="form-control rounded-3" required>
+              <option value="">-- Select Location --</option>
 
-            <datalist id="toList"></datalist>
+              @foreach($location as $loc)
+              <option value="{{ $loc->district }}">
+                {{ $loc->district }}
+              </option>
+              @endforeach
+
+            </select>
           </div>
 
           {{-- {/* Date */} --}}

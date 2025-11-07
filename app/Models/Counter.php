@@ -8,9 +8,15 @@ class Counter extends Model
 {
     protected $fillable = [
         'id',
-        'location',
+        'name',
         'manager',
-        'district_id',
+        'location_id',
         'distance',
+        'address',
     ];
+
+    public function locationinfo()
+    {
+        return $this->belongsTo(Location::class, 'location_id');
+    }
 }

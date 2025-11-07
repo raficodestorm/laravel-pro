@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BusController;
+use App\Http\Controllers\admin\BustypeController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\LocationController;
@@ -22,6 +23,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
   Route::get('/counter-managers', [UserManagementController::class, 'counterManagers'])->name('index.counterManagers');
   Route::get('/normal-users', [UserManagementController::class, 'normalUsers'])->name('index.normalUsers');
 
+  Route::resource('bustypes', BustypeController::class);
   Route::resource('buses', BusController::class);
   Route::resource('locations', LocationController::class);
   Route::resource('routes', RouteController::class);
