@@ -23,58 +23,72 @@
         <div class="row mb-3">
           <div class="col-md-6">
             <label for="name" class="form-label">Bus Name</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="Enter bus name" required
-              value="{{ old('name') }}">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Enter bus name" required>
           </div>
 
           <div class="col-md-6">
             <label for="coach_no" class="form-label">Coach Number</label>
-            <input type="number" name="coach_no" id="coach_no" class="form-control" placeholder="e.g. 101" required
-              value="{{ old('coach_no') }}">
+            <input type="number" name="coach_no" id="coach_no" class="form-control" placeholder="e.g. 101" required>
           </div>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-6">
             <label for="license" class="form-label">License Number</label>
-            <input type="text" name="license" id="license" class="form-control" placeholder="e.g. DHA-12345" required
-              value="{{ old('license') }}">
+            <input type="text" name="license" id="license" class="form-control" placeholder="e.g. DHA-12345" required>
           </div>
 
           <div class="col-md-6">
             <label for="company" class="form-label">Company Name</label>
-            <input type="text" name="company" id="company" class="form-control" placeholder="e.g. Green Line" required
-              value="{{ old('company') }}">
+            <input type="text" name="company" id="company" class="form-control" placeholder="e.g. Green Line" required>
           </div>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-6">
             <label for="bus_type" class="form-label">Bus type</label>
-            <input type="text" name="bus_type" id="bus_type" class="form-control" placeholder="AC/Non-AC/Sleeper"
-              required value="{{ old('bus_type') }}">
+            <select class="form-control" name="bus_type" id="bus_type">
+              <option value="">--select bus type--</option>
+              @foreach($types as $type)
+              <option value="{{$type->type}}">{{$type->type}}</option>
+              @endforeach
+            </select>
           </div>
 
           <div class="col-md-6">
-            <label for="seat_layout" class="form-label">Seat layout</label>
-            <input type="text" name="seat_layout" id="seat_layout" class="form-control" placeholder="26/30/36/40"
-              required value="{{ old('seat_layout') }}">
+            <label for="route" class="form-label">Route</label>
+            <select class="form-control" name="route" id="route">
+              <option value="">--select route--</option>
+              @foreach($routes as $route)
+              <option value="{{$route->route_code}}">{{$route->route_code}}</option>
+              @endforeach
+            </select>
           </div>
         </div>
 
-        <div class="mb-4">
-          <label for="route" class="form-label">Route</label>
-          <input type="text" name="route" id="route" class="form-control" placeholder="e.g. Dhaka – Chittagong" required
-            value="{{ old('route') }}">
-        </div>
+        <div class="row mb-4">
+          <div class="col-md-6 ">
+            <label for="seat_layout" class="form-label">Seat layout</label>
+            <input type="text" name="seat_layout" id="seat_layout" class="form-control" placeholder="2:2" required>
+          </div>
 
-        <div class="text-end">
-          <button type="submit" class="btn btn-success px-4">Save Bus</button>
-          <a href="{{ route('admin.buses.index') }}" class="btn btn-secondary px-4">Cancel</a>
+          <div class="col-md-6">
+            <label for="seat_layout" class="form-label">Seat capacity</label>
+            <input type="text" name="seat_capacity" id="seat_capacity" class="form-control" placeholder="36/40"
+              required>
+          </div>
         </div>
-      </form>
     </div>
+
+
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-success px-4">Save Bus</button>
+      <a href="{{ route('admin.buses.index') }}" class="btn btn-secondary px-4">Cancel</a>
+    </div>
+    </form>
   </div>
+</div>
 </div>
 
 @endsection

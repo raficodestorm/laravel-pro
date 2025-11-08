@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Schedule;
 use App\Models\Route;
 use App\Models\Bus;
+use App\Models\Bustype;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -18,7 +19,9 @@ class ScheduleController extends Controller
 
     public function create()
     {
-        return view('pages.admin.schedule.create');
+        $bustypes = Bustype::orderBy('type', 'asc')->get();
+        $routes = Route::orderBy('route_code', 'asc')->get();
+        return view('pages.admin.schedule.create', compact('routes', 'bustypes'));
     }
 
     public function store(Request $request)
@@ -47,7 +50,8 @@ class ScheduleController extends Controller
 
     public function edit(Schedule $schedule)
     {
-        return view('pages.admin.schedule.edit', compact('schedule'));
+        $routes = Route::orderBy('route_code', 'asc')->get();
+        return view('pages.admin.schedule.edit', compact('schedule', 'routes'));
     }
 
     public function update(Request $request, Schedule $schedule)

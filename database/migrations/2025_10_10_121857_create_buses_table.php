@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('license');
             $table->string('company');
             $table->string('bus_type');
-            $table->string('seat_layout');
             $table->string('route');
+            $table->string('seat_layout');
+            $table->integer('seat_capacity');
             $table->timestamps();
             $table->foreign('bus_type')->references('type')->on('bustypes');
         });

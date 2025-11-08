@@ -1,7 +1,8 @@
 <nav class="sidebar">
   <ul>
     <li class="first">
-      <span class="nav-logo">RunStar</span>
+      <span><a class="nav-logo" style="border: none " href="{{ route('dashboards') }}">RunStar</a></span>
+
       <button class="toggle-btn" id="toggleSide" onclick="toggleSidebar()">
         <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#220901">
           <path

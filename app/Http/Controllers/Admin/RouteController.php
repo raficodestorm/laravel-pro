@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Route;
 use Illuminate\Http\Request;
@@ -22,7 +23,8 @@ class RouteController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.route.create');
+        $locations = Location::orderBy('district', 'asc')->get();
+        return view('pages.admin.route.create', compact('locations'));
     }
 
     /**
@@ -39,7 +41,7 @@ class RouteController extends Controller
         ]);
 
         Route::create($validated);
-        return redirect()->route('routes.index')->with('success', 'Route added successfully!');
+        return redirect()->route('admin.routes.index')->with('success', 'Route added successfully!');
     }
 
     /**
@@ -55,7 +57,8 @@ class RouteController extends Controller
      */
     public function edit(Route $route)
     {
-        return view('pages.admin.route.edit', compact('route'));
+        $locations = Location::orderBy('district', 'asc')->get();
+        return view('pages.admin.route.edit', compact('route', 'locations'));
     }
 
     /**
@@ -72,7 +75,7 @@ class RouteController extends Controller
         ]);
 
         $route->update($validated);
-        return redirect()->route('routes.index')->with('success', 'Route updated successfully');
+        return redirect()->route('admin.routes.index')->with('success', 'Route updated successfully');
     }
 
     /**
@@ -81,7 +84,7 @@ class RouteController extends Controller
     public function destroy(Route $route)
     {
         $route->delete();
-        return redirect()->route('routes.index')->with('success', 'Route deleted successfully!');
+        return redirect()->route('admin.routes.index')->with('success', 'Route deleted successfully!');
     }
 
     // public function getLocationss(Request $request)

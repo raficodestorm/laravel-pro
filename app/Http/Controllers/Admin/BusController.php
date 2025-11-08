@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Bus;
+use App\Models\Bustype;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Route;
 
 class BusController extends Controller
 {
@@ -19,7 +21,9 @@ class BusController extends Controller
 
     public function create()
     {
-        return view('pages.admin.bus.create');
+        $types = Bustype::get();
+        $routes = Route::orderBy('route_code', 'asc')->get();
+        return view('pages.admin.bus.create', compact('types', 'routes'));
     }
 
     public function store(Request $request)
@@ -30,8 +34,9 @@ class BusController extends Controller
             'license' => 'required|string|max:255',
             'company' => 'required|string|max:255',
             'bus_type' => 'required|string|max:255',
-            'seat_layout' => 'required|string|max:255',
             'route' => 'required|string|max:255',
+            'seat_layout' => 'required|string|max:255',
+            'seat_capacity' => 'required|integer',
         ]);
 
         Bus::create($validated);
@@ -52,7 +57,8 @@ class BusController extends Controller
      */
     public function edit(Bus $bus)
     {
-        return view('pages.admin.bus.edit', compact('bus'));
+        $types = Bustype::get();
+        return view('pages.admin.bus.edit', compact('bus', 'types'));
     }
 
     /**
@@ -62,12 +68,13 @@ class BusController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'coach_no' => 'required|string|max:10',
+            'coach_no' => 'required|integer',
             'license' => 'required|string|max:255',
             'company' => 'required|string|max:255',
             'bus_type' => 'required|string|max:255',
-            'seat_layout' => 'required|string|max:255',
             'route' => 'required|string|max:255',
+            'seat_layout' => 'required|string|max:255',
+            'seat_capacity' => 'required|integer',
         ]);
         $bus->update($validated);
         return redirect()->route('admin.buses.index')->with('success', 'Bus updated successfully');

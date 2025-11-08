@@ -15,7 +15,7 @@
             </div>
             @endif
 
-            <form action="{{ route('routes.update', $route->id) }}" method="POST">
+            <form action="{{ route('admin.routes.update', $route->id) }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -26,25 +26,37 @@
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Start location</label>
-                    <input type="text" name="start_location" class="form-control" value="{{ $route->start_location }}">
+                    <select class="form-control" name="start_location" id="start_location">
+                        <option value="{{ $route->start_location }}">{{ $route->start_location }}</option>
+                        @foreach($locations as $location)
+                        <option value="{{$location->district}}">{{$location->district}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold">End location</label>
-                    <input type="text" name="end_location" class="form-control" value="{{ $route->end_location }}">
+                    <select class="form-control" name="end_location" id="end_location">
+                        <option value="{{ $route->end_location }}">{{ $route->end_location }}</option>
+                        @foreach($locations as $location)
+                        <option value="{{$location->district}}">{{$location->district}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Distance</label>
-                    <input type="text" name="distance" class="form-control" placeholder="distance">
+                    <input type="text" name="distance" class="form-control" placeholder="distance"
+                        value="{{ $route->distance }}" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Duration</label>
-                    <input type="text" name="duration" class="form-control" placeholder="duration">
+                    <input type="text" name="duration" class="form-control" placeholder="duration"
+                        value="{{ $route->duration }}" required>
                 </div>
 
                 <button type="submit" class="btn btn-success px-4">Update</button>
-                <a href="{{ route('routes.index') }}" class="btn btn-secondary px-4">Back</a>
+                <a href="{{ route('admin.routes.index') }}" class="btn btn-secondary px-4">Back</a>
             </form>
         </div>
     </div>

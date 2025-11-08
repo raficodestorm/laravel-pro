@@ -21,4 +21,8 @@ class Schedule extends Model
         'bus_type',
         'coach_no',
     ];
+    public function bus()
+    {
+        return $this->belongsTo(Bus::class, 'coach_no', 'coach_no');
+    }
 }

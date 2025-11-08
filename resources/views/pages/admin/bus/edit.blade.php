@@ -44,28 +44,47 @@
       <div class="row mb-3">
         <div class="col-md-6">
           <label for="bus_type" class="form-label">Bus type</label>
-          <input type="text" name="bus_type" id="bus_type" class="form-control" placeholder="AC/Non-AC/Sleeper" required
-            value="{{ old('bus_type' , $bus->bus_type) }}">
+          <select class="form-control" name="bus_type" id="bus_type">
+            <option value="{{ old('bus_type' , $bus->bus_type) }}">{{ old('bus_type' , $bus->bus_type) }}</option>
+            @foreach($types as $type)
+            <option value="{{$type->type}}">{{$type->type}}</option>
+            @endforeach
+          </select>
         </div>
 
-        <div class="col-md-6">
+        <div class=" col-md-6">
+          <label for="route" class="form-label">Route</label>
+          <select class="form-control" name="route" id="route">
+            <option value="{{ old('route', $bus->route) }}">{{ old('route', $bus->route) }}</option>
+            @foreach($routes as $route)
+            <option value="{{$route->route_code}}">{{$route->route_code}}</option>
+            @endforeach
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-md-6 ">
           <label for="seat_layout" class="form-label">Seat layout</label>
-          <input type="text" name="seat_layout" id="seat_layout" class="form-control" placeholder="26/30/36/40" required
+          <input type="text" name="seat_layout" id="seat_layout" class="form-control" placeholder="2:2" required
             value="{{ old('seat_layout', $bus->seat_layout) }}">
         </div>
-      </div>
 
-      <div class=" mb-4">
-        <label for="route" class="form-label">Route</label>
-        <input type="text" name="route" id="route" class="form-control" placeholder="e.g. Dhaka – Chittagong" required
-          value="{{ old('route', $bus->route) }}">
+        <div class="col-md-6 ">
+          <label for="seat_layout" class="form-label">Seat capacity</label>
+          <input type="text" name="seat_capacity" id="seat_capacity" class="form-control" placeholder="36/40" required
+            value="{{ old('seat_capacity', $bus->seat_capacity) }}">
+        </div>
       </div>
-
-      <div class="text-end">
-        <button type="submit" class="btn btn-success px-4">Update</button>
-      </div>
-    </form>
   </div>
+
+
+
+  <div class="text-end">
+    <button type="submit" class="btn btn-success px-4">Update</button>
+  </div>
+  </form>
+</div>
 </div>
 </div>
 @endsection

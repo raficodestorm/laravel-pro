@@ -29,9 +29,13 @@
 
         <div class="col-md-6 mb-3">
           <label class="form-label">Route Code</label>
-          <input type="text" id="route_code" name="route_code" class="form-control" list="routeSuggestions"
-            autocomplete="off" required>
-          <datalist id="routeSuggestions"></datalist>
+          <select class="form-control" name="route_code" id="route_code">
+            <option value="">--select route--</option>
+            @foreach($routes as $route)
+            <option value="{{$route->route_code}}">{{$route->route_code}}</option>
+            @endforeach
+          </select>
+
         </div>
 
         <div class="col-md-6 mb-3">
@@ -61,13 +65,12 @@
 
         <div class="col-md-6 mb-3">
           <label class="form-label">Bus Type</label>
-          <input type="text" id="bus_type" name="bus_type" class="form-control" list="busTypeSuggestions"
-            autocomplete="off" required>
-          <datalist id="busTypeSuggestions">
-            <option value="AC">AC</option>
-            <option value="Non-AC">Non-AC</option>
-            <option value="Sleeper">Sleeper</option>
-          </datalist>
+          <select class="form-control" name="bus_type" id="bus_type">
+            <option value="">--select bus type--</option>
+            @foreach($bustypes as $type)
+            <option value="{{$type->type}}">{{$type->type}}</option>
+            @endforeach
+          </select>
         </div>
 
         <div class="col-md-6 mb-3">

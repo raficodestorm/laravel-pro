@@ -10,9 +10,10 @@
       <p><strong>Coach No:</strong> {{ $bus->coach_no }}</p>
       <p><strong>License:</strong> {{ $bus->license }}</p>
       <p><strong>Company:</strong> {{ $bus->company }}</p>
-      <p><strong>Company:</strong> {{ $bus->bus_type }}</p>
-      <p><strong>Company:</strong> {{ $bus->seat_layout }}</p>
+      <p><strong>Bus type:</strong> {{ $bus->bus_type }}</p>
       <p><strong>Route:</strong> {{ $bus->route }}</p>
+      <p><strong>Seat layout:</strong> {{ $bus->seat_layout }}</p>
+      <p><strong>Seat capacity:</strong> {{ $bus->seat_capacity }}</p>
       <p><strong>added at:</strong> {{ $bus->created_at }}</p>
 
       <a href="{{ route('admin.buses.index') }}" class="btn btn-secondary">Back</a>

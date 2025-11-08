@@ -13,7 +13,8 @@ class Bus extends Model
         'license',
         'company',
         'bus_type',
-        'seat_layout',
         'route',
+        'seat_layout',
+        'seat_capacity',
     ];
 }

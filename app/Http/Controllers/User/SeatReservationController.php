@@ -60,25 +60,30 @@ class SeatReservationController extends Controller
     {
         //
     }
+    // $schedule = Schedule::findOrFail($id);
 
+    // return view('pages.user.seat-reservation', compact('schedule'));
     public function see($id)
     {
-        // $schedule = Schedule::findOrFail($id);
 
-        // return view('pages.user.seat-reservation', compact('schedule'));
-        $schedule = Schedule::findOrFail($id);
+        $schedule = Schedule::with('bus')->findOrFail($id);
 
-        // start_location এর counters
+        // Bus details
+        $seatLayout = $schedule->bus->seat_layout;   // Example: "2:2"
+        $seatCapacity = $schedule->bus->seat_capacity;
+        $bustype = $schedule->bus->bus_type;
+
         $boardingCounters = Counter::where('location_id', $schedule->start_location)->get();
-
-        // end_location এর counters
         $droppingCounters = Counter::where('location_id', $schedule->end_location)->get();
 
-        return view('pages.user.seat-reservation', [
-            'schedule' => $schedule,
-            'boardingCounters' => $boardingCounters,
-            'droppingCounters' => $droppingCounters,
-        ]);
+        return view('pages.user.seat-reservation', compact(
+            'schedule',
+            'seatLayout',
+            'seatCapacity',
+            'bustype',
+            'boardingCounters',
+            'droppingCounters'
+        ));
     }
 
     /**

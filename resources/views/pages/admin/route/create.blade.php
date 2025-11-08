@@ -23,13 +23,21 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Start location</label>
-                    <input type="text" name="start_location" class="form-control" list="start" placeholder="Start from">
-                    <datalist id="start"></datalist>
+                    <select class="form-control" name="start_location" id="start_location">
+                        <option value="">--- select location ---</option>
+                        @foreach($locations as $location)
+                        <option value="{{$location->district}}">{{$location->district}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">End location</label>
-                    <input type="text" name="end_location" class="form-control" list="end" placeholder="End to">
-                    <datalist id="end"></datalist>
+                    <select class="form-control" name="end_location" id="end_location">
+                        <option value="">--- select location ---</option>
+                        @foreach($locations as $location)
+                        <option value="{{$location->district}}">{{$location->district}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Distance</label>

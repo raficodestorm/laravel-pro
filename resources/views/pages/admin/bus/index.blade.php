@@ -21,8 +21,9 @@
           <th>License</th>
           <th>Company</th>
           <th>Bus type</th>
-          <th>Seat layout</th>
           <th>Route</th>
+          <th>Seat layout</th>
+          <th>Seat capacity</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -35,8 +36,9 @@
           <td>{{ $bus->license }}</td>
           <td>{{ $bus->company }}</td>
           <td>{{ $bus->bus_type }}</td>
-          <td>{{ $bus->seat_layout }}</td>
           <td>{{ $bus->route }}</td>
+          <td>{{ $bus->seat_layout }}</td>
+          <td>{{ $bus->seat_capacity }}</td>
           <td>
             <a href="{{ route('admin.buses.show', $bus) }}" class="btn btn-sm btn-info">View</a>
             <a href="{{ route('admin.buses.edit', $bus) }}" class="btn btn-sm btn-warning">Edit</a>
