@@ -97,12 +97,94 @@
     </div>
   </div>
 </div>
+<style>
+  /* Common Deck Style */
+  .deck {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .deck-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .seat-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+
+  .seat {
+    width: 35px;
+    height: 35px;
+    background: #eee;
+    margin: 3px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 500;
+  }
+
+  .seat.selected {
+    background: #4caf50;
+    color: white;
+  }
+
+  .aisle {
+    width: 30px;
+  }
+
+  /* Double-Decker Container */
+  .double-deck-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  /* Lower Deck Style */
+  .lower-deck {
+    background: #f8f9fa;
+    flex: 1;
+    min-width: 300px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Upper Deck Style */
+  .upper-deck {
+    background: #f8f9fa;
+    flex: 1;
+    min-width: 300px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Divider (for stacked layout fallback) */
+  .deck-divider {
+    border: none;
+    border-top: 2px dashed #aaa;
+    margin: 20px 0;
+  }
+
+  /* Responsive: stack decks on small screens */
+  @media (max-width: 768px) {
+    .double-deck-container {
+      flex-direction: column;
+    }
+  }
+</style>
 
 {{-- JavaScript for seat logic --}}
 <script>
   const seatLayout = "{{ $seatLayout }}";  
   const seatCapacity = Number("{{ $seatCapacity }}");
-  const busType = "{{ $bustype }}";
+  const busType = "{{ $bustype }}".toLowerCase();
   const seatPrice = {{ $schedule->price }};
 
   const selectedSeats = [];
@@ -111,54 +193,94 @@
   const selectedSeatsInput = document.getElementById("selectedSeatsInput");
   const totalAmount = document.getElementById("totalAmount");
 
-  function generateDynamicSeats() {
-    const [left, right] = seatLayout.split(":").map(Number);
+  document.addEventListener("DOMContentLoaded", () => {
+    if (busType.includes("double-decker")) {
+      generateDoubleDeckerSeats();
+    } else {
+      generateSingleDeckSeats();
+    }
+  });
+
+  /** Generate seats for single-decker buses */
+  function generateSingleDeckSeats() {
+    const singleDeck = document.createElement("div");
+    singleDeck.className = "deck single-deck";
+    // singleDeck.innerHTML = `<h3 class="deck-title">Single Deck</h3>`;
+    seatContainer.appendChild(singleDeck);
+
+    generateSeats(singleDeck, seatLayout, seatCapacity, "A");
+  }
+
+  /** Generate seats for double-decker buses (two separate styled divs) */
+  function generateDoubleDeckerSeats() {
+    const container = document.createElement("div");
+    container.className = "double-deck-container";
+    seatContainer.appendChild(container);
+
+    const halfCapacity = Math.ceil(seatCapacity / 2);
+
+    // LOWER DECK
+    const lowerDeck = document.createElement("div");
+    lowerDeck.className = "deck lower-deck";
+    lowerDeck.innerHTML = `<h3 class="deck-title">Lower Deck</h3>`;
+    container.appendChild(lowerDeck);
+
+    generateSeats(lowerDeck, seatLayout, halfCapacity, "A");
+
+    // UPPER DECK
+    const upperDeck = document.createElement("div");
+    upperDeck.className = "deck upper-deck";
+    upperDeck.innerHTML = `<h3 class="deck-title">Upper Deck</h3>`;
+    container.appendChild(upperDeck);
+
+    generateSeats(upperDeck, seatLayout, halfCapacity, "K");
+  }
+
+  /** Generate seats dynamically */
+  function generateSeats(container, layout, capacity, startLetter = "A") {
+    const [left, right] = layout.split(":").map(Number);
     const seatsPerRow = left + right;
-
-    // total rows required
-    const totalRows = Math.ceil(seatCapacity / seatsPerRow);
-
-    let currentSeatCount = 0; // Tracks how many seats created total
+    const totalRows = Math.ceil(capacity / seatsPerRow);
+    let currentSeatCount = 0;
 
     for (let row = 0; row < totalRows; row++) {
       const rowDiv = document.createElement("div");
       rowDiv.className = "seat-row";
 
-      const rowLabel = String.fromCharCode(65 + row); // A, B, C, D…
+      const rowLetter = String.fromCharCode(startLetter.charCodeAt(0) + row);
+      let seatNumber = 1;
 
-      // LEFT SIDE
-      for (let i = 1; i <= left; i++) {
-        if (currentSeatCount >= seatCapacity) break;
-        createSeat(rowDiv, rowLabel + i);
+      // LEFT side
+      for (let i = 0; i < left && currentSeatCount < capacity; i++) {
+        createSeat(rowDiv, `${rowLetter}${seatNumber++}`);
         currentSeatCount++;
       }
 
-      // AISLE
+      // Aisle
       const aisle = document.createElement("div");
       aisle.className = "aisle";
       rowDiv.appendChild(aisle);
 
-      // RIGHT SIDE
-      for (let i = 1; i <= right; i++) {
-        if (currentSeatCount >= seatCapacity) break;
-        createSeat(rowDiv, rowLabel + (left + i));
+      // RIGHT side
+      for (let i = 0; i < right && currentSeatCount < capacity; i++) {
+        createSeat(rowDiv, `${rowLetter}${seatNumber++}`);
         currentSeatCount++;
       }
 
-      seatContainer.appendChild(rowDiv);
+      container.appendChild(rowDiv);
     }
   }
 
+  /** Create an individual seat */
   function createSeat(rowDiv, seatId) {
     const seat = document.createElement("div");
     seat.className = "seat";
     seat.textContent = seatId;
-
     seat.onclick = () => toggleSeat(seatId, seat);
-
     rowDiv.appendChild(seat);
   }
 
+  /** Toggle seat selection */
   function toggleSeat(id, el) {
     if (selectedSeats.includes(id)) {
       selectedSeats.splice(selectedSeats.indexOf(id), 1);
@@ -170,6 +292,7 @@
     updateSummary();
   }
 
+  /** Update summary info */
   function updateSummary() {
     selectedSeatsDisplay.textContent = selectedSeats.length
       ? selectedSeats.join(", ")
@@ -179,12 +302,101 @@
     totalAmount.value = selectedSeats.length * seatPrice;
   }
 
+  /** Optional horn sound */
   function playHorn() {
     const audio = new Audio("{{ asset('sound/horn.m4a') }}");
     audio.play();
   }
+</script>
 
-  document.addEventListener("DOMContentLoaded", generateDynamicSeats);
+
+
+<script>
+  // const seatLayout = "{{ $seatLayout }}";  
+  // const seatCapacity = Number("{{ $seatCapacity }}");
+  // const busType = "{{ $bustype }}";
+  // const seatPrice = {{ $schedule->price }};
+
+  // const selectedSeats = [];
+  // const seatContainer = document.getElementById("seat-layout");
+  // const selectedSeatsDisplay = document.getElementById("selected-seats");
+  // const selectedSeatsInput = document.getElementById("selectedSeatsInput");
+  // const totalAmount = document.getElementById("totalAmount");
+
+  // function generateDynamicSeats() {
+  //   const [left, right] = seatLayout.split(":").map(Number);
+  //   const seatsPerRow = left + right;
+
+  //   // total rows required
+  //   const totalRows = Math.ceil(seatCapacity / seatsPerRow);
+
+  //   let currentSeatCount = 0; // Tracks how many seats created total
+
+  //   for (let row = 0; row < totalRows; row++) {
+  //     const rowDiv = document.createElement("div");
+  //     rowDiv.className = "seat-row";
+
+  //     const rowLabel = String.fromCharCode(65 + row); // A, B, C, D…
+
+  //     // LEFT SIDE
+  //     for (let i = 1; i <= left; i++) {
+  //       if (currentSeatCount >= seatCapacity) break;
+  //       createSeat(rowDiv, rowLabel + i);
+  //       currentSeatCount++;
+  //     }
+
+  //     // AISLE
+  //     const aisle = document.createElement("div");
+  //     aisle.className = "aisle";
+  //     rowDiv.appendChild(aisle);
+
+  //     // RIGHT SIDE
+  //     for (let i = 1; i <= right; i++) {
+  //       if (currentSeatCount >= seatCapacity) break;
+  //       createSeat(rowDiv, rowLabel + (left + i));
+  //       currentSeatCount++;
+  //     }
+
+  //     seatContainer.appendChild(rowDiv);
+  //   }
+  // }
+
+  // function createSeat(rowDiv, seatId) {
+  //   const seat = document.createElement("div");
+  //   seat.className = "seat";
+  //   seat.textContent = seatId;
+
+  //   seat.onclick = () => toggleSeat(seatId, seat);
+
+  //   rowDiv.appendChild(seat);
+  // }
+
+  // function toggleSeat(id, el) {
+  //   if (selectedSeats.includes(id)) {
+  //     selectedSeats.splice(selectedSeats.indexOf(id), 1);
+  //     el.classList.remove("selected");
+  //   } else {
+  //     selectedSeats.push(id);
+  //     el.classList.add("selected");
+  //   }
+  //   updateSummary();
+  // }
+
+  // function updateSummary() {
+  //   selectedSeatsDisplay.textContent = selectedSeats.length
+  //     ? selectedSeats.join(", ")
+  //     : "None";
+
+  //   selectedSeatsInput.value = selectedSeats.join(", ");
+  //   totalAmount.value = selectedSeats.length * seatPrice;
+  // }
+
+  // function playHorn() {
+  //   const audio = new Audio("{{ asset('sound/horn.m4a') }}");
+  //   audio.play();
+  // }
+
+  // document.addEventListener("DOMContentLoaded", generateDynamicSeats);
 </script>
 
 

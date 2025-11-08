@@ -64,7 +64,7 @@ class BustypeController extends Controller
             'type' => 'required|string|max:100|unique:bustypes,type',
         ]);
 
-        $bustype->update($request->$velidated);
+        $bustype->update($velidated);
 
         return redirect()->route('admin.bustypes.index')->with('success', 'Bus type updated successfully!');
     }

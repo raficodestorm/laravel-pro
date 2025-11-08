@@ -58,7 +58,8 @@ class BusController extends Controller
     public function edit(Bus $bus)
     {
         $types = Bustype::get();
-        return view('pages.admin.bus.edit', compact('bus', 'types'));
+        $routes = Route::orderBy('route_code', 'asc')->get();
+        return view('pages.admin.bus.edit', compact('bus', 'types','routes'));
     }
 
     /**
