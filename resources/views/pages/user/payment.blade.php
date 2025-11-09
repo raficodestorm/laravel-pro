@@ -21,7 +21,7 @@
         </p>
 
         <p>
-          <strong>Bus Type:</strong> {{ $bookingData->Bus_type }} <br>
+          <strong>Bus Type:</strong> {{ $bookingData->bus_type }} <br>
           <strong>Coach No:</strong> {{ $bookingData->coach_no }} <br>
           <strong>Route:</strong> {{ $bookingData->route }} <br>
           <strong>Departure:</strong> {{ $bookingData->departure }}

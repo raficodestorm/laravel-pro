@@ -4,16 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\SeatReservationController;
 use App\Http\Controllers\User\SearchScheduleBusController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\DashboardController;
 
-Route::get('/', function () {
-    return view('pages.user.userfront');
-})->name('user-main-page');
+// Route::get('/', function () {
+//     return view('pages.user.userfront');
+// })->name('user-main-page');
 
 // ------------------------for search chedule bus ----------------------------------------
 // Route::get('/locations/search', [SearchScheduleBusController::class, 'getLocations'])->name('locations.get');
-Route::get('/', [SearchScheduleBusController::class, 'index'])->name('bus.search.form');
+Route::get('/', [SearchScheduleBusController::class, 'index'])->name('main.portal');
 Route::post('/find-bus', [SearchScheduleBusController::class, 'search'])->name('bus.search');
 
 // ------------------------for seat Reservation ----------------------------------------
@@ -48,6 +49,12 @@ Route::middleware(['auth'])->group(function () {
 
     // Delete Account (optional, if you want to keep Breeze's delete)
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/payment/{id}', [PaymentController::class, 'showPaymentPage'])->name('payment.for');
+Route::post('/payment', [PaymentController::class, 'showPaymentPage'])->name('payment.page');
+Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+
+Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
 });
 
 

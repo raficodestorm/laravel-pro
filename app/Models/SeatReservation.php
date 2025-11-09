@@ -10,6 +10,7 @@ class SeatReservation extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'schedule_id',
         'bus_type',
         'coach_no',

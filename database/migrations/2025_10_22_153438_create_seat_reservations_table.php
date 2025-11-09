@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('seat_reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('schedule_id')->constrained()->onDelete('cascade');
             $table->string('bus_type');
             $table->string('coach_no');

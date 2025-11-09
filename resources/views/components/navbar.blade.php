@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{{ route('main.portal') }}">
       <span>RunStar</span>
     </a>
     <button class="navbar-toggler text-light border-0" type="button" data-bs-toggle="collapse"
