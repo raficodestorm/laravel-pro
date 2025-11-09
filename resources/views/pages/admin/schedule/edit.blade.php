@@ -5,7 +5,7 @@
   <div class="card shadow p-4">
     <h3 class="mb-4 text-center text-danger">Edit Schedule</h3>
 
-    <form action="{{ route('schedules.update', $schedule->id) }}" method="POST" id="scheduleForm">
+    <form action="{{ route('admin.schedules.update', $schedule->id) }}" method="POST" id="scheduleForm">
       @csrf
       @method('PUT')
       <div class="row">
@@ -59,13 +59,13 @@
 
         <div class="col-md-6 mb-3">
           <label class="form-label">Bus Type</label>
-          <input type="text" id="bus_type" name="bus_type" class="form-control" list="busTypeSuggestions"
-            autocomplete="off" required value="{{  old('bus_type', $schedule->bus_type) }}">
-          <datalist id="busTypeSuggestions">
-            <option value="AC">AC</option>
-            <option value="Non-AC">Non-AC</option>
-            <option value="Sleeper">Sleeper</option>
-          </datalist>
+          <select class="form-control" name="bus_type" id="bus_type">
+            <option value="{{  old('bus_type', $schedule->bus_type) }}">{{ old('bus_type', $schedule->bus_type) }}
+            </option>
+            @foreach($bustypes as $type)
+            <option value="{{$type->type}}">{{$type->type}}</option>
+            @endforeach
+          </select>
         </div>
 
         <div class="col-md-6 mb-3">
@@ -90,7 +90,7 @@
 
     // Load all route codes for suggestions
     $.ajax({
-        url: "{{ route('get.route.info') }}",
+        url: "{{ route('admin.get.route.info') }}",
         method: 'GET',
         success: function(response) {
             // We'll skip this because it expects a specific route_code input
@@ -103,7 +103,7 @@
 
         if(code.length > 0) {
             $.ajax({
-                url: "{{ route('get.route.info') }}",
+                url: "{{ route('admin.get.route.info') }}",
                 method: 'GET',
                 data: { route_code: code },
                 success: function(route) {
@@ -124,7 +124,7 @@
 
         if(busType.length > 0) {
             $.ajax({
-                url: "{{ route('get.coaches') }}",
+                url: "{{ route('admin.get.coaches') }}",
                 method: 'GET',
                 data: { bus_type: busType },
                 success: function(coaches) {

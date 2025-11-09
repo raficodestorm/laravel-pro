@@ -11,51 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('seat_reservations', function (Blueprint $table) {
+        Schema::create('counters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('schedule_id')->constrained()->onDelete('cascade');
-            $table->string('bus_type');
-            $table->string('coach_no');
-            $table->string('route');
-            $table->decimal('seat_price', 10, 2);
-            $table->string('departure');
-            $table->string('selected_seats');
-            $table->decimal('total', 10, 2);
-            $table->string('status')->nullable();
-            $table->string('boarding');
-            $table->string('dropping');
             $table->string('name');
-            $table->string('mobile');
-            $table->timestamps(); 
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('seat_reservations');
-    }
-};      this is my seat_reservation table.                                      <?php
-
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('booked_seats', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('schedule_id')->references('id')->on('schedules');
-            $table->string('coach_no');
-            $table->string('booked_seats');
+            $table->string('manager');
+            $table->unsignedBigInteger('location_id');
+            $table->integer('distance');
+            $table->longText('address');
             $table->timestamps();
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 
@@ -64,258 +28,465 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('booked_seats');
+        Schema::dropIfExists('counters');
     }
-};      this is my booked_seats table.                                                  $table->decimal('tatal_amount');    this is my payment table.       <?php
-
-namespace App\Http\Controllers;
-
-use App\Models\SeatReservation;
-use Illuminate\Http\Request;
-use App\Models\Schedule;
-
-class SeatReservationController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'schedule_id' => 'required|exists:schedules,id',
-            'bus_type' => 'required|string',
-            'coach_no' => 'required|string',
-            'route' => 'required|string',
-            'seat_price' => 'required|string',
-            'departure' => 'required|string',
-            'selected_seats' => 'required|string',
-            'total' => 'required|string',
-            'boarding' => 'required|string',
-            'dropping' => 'required|string',
-            'name' => 'required|string|max:100',
-            'mobile' => 'required|string|max:20',
-        ]);
-
-        $validated['seat_price'] = str_replace(',', '', $validated['seat_price']);
-        $validated['total'] = str_replace(',', '', $validated['total']);
-
-        $reservation = SeatReservation::create($validated);
-        return redirect()->route('payment.for', ['id' => $reservation->id]);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(SeatReservation $seatReservation)
-    {
-        //
-    }
-
-    public function see($id)
-    {
-        $schedule = Schedule::findOrFail($id);
-
-        return view('pages.user.seat-reservation', compact('schedule'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(SeatReservation $seatReservation)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, SeatReservation $seatReservation)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(SeatReservation $seatReservation)
-    {
-        //
-    }
-
-    public function payment(Request $request) {}
-}    this is my seatReservationController,                                  <?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
-class PaymentController extends Controller
-{
-    // Step 1: Show payment page with dynamic data
-    public function showPaymentPage($id)
-    {
-        // Fetch reservation from DB
-        $bookingData = \App\Models\SeatReservation::findOrFail($id);
-
-        return view('pages.user.payment', compact('bookingData'));
-    }
-
-    // Step 2: Process payment
-    public function process(Request $request)
-    {
-        $method = $request->paymentMethod;
-
-        // Basic validation
-        if ($method === 'card') {
-            $request->validate([
-                'cardNumber' => 'required',
-                'expiry' => 'required',
-                'cvv' => 'required',
-            ]);
-        } elseif ($method === 'wallet') {
-            $request->validate(['walletNumber' => 'required']);
-        }
-
-        // Simulate success (later you can integrate bKash/Nagad gateway)
-        return redirect()->route('confirmation')->with('success', '✅ Payment Successful! Your ticket is confirmed.');
-    }
-}       this is my paymentController.                           @extends('layouts.userlayout')
+};           eta counters table.                                 @extends('layouts.userlayout')
 
 @section('content')
-<div class="container payment-page my-5">
-  @if(session('success'))
-  <div class="alert alert-success">
-    {{ session('success') }}
-  </div>
-  @endif
-
+<div class="container seat-reservation">
   <div class="row">
-    {{-- LEFT SIDE - Booking Summary --}}
-    <div class="col-md-5">
-      <div class="card shadow-lg p-4 rounded-4 mb-4">
-        <h4 class="mb-3">🚌 Booking Summary</h4>
-        <p>
-          <strong>Passenger:</strong> {{ $bookingData->name }} <br>
-          <strong>Mobile:</strong> {{ $bookingData->mobile }} <br>
-          <strong>Boarding:</strong> {{ $bookingData->boarding }} <br>
-          <strong>Dropping:</strong> {{ $bookingData->dropping }} <br>
-        </p>
+    {{-- LEFT SIDE - Seat Layout --}}
+    <div class="col-md-6">
+      <div class="col-md-12 legend">
+        <span class="seat soldM">Booked</span>
+        <span class="seat blocked">Blocked</span>
+        <span class="seat available">Available</span>
+        <span class="seat selected">Selected</span>
+      </div>
 
-        <p>
-          <strong>Bus Type:</strong> {{ $bookingData->Bus_type }} <br>
-          <strong>Coach No:</strong> {{ $bookingData->coach_no }} <br>
-          <strong>Route:</strong> {{ $bookingData->route }} <br>
-          <strong>Departure:</strong> {{ $bookingData->departure }}
-        </p>
+      <div class="bus-container">
+        {{-- Top row: Door + Driver --}}
+        <div class="bus-front">
+          <div class="door">Door</div>
+          <div class="driver" onclick="playHorn()" style="cursor:pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px">
+              <path
+                d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-84v-120q-60-12-102-54t-54-102H164q12 109 89.5 185T440-164Zm80 0q109-12 186.5-89.5T796-440H676q-12 60-54 102t-102 54v120ZM164-520h116l120-120h160l120 120h116q-15-121-105-200.5T480-800q-121 0-211 79.5T164-520Z" />
+            </svg>
+          </div>
+        </div>
 
-        <p>
-          <strong>Seats:</strong>
-          @if(!empty($bookingData->selected_seats))
-          {{ $bookingData->selected_seats }}
-          @else
-          No seats selected
-          @endif
-        </p>
+        {{-- Seat Layout --}}
+        <div class="seats" id="seat-layout"></div>
 
-        @php
-        // Extract total amount (remove currency symbol if present)
-        $totalAmount = preg_replace('/[^\d.]/', '', $bookingData['total'] ?? 0);
-        @endphp
-
-        <div class="fare-summary mt-3">
-          <h5>Total Fare:</h5>
-          <h3 class="text-success">৳ {{ number_format($bookingData->total, 2) }}</h3>
+        {{-- Footer --}}
+        <div class="summary">
+          <h4>Selected Seats:</h4>
+          <p id="selected-seats">None</p>
         </div>
       </div>
     </div>
 
-    {{-- RIGHT SIDE - Payment Options --}}
-    <div class="col-md-7">
-      <div class="card shadow-lg p-4 rounded-4">
-        <h4 class="mb-3">💳 Payment Details</h4>
-
-        <form method="POST" action="{{ route('payment.process') }}">
+    {{-- RIGHT SIDE - Reservation Form --}}
+    <div class="col-md-6">
+      <div class="reservation-form">
+        <form id="reservationForm" action="{{ route('go.payment') }}" method="POST">
           @csrf
-          <input type="hidden" name="bookingData" value='@json($bookingData)'>
+          <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
 
-          {{-- Payment Method --}}
-          <div class="mb-3">
-            <label class="form-label">Select Payment Method:</label>
-            <select class="form-select" id="paymentMethod" name="paymentMethod" required
-              onchange="togglePaymentFields(this.value)">
-              <option value="">-- Choose Method --</option>
-              <option value="card">Credit/Debit Card</option>
-              <option value="wallet">Mobile Wallet (bKash, Nagad, Rocket)</option>
-              <option value="netbanking">Net Banking</option>
-              <option value="cod">Cash at Counter</option>
+          <h4 class="mb-3 text-center" style="color:#780116;">BUS INFORMATION</h4>
+          <div class="ticket-card p-3 mb-3">
+            <p class="inline"><strong>Bus type:</strong></p>
+            <input class="hidein" type="text" name="bus_type" value="{{ $schedule->bus_type }}" readonly><br>
+            <p class="inline"><strong>Coach No:</strong></p>
+            <input class="hidein" type="text" name="coach_no" value="{{ $schedule->coach_no }}" readonly><br>
+            <p class="inline"><strong>Route:</strong></p>
+            <input class="hidein" type="text" name="route"
+              value="{{ $schedule->start_location }} to {{ $schedule->end_location }}" readonly> <br>
+
+            <p class="inline"><strong>Fare per Seat: ৳</strong></p>
+            <input class="hidein" type="text" name="seat_price" value="{{ number_format($schedule->price, 2) }}"
+              readonly> <br>
+            <p class="inline"><strong>Departure:</strong></p>
+            <input class="hidein" type="text" name="departure"
+              value="{{ date('h:i A', strtotime($schedule->set_time)) }}" readonly><br>
+
+            <p class="inline"><strong>Boarding point:</strong></p>
+            <select name="boarding" required>
+              <option value="">Select boarding point</option>
+              @foreach($boardingCounters as $boardcounter)
+              <option value="{{ $boardcounter->name }}">
+                {{ $boardcounter->name }}
+              </option>
+              @endforeach
+            </select>
+
+            <p class="inline"><strong>Dropping point:</strong></p>
+            <select name="dropping" required>
+              <option value="">Select dropping point</option>
+              @foreach($droppingCounters as $dropcounter)
+              <option value="{{ $dropcounter->name }}">
+                {{ $dropcounter->name }}
+              </option>
+              @endforeach
             </select>
           </div>
 
-          {{-- Card Payment --}}
-          <div id="cardFields" style="display: none;">
-            <div class="mb-3">
-              <label class="form-label">Card Number</label>
-              <input type="text" name="cardNumber" class="form-control" placeholder="1234 5678 9012 3456">
-            </div>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Expiry Date</label>
-                <input type="text" name="expiry" class="form-control" placeholder="MM/YY">
-              </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label">CVV</label>
-                <input type="password" name="cvv" class="form-control" placeholder="123">
-              </div>
-            </div>
-          </div>
+          <h4>SEAT INFORMATION:</h4>
+          <span>Selected Seats:</span>
+          <input type="text" id="selectedSeatsInput" name="selected_seats" readonly>
 
-          {{-- Wallet --}}
-          <div id="walletFields" style="display: none;">
-            <div class="mb-3">
-              <label class="form-label">Wallet Number</label>
-              <input type="text" name="walletNumber" class="form-control" placeholder="01XXXXXXXXX">
-            </div>
-          </div>
+          <span>Total amount:</span>
+          <input type="text" id="totalAmount" name="total" readonly>
 
-          {{-- Cash on Counter --}}
-          <div id="codNotice" style="display: none;">
-            <div class="alert alert-info">
-              You have chosen <strong>Cash at Counter</strong>. Please pay at the bus counter before departure.
-            </div>
-          </div>
+          <input type="text" name="name" placeholder="Your Name*" required>
+          <input type="text" name="mobile" placeholder="Mobile Number*" required>
 
-          {{-- Confirm Button --}}
-          <button type="submit" class="btn btn-success w-100 rounded-3 py-2 mt-3">
-            Confirm & Pay ৳{{ number_format($totalAmount, 2) }}
+          <button type="submit" class="submit-btn" onclick="playHorn()" style="cursor:pointer;">
+            SUBMIT
           </button>
         </form>
       </div>
     </div>
   </div>
 </div>
+<style>
+  /* Common Deck Style */
+  .deck {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
 
-{{-- Inline Script --}}
+  .deck-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .seat-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+
+  .seat {
+    width: 35px;
+    height: 35px;
+    background: #eee;
+    margin: 3px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 500;
+  }
+
+  .seat.selected {
+    background: #4caf50;
+    color: white;
+  }
+
+  .aisle {
+    width: 30px;
+  }
+
+  /* Double-Decker Container */
+  .double-deck-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  /* Lower Deck Style */
+  .lower-deck {
+    background: #f8f9fa;
+    flex: 1;
+    min-width: 300px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Upper Deck Style */
+  .upper-deck {
+    background: #f8f9fa;
+    flex: 1;
+    min-width: 300px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Divider (for stacked layout fallback) */
+  .deck-divider {
+    border: none;
+    border-top: 2px dashed #aaa;
+    margin: 20px 0;
+  }
+
+  /* Responsive: stack decks on small screens */
+  @media (max-width: 768px) {
+    .double-deck-container {
+      flex-direction: column;
+    }
+  }
+</style>
+
+{{-- JavaScript for seat logic --}}
 <script>
-  function togglePaymentFields(method) {
-    document.getElementById('cardFields').style.display = (method === 'card') ? 'block' : 'none';
-    document.getElementById('walletFields').style.display = (method === 'wallet') ? 'block' : 'none';
-    document.getElementById('codNotice').style.display = (method === 'cod') ? 'block' : 'none';
-}
+  const seatLayout = "{{ $seatLayout }}";  
+  const seatCapacity = Number("{{ $seatCapacity }}");
+  const busType = "{{ $bustype }}".toLowerCase();
+  const seatPrice = {{ $schedule->price }};
+
+  const selectedSeats = [];
+  const seatContainer = document.getElementById("seat-layout");
+  const selectedSeatsDisplay = document.getElementById("selected-seats");
+  const selectedSeatsInput = document.getElementById("selectedSeatsInput");
+  const totalAmount = document.getElementById("totalAmount");
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (busType.includes("double-decker")) {
+      generateDoubleDeckerSeats();
+    } else {
+      generateSingleDeckSeats();
+    }
+  });
+
+  /** Generate seats for single-decker buses */
+  function generateSingleDeckSeats() {
+    const singleDeck = document.createElement("div");
+    singleDeck.className = "deck single-deck";
+    // singleDeck.innerHTML = `<h3 class="deck-title">Single Deck</h3>`;
+    seatContainer.appendChild(singleDeck);
+
+    generateSeats(singleDeck, seatLayout, seatCapacity, "A");
+  }
+
+  /** Generate seats for double-decker buses (two separate styled divs) */
+  function generateDoubleDeckerSeats() {
+    const container = document.createElement("div");
+    container.className = "double-deck-container";
+    seatContainer.appendChild(container);
+
+    const halfCapacity = Math.ceil(seatCapacity / 2);
+
+    // LOWER DECK
+    const lowerDeck = document.createElement("div");
+    lowerDeck.className = "deck lower-deck";
+    lowerDeck.innerHTML = `<h3 class="deck-title">Lower Deck</h3>`;
+    container.appendChild(lowerDeck);
+
+    generateSeats(lowerDeck, seatLayout, halfCapacity, "A");
+
+    // UPPER DECK
+    const upperDeck = document.createElement("div");
+    upperDeck.className = "deck upper-deck";
+    upperDeck.innerHTML = `<h3 class="deck-title">Upper Deck</h3>`;
+    container.appendChild(upperDeck);
+
+    generateSeats(upperDeck, seatLayout, halfCapacity, "K");
+  }
+
+  /** Generate seats dynamically */
+  function generateSeats(container, layout, capacity, startLetter = "A") {
+    const [left, right] = layout.split(":").map(Number);
+    const seatsPerRow = left + right;
+    const totalRows = Math.ceil(capacity / seatsPerRow);
+    let currentSeatCount = 0;
+
+    for (let row = 0; row < totalRows; row++) {
+      const rowDiv = document.createElement("div");
+      rowDiv.className = "seat-row";
+
+      const rowLetter = String.fromCharCode(startLetter.charCodeAt(0) + row);
+      let seatNumber = 1;
+
+      // LEFT side
+      for (let i = 0; i < left && currentSeatCount < capacity; i++) {
+        createSeat(rowDiv, `${rowLetter}${seatNumber++}`);
+        currentSeatCount++;
+      }
+
+      // Aisle
+      const aisle = document.createElement("div");
+      aisle.className = "aisle";
+      rowDiv.appendChild(aisle);
+
+      // RIGHT side
+      for (let i = 0; i < right && currentSeatCount < capacity; i++) {
+        createSeat(rowDiv, `${rowLetter}${seatNumber++}`);
+        currentSeatCount++;
+      }
+
+      container.appendChild(rowDiv);
+    }
+  }
+
+  /** Create an individual seat */
+  function createSeat(rowDiv, seatId) {
+    const seat = document.createElement("div");
+    seat.className = "seat";
+    seat.textContent = seatId;
+    seat.onclick = () => toggleSeat(seatId, seat);
+    rowDiv.appendChild(seat);
+  }
+
+  /** Toggle seat selection */
+  function toggleSeat(id, el) {
+    if (selectedSeats.includes(id)) {
+      selectedSeats.splice(selectedSeats.indexOf(id), 1);
+      el.classList.remove("selected");
+    } else {
+      selectedSeats.push(id);
+      el.classList.add("selected");
+    }
+    updateSummary();
+  }
+
+  /** Update summary info */
+  function updateSummary() {
+    selectedSeatsDisplay.textContent = selectedSeats.length
+      ? selectedSeats.join(", ")
+      : "None";
+
+    selectedSeatsInput.value = selectedSeats.join(", ");
+    totalAmount.value = selectedSeats.length * seatPrice;
+  }
+
+  /** Optional horn sound */
+  function playHorn() {
+    const audio = new Audio("{{ asset('sound/horn.m4a') }}");
+    audio.play();
+  }
 </script>
-@endsection     this is my payment.blade.php file.               Now , i want that when user confirm payment then it will update "status" column in seat_reservation table.
+
+
+
+<script>
+  // const seatLayout = "{{ $seatLayout }}";  
+  // const seatCapacity = Number("{{ $seatCapacity }}");
+  // const busType = "{{ $bustype }}";
+  // const seatPrice = {{ $schedule->price }};
+
+  // const selectedSeats = [];
+  // const seatContainer = document.getElementById("seat-layout");
+  // const selectedSeatsDisplay = document.getElementById("selected-seats");
+  // const selectedSeatsInput = document.getElementById("selectedSeatsInput");
+  // const totalAmount = document.getElementById("totalAmount");
+
+  // function generateDynamicSeats() {
+  //   const [left, right] = seatLayout.split(":").map(Number);
+  //   const seatsPerRow = left + right;
+
+  //   // total rows required
+  //   const totalRows = Math.ceil(seatCapacity / seatsPerRow);
+
+  //   let currentSeatCount = 0; // Tracks how many seats created total
+
+  //   for (let row = 0; row < totalRows; row++) {
+  //     const rowDiv = document.createElement("div");
+  //     rowDiv.className = "seat-row";
+
+  //     const rowLabel = String.fromCharCode(65 + row); // A, B, C, D…
+
+  //     // LEFT SIDE
+  //     for (let i = 1; i <= left; i++) {
+  //       if (currentSeatCount >= seatCapacity) break;
+  //       createSeat(rowDiv, rowLabel + i);
+  //       currentSeatCount++;
+  //     }
+
+  //     // AISLE
+  //     const aisle = document.createElement("div");
+  //     aisle.className = "aisle";
+  //     rowDiv.appendChild(aisle);
+
+  //     // RIGHT SIDE
+  //     for (let i = 1; i <= right; i++) {
+  //       if (currentSeatCount >= seatCapacity) break;
+  //       createSeat(rowDiv, rowLabel + (left + i));
+  //       currentSeatCount++;
+  //     }
+
+  //     seatContainer.appendChild(rowDiv);
+  //   }
+  // }
+
+  // function createSeat(rowDiv, seatId) {
+  //   const seat = document.createElement("div");
+  //   seat.className = "seat";
+  //   seat.textContent = seatId;
+
+  //   seat.onclick = () => toggleSeat(seatId, seat);
+
+  //   rowDiv.appendChild(seat);
+  // }
+
+  // function toggleSeat(id, el) {
+  //   if (selectedSeats.includes(id)) {
+  //     selectedSeats.splice(selectedSeats.indexOf(id), 1);
+  //     el.classList.remove("selected");
+  //   } else {
+  //     selectedSeats.push(id);
+  //     el.classList.add("selected");
+  //   }
+  //   updateSummary();
+  // }
+
+  // function updateSummary() {
+  //   selectedSeatsDisplay.textContent = selectedSeats.length
+  //     ? selectedSeats.join(", ")
+  //     : "None";
+
+  //   selectedSeatsInput.value = selectedSeats.join(", ");
+  //   totalAmount.value = selectedSeats.length * seatPrice;
+  // }
+
+  // function playHorn() {
+  //   const audio = new Audio("{{ asset('sound/horn.m4a') }}");
+  //   audio.play();
+  // }
+
+  // document.addEventListener("DOMContentLoaded", generateDynamicSeats);
+</script>
+
+
+<script>
+  // const rows = 10;
+  // const cols = 4;
+  // const seatPrice = {{ $schedule->price }};
+  // const seatLayout = document.getElementById("seat-layout");
+  // const selectedSeatsDisplay = document.getElementById("selected-seats");
+  // const selectedSeatsInput = document.getElementById("selectedSeatsInput");
+  // const totalAmount = document.getElementById("totalAmount");
+  // let selectedSeats = [];
+
+  // function generateSeats() {
+  //   for (let i = 0; i < rows; i++) {
+  //     const rowLabel = String.fromCharCode(65 + i);
+  //     const rowDiv = document.createElement("div");
+  //     rowDiv.className = "seat-row";
+  //     for (let j = 1; j <= cols; j++) {
+  //       if (j === 3) {
+  //         const aisle = document.createElement("div");
+  //         aisle.className = "aisle";
+  //         rowDiv.appendChild(aisle);
+  //       }
+  //       const seat = document.createElement("div");
+  //       seat.className = "seat";
+  //       seat.textContent = `${rowLabel}${j}`;
+  //       seat.onclick = () => toggleSeat(`${rowLabel}${j}`, seat);
+  //       rowDiv.appendChild(seat);
+  //     }
+  //     seatLayout.appendChild(rowDiv);
+  //   }
+  // }
+
+  // function toggleSeat(seatId, element) {
+  //   if (selectedSeats.includes(seatId)) {
+  //     selectedSeats = selectedSeats.filter(s => s !== seatId);
+  //     element.classList.remove("selected");
+  //   } else {
+  //     selectedSeats.push(seatId);
+  //     element.classList.add("selected");
+  //   }
+  //   updateSummary();
+  // }
+
+  // function updateSummary() {
+  //   selectedSeatsDisplay.textContent = selectedSeats.length ? selectedSeats.join(", ") : "None";
+  //   selectedSeatsInput.value = selectedSeats.join(", ");
+  //   const total = selectedSeats.length * seatPrice;
+  //   totalAmount.value =total;
+  // }
+
+  // function playHorn() {
+  //   const audio = new Audio("{{ asset('sound/horn.m4a') }}");
+  //   audio.play();
+  // }
+
+  // document.addEventListener("DOMContentLoaded", generateSeats);
+</script>
+@endsection                             and eta seatreservation.blade.php                     ami chai user jokon boarding point select korbe tokon departure tame update hobe (departure time + distance)   mane departure time er sate selected counter er distance jog hbe (counter table e distance minute dewa takbe)              

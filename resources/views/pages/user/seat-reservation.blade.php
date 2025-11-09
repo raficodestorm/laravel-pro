@@ -57,7 +57,27 @@
               readonly> <br>
             <p class="inline"><strong>Departure:</strong></p>
             <input class="hidein" type="text" name="departure"
-              value="{{ date('h:i A', strtotime($schedule->set_time)) }}" readonly>
+              value="{{ date('h:i A', strtotime($schedule->set_time)) }}" readonly><br>
+
+            <p class="inline"><strong>Boarding point:</strong></p>
+            <select name="boarding" required>
+              <option value="">Select boarding point</option>
+              @foreach($boardingCounters as $boardcounter)
+              <option value="{{ $boardcounter->name }}">
+                {{ $boardcounter->name }}
+              </option>
+              @endforeach
+            </select>
+
+            <p class="inline"><strong>Dropping point:</strong></p>
+            <select name="dropping" required>
+              <option value="">Select dropping point</option>
+              @foreach($droppingCounters as $dropcounter)
+              <option value="{{ $dropcounter->name }}">
+                {{ $dropcounter->name }}
+              </option>
+              @endforeach
+            </select>
           </div>
 
           <h4>SEAT INFORMATION:</h4>
@@ -66,25 +86,6 @@
 
           <span>Total amount:</span>
           <input type="text" id="totalAmount" name="total" readonly>
-
-          <h4 style="margin-top:3rem;">BOARDING/DROPPING:</h4>
-          <select name="boarding" required>
-            <option value="">Select boarding point</option>
-            @foreach($boardingCounters as $counter)
-            <option value="{{ $counter->location }}">
-              {{ $counter->location }}
-            </option>
-            @endforeach
-          </select>
-
-          <select name="dropping" required>
-            <option value="">Select dropping point</option>
-            @foreach($droppingCounters as $counter)
-            <option value="{{ $counter->location }}">
-              {{ $counter->location }}
-            </option>
-            @endforeach
-          </select>
 
           <input type="text" name="name" placeholder="Your Name*" required>
           <input type="text" name="mobile" placeholder="Mobile Number*" required>

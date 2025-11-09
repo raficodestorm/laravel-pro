@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('coach_no');
             $table->timestamps();
             $table->foreign('route_code')->references('route_code')->on('routes')->onDelete('cascade');
+            $table->foreign('start_location')->references('district')->on('locations')->onDelete('cascade');
+            $table->foreign('end_location')->references('district')->on('locations')->onDelete('cascade');
         });
     }
 

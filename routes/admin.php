@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\UserManagementController;
-
+use App\Http\Controllers\User\SeatReservationController;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
   Route::get('users/create', [UserManagementController::class, 'create'])->name('users.create');
@@ -32,4 +32,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
   Route::get('/get-route-info', [ScheduleController::class, 'getRouteInfo'])->name('get.route.info');
   Route::get('/get-coaches', [ScheduleController::class, 'getCoachesByBusType'])->name('get.coaches');
+
+  Route::get('/reservation/{id}/edit', [SeatReservationController::class, 'edit'])->name('reservation.edit');
+  Route::put('/reservation/{id}', [SeatReservationController::class, 'update'])->name('reservation.update');
 });

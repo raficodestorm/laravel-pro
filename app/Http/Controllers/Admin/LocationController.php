@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Location;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'district' => 'required|string|max:100',
+            'district' => 'required|string|max:100|unique:locations,district',
             'division' => 'nullable|string|max:100',
         ]);
 
@@ -61,7 +62,7 @@ class LocationController extends Controller
     public function update(Request $request, Location $location)
     {
         $request->validate([
-            'district' => 'required|string|max:100',
+            'district' => 'required|string|max:100|unique:locations,district',
             'division' => 'nullable|string|max:100',
         ]);
 

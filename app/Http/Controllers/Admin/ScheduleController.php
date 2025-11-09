@@ -50,8 +50,9 @@ class ScheduleController extends Controller
 
     public function edit(Schedule $schedule)
     {
+        $bustypes = Bustype::orderBy('type', 'asc')->get();
         $routes = Route::orderBy('route_code', 'asc')->get();
-        return view('pages.admin.schedule.edit', compact('schedule', 'routes'));
+        return view('pages.admin.schedule.edit', compact('schedule', 'routes', 'bustypes'));
     }
 
     public function update(Request $request, Schedule $schedule)

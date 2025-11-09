@@ -16,10 +16,10 @@ class SeatReservation extends Model
         'route',
         'seat_price',
         'departure',
-        'selected_seats',
-        'total',
         'boarding',
         'dropping',
+        'selected_seats',
+        'total',
         'name',
         'mobile',
     ];
