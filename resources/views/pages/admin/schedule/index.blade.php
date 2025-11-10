@@ -26,6 +26,7 @@
                     <th>Price</th>
                     <th>Bus type</th>
                     <th>Coach no</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -43,6 +44,7 @@
                     <td>{{ $schedule->price }}</td>
                     <td>{{ $schedule->bus_type }}</td>
                     <td>{{ $schedule->coach_no }}</td>
+                    <td>{{ $schedule->status }}</td>
 
                     <td>
                         <a href="{{ route('admin.schedules.show', $schedule->id) }}" class="btn btn-info btn-sm">View</a>

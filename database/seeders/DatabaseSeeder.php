@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LocationSeeder::class);
         $this->call(RouteSeeder::class);
         $this->call(AdminUserSeeder::class);
+        $this->call(BustypeSeeder::class);
 
 
         // User::factory(10)->create();

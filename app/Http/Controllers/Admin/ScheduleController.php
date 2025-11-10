@@ -66,8 +66,9 @@ class ScheduleController extends Controller
             'distance' => 'nullable|string|max:50',
             'duration' => 'nullable|string|max:50',
             'price' => 'required|numeric|min:0',
-            'bus_type' => 'required|string|max:100',
+            'bus_type' => 'required|string|max:100', 
             'coach_no' => 'required|string|max:50',
+            'status' => ['required', 'in:pending,running,finished'],
         ]);
 
         $schedule->update($validated);
@@ -79,6 +80,19 @@ class ScheduleController extends Controller
         $schedule->delete();
         return redirect()->route('admin.schedules.index')->with('success', 'Schedule deleted successfully!');
     }
+
+    public function start(Schedule $schedule)
+    {
+    $schedule->update(['status' => 'running']);
+    return redirect()->route('admin.schedules.show', $schedule)->with('success', 'Trip started successfully!');
+    }
+
+    public function finish(Schedule $schedule)
+    {
+    $schedule->update(['status' => 'finished']);
+    return redirect()->route('admin.schedules.show', $schedule)->with('success', 'Trip finished successfully!');
+    }
+
 
     // AJAX: Get Route Info
     public function getRouteInfo(Request $request)

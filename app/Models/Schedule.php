@@ -20,6 +20,7 @@ class Schedule extends Model
         'price',
         'bus_type',
         'coach_no',
+        'status',
     ];
     public function bus()
     {
