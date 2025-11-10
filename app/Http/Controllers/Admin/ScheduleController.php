@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Schedule;
+use App\Models\Booked_seat;
+use App\Models\SeatReservation;
 use App\Models\Route;
 use App\Models\Bus;
 use App\Models\Bustype;
 use Illuminate\Http\Request;
+use PDF;
 
 class ScheduleController extends Controller
 {
@@ -66,7 +69,7 @@ class ScheduleController extends Controller
             'distance' => 'nullable|string|max:50',
             'duration' => 'nullable|string|max:50',
             'price' => 'required|numeric|min:0',
-            'bus_type' => 'required|string|max:100', 
+            'bus_type' => 'required|string|max:100',
             'coach_no' => 'required|string|max:50',
             'status' => ['required', 'in:pending,running,finished'],
         ]);
@@ -83,14 +86,43 @@ class ScheduleController extends Controller
 
     public function start(Schedule $schedule)
     {
-    $schedule->update(['status' => 'running']);
-    return redirect()->route('admin.schedules.show', $schedule)->with('success', 'Trip started successfully!');
+        $schedule->update(['status' => 'running']);
+        return redirect()->route('admin.schedules.report', $schedule->id)
+            ->with('success', 'Trip started successfully! Trip report generated below.');
     }
 
     public function finish(Schedule $schedule)
     {
-    $schedule->update(['status' => 'finished']);
-    return redirect()->route('admin.schedules.show', $schedule)->with('success', 'Trip finished successfully!');
+        $schedule->update(['status' => 'finished']);
+        return redirect()->route('admin.schedules.show', $schedule)->with('success', 'Trip finished successfully!');
+    }
+
+    public function pending(Schedule $schedule)
+    {
+        $schedule->update(['status' => 'pending']);
+        return redirect()->route('admin.schedules.show', $schedule)->with('success', 'Trip pending successfully!');
+    }
+
+
+    public function tripReport(Schedule $schedule)
+    {
+        $bookedSeats = Booked_seat::where('schedule_id', $schedule->id)->get();
+
+        // Calculate total passengers by summing all booked seat counts
+        $totalPassengers = $bookedSeats->reduce(function ($carry, $item) {
+            $seats = explode(',', $item->booked_seats);
+            return $carry + count(array_filter($seats)); // filters out empty values
+        }, 0);
+        $seatReservations = SeatReservation::where('schedule_id', $schedule->id)->get();
+
+        $pdf = PDF::loadView('pages.controller.trip.trip-report', [
+            'schedule' => $schedule,
+            'bookedSeats' => $bookedSeats,
+            'seatReservations' => $seatReservations,
+            'totalPassengers' => $totalPassengers
+        ])->setPaper('A4', 'portrait');
+
+        return $pdf->stream('Trip_Report_' . $schedule->id . '.pdf');
     }
 
 

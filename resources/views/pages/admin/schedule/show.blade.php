@@ -16,7 +16,7 @@
       <p><strong>Duration:</strong> {{ $schedule->duration }}</p>
       <p><strong>Bus type:</strong> {{ $schedule->bus_type }}</p>
       <p><strong>Coach no:</strong> {{ $schedule->coach_no }}</p>
-      <p><strong>Status:</strong> 
+      <p><strong>Status:</strong>
         <span class="badge 
           @if($schedule->status == 'pending') bg-warning 
           @elseif($schedule->status == 'running') bg-primary 
@@ -30,7 +30,7 @@
       <form action="{{ route('admin.schedules.start', $schedule->id) }}" method="POST" style="display:inline;">
         @csrf
         @method('PATCH')
-        <button type="submit" class="btn btn-success">Start</button>
+        <button type="submit" class="btn btn-success">Start & Generate Report</button>
       </form>
       @endif
 
@@ -42,6 +42,15 @@
         <button type="submit" class="btn btn-danger">Finish</button>
       </form>
       @endif
+
+      @if($schedule->status == ('running'||'finished'))
+      <form action="{{ route('admin.schedules.pending', $schedule->id) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('PATCH')
+        <button type="submit" class="btn btn-danger">back to pending</button>
+      </form>
+      @endif
+
     </div>
   </div>
 </div>

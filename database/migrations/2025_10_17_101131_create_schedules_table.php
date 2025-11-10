@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->string('bus_type');
             $table->string('coach_no');
-            $table->enum('status', ['pending', 'runnig', 'finished'])->default('pending');
+            $table->enum('status', ['pending', 'running', 'finished'])->default('pending');
             $table->timestamps();
             $table->foreign('route_code')->references('route_code')->on('routes')->onDelete('cascade');
             $table->foreign('start_location')->references('district')->on('locations')->onDelete('cascade');

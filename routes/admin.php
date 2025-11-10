@@ -27,8 +27,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
   Route::resource('buses', BusController::class);
   Route::resource('locations', LocationController::class);
   Route::resource('routes', RouteController::class);
-  Route::resource('schedules', ScheduleController::class);
   Route::resource('counters', CounterController::class);
+  Route::resource('schedules', ScheduleController::class);
+  Route::patch('/schedules/{schedule}/start', [ScheduleController::class, 'start'])->name('schedules.start');
+  Route::patch('/schedules/{schedule}/finish', [ScheduleController::class, 'finish'])->name('schedules.finish');
+  Route::patch('/schedules/{schedule}/pending', [ScheduleController::class, 'pending'])->name('schedules.pending');
+  Route::get('/schedules/{schedule}/report', [ScheduleController::class, 'tripReport'])->name('schedules.report');
+
 
   Route::get('/get-route-info', [ScheduleController::class, 'getRouteInfo'])->name('get.route.info');
   Route::get('/get-coaches', [ScheduleController::class, 'getCoachesByBusType'])->name('get.coaches');

@@ -4,8 +4,8 @@
 <div class="container-fluid main-area">
     <div class="index-card shadow">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3>All Schedules</h3>
-            <a href="{{ route('admin.schedules.create') }}" class="btn btn-info">+ Add Shedule</a>
+            <h3>All Locations</h3>
+            <a href="{{ route('admin.counters.create') }}" class="btn btn-info">+ Add Counter</a>
         </div>
 
         @if (session('success'))
@@ -13,42 +13,37 @@
         @endif
 
         <table class="table table-bordered align-middle" id="table-same">
-            <thead class="table-dark text-center">
+            <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Route</th>
-                    <th>Price</th>
-                    <th>Bus type</th>
-                    <th>Coach no</th>
-                    <th>Status</th>
+                    <th>Counter name</th>
+                    <th>Manager name</th>
+                    <th>District</th>
+                    <th>Distance</th>
                     <th>Action</th>
+
                 </tr>
             </thead>
             <tbody>
-                @forelse($schedules as $schedule)
+                @forelse($counters as $counter)
                 <tr class="text-center">
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $schedule->set_date }}</td>
-                    <td>{{ $schedule->set_time }}</td>
-                    <td>{{ $schedule->route_code }}</td>
-                    <td>{{ $schedule->price }}</td>
-                    <td>{{ $schedule->bus_type }}</td>
-                    <td>{{ $schedule->coach_no }}</td>
-                    <td>{{ $schedule->status }}</td>
-
+                    <td>{{ $counter->id }}</td>
+                    <td>{{ $counter->name }}</td>
+                    <td>{{ $counter->manager }}</td>
+                    <td>{{ $counter->locationinfo->district ?? 'N/A' }}</td>
+                    <td>{{ $counter->distance }}</td>
                     <td>
-                        <a href="{{ route('admin.schedules.show', $schedule->id) }}"
-                            class="btn btn-info btn-sm">View</a>
-                        <a href="{{ route('admin.schedules.edit', $schedule->id) }}"
+
+                        <a href="{{ route('admin.counters.show', $counter->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('admin.counters.edit', $counter->id) }}"
                             class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" method="POST"
+                        <form action="{{ route('admin.counters.destroy', $counter->id) }}" method="POST"
                             class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button onclick="return confirm('Are you sure?')"
                                 class="btn btn-danger btn-sm">Delete</button>
+
                         </form>
                     </td>
                 </tr>
@@ -60,7 +55,7 @@
             </tbody>
         </table>
 
-        {{ $schedules->links() }}
+        {{ $counters->links() }}
     </div>
 </div>
 
