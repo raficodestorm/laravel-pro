@@ -7,6 +7,7 @@ use App\Http\Controllers\User\SearchScheduleBusController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TicketController;
 
 // Route::get('/', function () {
 //     return view('pages.user.userfront');
@@ -51,10 +52,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/payment/{id}', [PaymentController::class, 'showPaymentPage'])->name('payment.for');
-Route::post('/payment', [PaymentController::class, 'showPaymentPage'])->name('payment.page');
-Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
 
-Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
+    Route::get('/ticket', [TicketController::class, 'show'])->name('user.ticket');
+
+
+    // Route::post('/payment', [PaymentController::class, 'showPaymentPage'])->name('payment.page');
+    // Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+
+    Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
 });
 
 

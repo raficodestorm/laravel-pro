@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SeatReservation;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
+use App\Models\Booked_seat;
 use App\Models\Counter;
 use App\Models\Location;
 
@@ -29,7 +30,7 @@ class SeatReservationController extends Controller
 
     public function __construct()
     {
-    $this->middleware('auth')->only('store');
+        $this->middleware('auth')->only('store');
     }
 
     public function see($id)
@@ -50,6 +51,18 @@ class SeatReservationController extends Controller
             $q->where('district', $schedule->end_location);
         })->get();
 
+
+        $bookedSeats = Booked_seat::where('schedule_id', $schedule->id)
+            ->pluck('booked_seats')
+            ->toArray();
+
+        // Convert CSV values (ex: "A1,A2") into a clean array
+        $bookedSeats = collect($bookedSeats)
+            ->flatMap(fn($s) => explode(',', $s))
+            ->map(fn($s) => trim($s))
+            ->toArray();
+
+
         return view('pages.user.seat-reservation', compact(
             'schedule',
             'seatLayout',
@@ -57,6 +70,7 @@ class SeatReservationController extends Controller
             'bustype',
             'boardingCounters',
             'droppingCounters',
+            'bookedSeats'
         ));
     }
 
@@ -76,6 +90,7 @@ class SeatReservationController extends Controller
             'dropping' => 'required|string',
             'selected_seats' => 'required|string',
             'total' => 'required|string',
+            'status' => 'nullable|string',
             'name' => 'required|string|max:100',
             'mobile' => 'required|string|max:20',
         ]);
@@ -83,6 +98,7 @@ class SeatReservationController extends Controller
         $validated['seat_price'] = str_replace(',', '', $validated['seat_price']);
         $validated['total'] = str_replace(',', '', $validated['total']);
         $validated['user_id'] = auth()->id();
+        $validated['status'] = $validated['status'] ?? 'pending';
         $reservation = SeatReservation::create($validated);
         return redirect()->route('payment.for', ['id' => $reservation->id]);
     }
@@ -97,7 +113,7 @@ class SeatReservationController extends Controller
     // $schedule = Schedule::findOrFail($id);
 
     // return view('pages.user.seat-reservation', compact('schedule'));
-    
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -114,7 +130,7 @@ class SeatReservationController extends Controller
     public function update(Request $request, $id)
     {
         $reservation = SeatReservation::findOrFail($id);
-    
+
         $validated = $request->validate([
             'schedule_id' => 'required|exists:schedules,id',
             'bus_type' => 'required|string',
@@ -126,18 +142,19 @@ class SeatReservationController extends Controller
             'dropping' => 'required|string',
             'selected_seats' => 'required|string',
             'total' => 'required|string',
+            'status' => 'nullable|string',
             'name' => 'required|string|max:100',
             'mobile' => 'required|string|max:20',
         ]);
-    
+
         $validated['seat_price'] = str_replace(',', '', $validated['seat_price']);
         $validated['total'] = str_replace(',', '', $validated['total']);
-    
+
         $reservation->update($validated);
-    
+
         return redirect()->back()->with('success', 'Reservation updated successfully!');
     }
-    
+
 
 
     /**

@@ -3,233 +3,298 @@
 @section('content')
 <style>
   /* ---------------------  style for seat Resrvation ------------------------------------ */
-.seat-reservation {
-  margin-top: 35px;
-  margin-bottom: 30px;
-  border-radius: 1rem;
-  box-shadow: 0 0 20px rgba(128, 128, 128, 0.854) !important;
-}
-.bus-container {
-  width: 350px;
-  margin: auto;
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  background: var(--bg-color);
-}
-.legend {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin: .5rem 0 1rem 0;
-}
-
-.legend .seat {
-  text-align: center;
-  line-height: 1rem;
-  border-radius: 4px;
-  font-size: 12px;
-  cursor: default;
-  height: 45px;
-  width: 55px;
-}
-
-.seat.blocked { background: #333; color: white; border: .5px solid var(--main-color);}
-.seat.available { background: #fffffc; color: #333; border: .5px solid var(--main-color); }
-.seat.selected { background: #4CAF50; color: white; border: .5px solid var(--main-color);} /* green */
-.seat.soldM { background: #ff0000; color: white; border: .5px solid var(--main-color);}    /* red */
-.seat.soldF { background: #ff2ecc; color: white; border: .5px solid var(--main-color);}    /* pink */
-
-.bus-front {
-  display: flex;
-  justify-content: space-between;
-  margin:0 20px 20px 20px;
-}
-
-.driver {
-  font-weight: bold;
-  width: 60px;
-  text-align: center;
-}
-
-.driver svg {
-  font-size: 40px;
-  animation: steering-spin 2s linear infinite, fill-change 3s ease-in-out infinite;
-}
-
-/* Spin animation */
-@keyframes steering-spin {
-  from {
-    transform: rotate(0deg);
+  .seat-reservation {
+    margin-top: 35px;
+    margin-bottom: 30px;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(128, 128, 128, 0.854) !important;
   }
-  to {
-    transform: rotate(360deg);
+
+  .bus-container {
+    width: 350px;
+    margin: auto;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background: var(--bg-color);
   }
-}
 
-/* Animate fill color */
-@keyframes fill-change {
-  0%   { fill: red; }
-  25%  { fill: blue; }
-  50%  { fill: #780116; }
-  75%  { fill: green; }
-  100% { fill: red; }
-}
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: .5rem 0 1rem 0;
+  }
 
-.door {
-  color: gray;
-  font-weight: bold;
-  padding: 10px;
-  border-radius: 6px;
-  width: 60px;
-  text-align: center;
-}
-.deck {
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 20px;
-}
+  .legend .seat {
+    text-align: center;
+    line-height: 1rem;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: default;
+    height: 45px;
+    width: 55px;
+  }
 
-.deck-title {
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-size: 18px;
-}
+  .seat.blocked {
+    background: #333;
+    color: white;
+    border: .5px solid var(--main-color);
+  }
 
-.seat {
-  width: 35px;
-  height: 35px;
-  background: #eee;
-  color: var(--second-color);
-  border: 1.5px solid var(--main-color);
-  margin: 3px;
-  font-size: 12px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: 0.2s;
-  font-weight: 500;
-}
+  .seat.available {
+    background: #fffffc;
+    color: #333;
+    border: .5px solid var(--main-color);
+  }
 
-.seat.selected {
-  background: #4caf50;
-  color: white;
-}
+  .seat.selected {
+    background: #4CAF50;
+    color: white;
+    border: .5px solid var(--main-color);
+  }
 
-.double-deck-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
+  /* green */
+  .seat.soldM {
+    background: #ff0000;
+    color: white;
+    border: .5px solid var(--main-color);
+  }
 
-.lower-deck {
-  background: #f8f9fa;
-  flex: 1;
-  min-width: 300px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
+  /* red */
+  .seat.soldF {
+    background: #ff2ecc;
+    color: white;
+    border: .5px solid var(--main-color);
+  }
 
-.upper-deck {
-  background: #f8f9fa;
-  flex: 1;
-  min-width: 300px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
+  /* pink */
 
-.deck-divider {
-  border: none;
-  border-top: 2px dashed #aaa;
-  margin: 20px 0;
-}
+  .bus-front {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px 20px 20px;
+  }
 
-@media (max-width: 768px) {
+  .driver {
+    font-weight: bold;
+    width: 60px;
+    text-align: center;
+  }
+
+  .driver svg {
+    font-size: 40px;
+    animation: steering-spin 2s linear infinite, fill-change 3s ease-in-out infinite;
+  }
+
+  /* Spin animation */
+  @keyframes steering-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Animate fill color */
+  @keyframes fill-change {
+    0% {
+      fill: red;
+    }
+
+    25% {
+      fill: blue;
+    }
+
+    50% {
+      fill: #780116;
+    }
+
+    75% {
+      fill: green;
+    }
+
+    100% {
+      fill: red;
+    }
+  }
+
+  .door {
+    color: gray;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+    width: 60px;
+    text-align: center;
+  }
+
+  .deck {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .deck-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .seat {
+    width: 35px;
+    height: 35px;
+    background: #eee;
+    color: var(--second-color);
+    border: 1.5px solid var(--main-color);
+    margin: 3px;
+    font-size: 12px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 500;
+  }
+
+  .seat.selected {
+    background: #4caf50;
+    color: white;
+  }
+
   .double-deck-container {
-    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
   }
-}
-.seats {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
 
-.seat-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
+  .lower-deck {
+    background: #f8f9fa;
+    flex: 1;
+    min-width: 300px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
 
-.seat:hover {
-  transform: scale(1.05);
-}
+  .upper-deck {
+    background: #f8f9fa;
+    flex: 1;
+    min-width: 300px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
 
-.aisle {
-  width: 40px; /* space for walking */
-}
+  .deck-divider {
+    border: none;
+    border-top: 2px dashed #aaa;
+    margin: 20px 0;
+  }
 
-.summary {
-  margin-top: 20px;
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  text-align: center;
-}
-.reservation-form {
-  margin-top: 4.4rem;
-  margin-right: 4rem;
-  margin-bottom: 1rem;
-}
-.reservation-form select,
-.reservation-form input {
-  display: block;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
-  border-radius: 5px;
-  background-color: var(--bg-color);
-  border: .5px solid var(--light-hover);
-}
-/* .reservation-form select, */
-input:focus{
-  border: none;
-}
-.submit-btn {
-  width: 100%;
-  background: linear-gradient(90deg, #ff0000, #780116);
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  animation: wiggle 1s ease-in-out infinite;
-}
+  @media (max-width: 768px) {
+    .double-deck-container {
+      flex-direction: column;
+    }
+  }
 
-/* Wiggle animation */
-@keyframes wiggle {
-  0%  { transform: translateX(-3px); background: linear-gradient(90deg, #ff0000, #780116);}
-  50%  { transform: translateX(3px); background: linear-gradient(90deg, #780116, #ff0000);}
-  100%  { transform: translateX(-3px); background: linear-gradient(90deg, #ff0000, #780116);}
-}
+  .seats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-/* Apply on hover */
-.submit-btn:hover {
-  box-shadow: 0 0 10px var(--main-color);
-}
-.inline{
-  display: inline-block !important;
-}
-.hidein{
-  border: none !important;
-  display: inline-block !important;
-  width: 50% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
+  .seat-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .seat:hover {
+    transform: scale(1.05);
+  }
+
+  .aisle {
+    width: 40px;
+    /* space for walking */
+  }
+
+  .summary {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .reservation-form {
+    margin-top: 4.4rem;
+    margin-right: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .reservation-form select,
+  .reservation-form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: var(--bg-color);
+    border: .5px solid var(--light-hover);
+  }
+
+  /* .reservation-form select, */
+  input:focus {
+    border: none;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #ff0000, #780116);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    animation: wiggle 1s ease-in-out infinite;
+  }
+
+  /* Wiggle animation */
+  @keyframes wiggle {
+    0% {
+      transform: translateX(-3px);
+      background: linear-gradient(90deg, #ff0000, #780116);
+    }
+
+    50% {
+      transform: translateX(3px);
+      background: linear-gradient(90deg, #780116, #ff0000);
+    }
+
+    100% {
+      transform: translateX(-3px);
+      background: linear-gradient(90deg, #ff0000, #780116);
+    }
+  }
+
+  /* Apply on hover */
+  .submit-btn:hover {
+    box-shadow: 0 0 10px var(--main-color);
+  }
+
+  .inline {
+    display: inline-block !important;
+  }
+
+  .hidein {
+    border: none !important;
+    display: inline-block !important;
+    width: 50% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 </style>
 <div class="container seat-reservation">
   <div class="row">
@@ -293,9 +358,9 @@ input:focus{
             <select id="boarding" name="boarding" required>
               <option value="">Select boarding point</option>
               @foreach($boardingCounters as $boardcounter)
-                <option value="{{ $boardcounter->name }}" data-distance="{{ $boardcounter->distance }}">
-                  {{ $boardcounter->name }}
-                </option>
+              <option value="{{ $boardcounter->name }}" data-distance="{{ $boardcounter->distance }}">
+                {{ $boardcounter->name }}
+              </option>
               @endforeach
             </select>
 
@@ -335,6 +400,7 @@ input:focus{
   const seatCapacity = Number("{{ $seatCapacity }}");
   const busType = "{{ $bustype }}".toLowerCase();
   const seatPrice = {{ $schedule->price }};
+  const bookedSeats = @json($bookedSeats);
 
   const selectedSeats = [];
   const seatContainer = document.getElementById("seat-layout");
@@ -421,13 +487,30 @@ input:focus{
   }
 
   /** Create an individual seat */
+  // function createSeat(rowDiv, seatId) {
+  //   const seat = document.createElement("div");
+  //   seat.className = "seat";
+  //   seat.textContent = seatId;
+  //   seat.onclick = () => toggleSeat(seatId, seat);
+  //   rowDiv.appendChild(seat);
+  // }
+
   function createSeat(rowDiv, seatId) {
     const seat = document.createElement("div");
     seat.className = "seat";
     seat.textContent = seatId;
-    seat.onclick = () => toggleSeat(seatId, seat);
+
+    // ✅ If already booked → mark red and disable
+    if (bookedSeats.includes(seatId)) {
+        seat.classList.add("soldM");   // red color
+        seat.style.pointerEvents = "none"; // disable clicking
+    } else {
+        seat.onclick = () => toggleSeat(seatId, seat);
+    }
+
     rowDiv.appendChild(seat);
-  }
+}
+
 
   /** Toggle seat selection */
   function toggleSeat(id, el) {

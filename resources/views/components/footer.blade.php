@@ -9,9 +9,10 @@
                     <path d="M6 12h12M6 7h12M6 17h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" />
                 </svg>
-                <span class="brand-name">YourCompany</span>
+                <span class="brand-name">RunStar</span>
             </a>
-            <p class="brand-desc">We build reliable, secure and beautifully designed web solutions that scale.</p>
+            <p class="brand-desc">We provide reliable, secure and on-time bus services with modern coaches and friendly
+                customer support.</p>
 
             <div class="social" aria-label="Social links">
                 <a href="#" class="social-link" aria-label="Twitter">
@@ -43,12 +44,12 @@
 
         <!-- Column 2: Quick Links -->
         <nav class="footer-col" aria-label="Footer quick links">
-            <h3 class="footer-title">Products</h3>
+            <h3 class="footer-title">Services</h3>
             <ul class="footer-list">
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Pricing</a></li>
-                <li><a href="#">Roadmap</a></li>
-                <li><a href="#">Integrations</a></li>
+                <li><a href="#">Bus Routes</a></li>
+                <li><a href="#">Schedules</a></li>
+                <li><a href="#">Ticket Pricing</a></li>
+                <li><a href="#">Corporate Booking</a></li>
             </ul>
         </nav>
 
@@ -56,10 +57,10 @@
         <div class="footer-col">
             <h3 class="footer-title">Resources</h3>
             <ul class="footer-list">
-                <li><a href="#">Docs</a></li>
-                <li><a href="#">API Reference</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="#">Route Map</a></li>
+                <li><a href="#">Travel Guidelines</a></li>
+                <li><a href="#">Passenger Support</a></li>
+                <li><a href="#">Blogs</a></li>
             </ul>
         </div>
 
@@ -67,9 +68,9 @@
         <div class="footer-col">
             <h3 class="footer-title">Contact</h3>
             <address class="contact">
-                <div>123 Avenue Street, City, Country</div>
+                <div>Central Bus Terminal, Dhaka, Bangladesh</div>
                 <div><a href="tel:+15551234567">+1 (555) 123-4567</a></div>
-                <div><a href="mailto:hello@yourcompany.com">hello@yourcompany.com</a></div>
+                <div><a href="mailto:hello@yourcompany.com">runstar@gmail.com</a></div>
             </address>
 
             <form class="subscribe" action="#" method="post"
@@ -83,7 +84,7 @@
 
     <div class="footer-bottom" role="presentation">
         <div class="bottom-inner">
-            <small>© <span id="current-year"></span> YourCompany. All rights reserved.</small>
+            <small>© <span id="current-year"></span> RunStar Bus Service. All rights reserved.</small>
             <ul class="legal">
                 <li><a href="#">Terms</a></li>
                 <li><a href="#">Privacy</a></li>

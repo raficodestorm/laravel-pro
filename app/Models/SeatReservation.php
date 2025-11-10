@@ -21,6 +21,7 @@ class SeatReservation extends Model
         'dropping',
         'selected_seats',
         'total',
+        'status',
         'name',
         'mobile',
     ];
