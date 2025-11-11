@@ -14,4 +14,9 @@ class Route extends Model
         'distance',
         'duration',
     ];
+
+    public function drivers()
+    {
+        return $this->hasMany(Driver::class, 'route_id');
+    }
 }

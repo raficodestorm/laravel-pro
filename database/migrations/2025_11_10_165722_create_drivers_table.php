@@ -18,9 +18,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('license');
             $table->longText('address');
-            $table->string('route');
+            $table->foreignId('route_id')->constrained('routes');
             $table->timestamps();
-            $table->foreign('location_id')->references('id')->on('locations');
         });
     }
 
