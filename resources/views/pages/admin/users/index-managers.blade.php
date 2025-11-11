@@ -19,24 +19,20 @@
           <th>Full Name</th>
           <th>Username</th>
           <th>Email</th>
-          <th>Father namee</th>
           <th>Phone</th>
-          <th>Address</th>
-          <th>NID</th>
           <th>Image</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         @forelse($users as $user)
         <tr>
           {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
+          <td>{{ $user->id }}</td>
           <td>{{ $user->fullname }}</td>
           <td>{{ $user->username }}</td>
           <td>{{ $user->email }}</td>
-          <td>{{ $user->father_name }}</td>
           <td>{{ $user->phone }}</td>
-          <td>{{ $user->address }}</td>
-          <td>{{ $user->nid_no }}</td>
           <td>
             <img src="{{ asset('storage/' . $user->profile_photo_path) }}" alt="User Image" width="60" height="60"
               style="object-fit: cover; border-radius: 8px;">

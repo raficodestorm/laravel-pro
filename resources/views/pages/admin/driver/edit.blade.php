@@ -42,7 +42,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Route</label>
-                    <select name="route" class="form-control" required>
+                    <select name="route_id" class="form-control" required>
                         <option value="{{ $driver->route_id }}">{{ $driver->route_id }}</option>
 
                         @foreach($routes as $route)

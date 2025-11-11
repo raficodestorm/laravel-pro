@@ -45,8 +45,7 @@
                 @endforelse
             </tbody>
         </table>
-
-        {{ $locations->links() }}
+ <!-- {{ $locations->links() }} -->
     </div>
 </div>
 

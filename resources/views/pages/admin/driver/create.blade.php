@@ -39,7 +39,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Route</label>
-                    <select name="route" class="form-control" required>
+                    <select name="route_id" class="form-control" required>
                         <option value="">-- Select Route --</option>
 
                         @foreach($routes as $route)
@@ -53,7 +53,7 @@
 
 
                 <button type="submit" class="btn btn-success px-4">Save</button>
-                <a href="{{ route('admin.counters.index') }}" class="btn btn-secondary px-4">Back</a>
+                <a href="{{ route('admin.drivers.index') }}" class="btn btn-secondary px-4">Back</a>
             </form>
         </div>
     </div>

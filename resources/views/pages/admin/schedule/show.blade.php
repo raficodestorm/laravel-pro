@@ -50,7 +50,7 @@
         <button type="submit" class="btn btn-danger">back to pending</button>
       </form>
       @endif
-
+      <a class="btn btn-secondary" href="{{ route('admin.schedules.index') }}">back</a>
     </div>
   </div>
 </div>

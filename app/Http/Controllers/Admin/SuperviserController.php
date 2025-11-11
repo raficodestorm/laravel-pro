@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Models\Driver;
+use App\Models\Superviser;
 use App\Models\Route;
 use Illuminate\Http\Request;
 
-class DriverController extends Controller
+class SuperviserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
-        $drivers = Driver::get();
-        return view('pages.admin.driver.index', compact('drivers'));
+        $supervisers = Superviser::get();
+        return view('pages.admin.superviser.index', compact('supervisers'));
     }
 
     /**
@@ -24,7 +23,7 @@ class DriverController extends Controller
     public function create()
     {
         $routes = Route::orderBy('route_code', 'asc')->get();
-        return view('pages.admin.driver.create', compact('routes'));
+        return view('pages.admin.superviser.create', compact('routes'));
     }
 
     /**
@@ -36,55 +35,53 @@ class DriverController extends Controller
             'name' => 'required|string|max:100',
             'father' => 'required|string|max:100',
             'phone' => 'required|string|max:100',
-            'license' => 'required|string|max:100',
-            'address' => 'required|string|max:100',
+            'address'=> 'required|string|max:100',
             'route_id' => 'nullable|integer',
         ]);
-
-        Driver::create($validated);
-        return redirect()->route('admin.drivers.index')->with('seccess', 'driver added successfully!');
+        Superviser::create($validated);
+        return redirect()->route('admin.supervisers.index')->with('success', 'Superviser added successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Driver $driver)
+    public function show(Superviser $superviser)
     {
-        return view('pages.admin.driver.show', compact('driver'));
+        return view('pages.admin.superviser.show', compact('superviser'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Driver $driver)
+    public function edit(Superviser $superviser)
     {
         $routes = Route::orderBy('route_code', 'asc')->get();
-        return view('pages.admin.driver.edit', compact('driver', 'routes'));
+        return view('pages.admin.superviser.edit', compact('superviser', 'routes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Driver $driver)
+    public function update(Request $request, Superviser $superviser)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
             'father' => 'required|string|max:100',
             'phone' => 'required|string|max:100',
-            'license' => 'required|string|max:100',
-            'address' => 'required|string|max:100',
+            'address'=> 'required|string|max:100',
             'route_id' => 'nullable|integer',
         ]);
-        $driver->update($validated);
-        return redirect()->route('admin.drivers.index')->with('success', 'Driver updated successfully');
+
+        $superviser->update($validated);
+        return redirect()->route('admin.supervisers.index')->with('success', 'Supervisers updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Driver $driver)
+    public function destroy(Superviser $superviser)
     {
-        $driver->delete();
-        return redirect()->route('admin.drivers.index')->with('success', 'Drivere deleted successfully');
+        $superviser->delete();
+        return redirect()->route('admin.supervisers.index')->with('success', 'Superviser deleted successfully');
     }
 }

@@ -3,7 +3,7 @@
 
 <div class="container-fluid main-area">
     <div class="index-card shadow">
-        <div class="card-header p-2 mb-3 text-white fw-bold" style="background-color: #ff0000">Edit Counter</div>
+        <div class="card-header p-2 mb-3 text-white fw-bold" style="background-color: #ff0000">Edit Superviser</div>
         <div class="card-body">
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -15,35 +15,31 @@
             </div>
             @endif
 
-            <form action="{{ route('admin.drivers.update', $driver->id) }}" method="POST">
+            <form action="{{ route('admin.supervisers.update', $superviser->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Full name</label>
-                    <input type="text" name="name" class="form-control" value="{{ $driver->name }}" required>
+                    <input type="text" name="name" class="form-control" value="{{ $superviser->name }}" required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Father name</label>
-                    <input type="text" name="father" class="form-control" value="{{ $driver->father }}">
+                    <input type="text" name="father" class="form-control" value="{{ $superviser->father }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Phone</label>
-                    <input type="text" name="phone" class="form-control" value="{{ $driver->phone }}">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">License Number</label>
-                    <input type="text" name="license" class="form-control" value="{{ $driver->license }}">
+                    <input type="text" name="phone" class="form-control" value="{{ $superviser->phone }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Address</label>
                     <input type="textaria" name="address" class="form-control" placeholder="Enter address"
-                        value="{{ $driver->address }}">
+                        value="{{ $superviser->address }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Route</label>
-                    <select name="route" class="form-control" required>
-                        <option value="{{ $driver->route_id }}">{{ $driver->route_id }}</option>
+                    <select name="route_id" class="form-control" required>
+                        <option value="{{ $superviser->route_id }}">{{ $superviser->route_id }}</option>
 
                         @foreach($routes as $route)
                         <option value="{{ $route->id }}">
@@ -56,7 +52,7 @@
 
 
                 <button type="submit" class="btn btn-success px-4">Update</button>
-                <a href="{{ route('admin.drivers.index') }}" class="btn btn-secondary px-4">Back</a>
+                <a href="{{ route('admin.supervisers.index') }}" class="btn btn-secondary px-4">Back</a>
             </form>
         </div>
     </div>

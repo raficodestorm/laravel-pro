@@ -8,7 +8,8 @@ use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\UserManagementController;
-use App\Http\Controllers\DriverController;
+use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\Admin\SuperviserController;
 use App\Http\Controllers\User\SeatReservationController;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
@@ -27,6 +28,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
   Route::resource('bustypes', BustypeController::class);
   Route::resource('buses', BusController::class);
   Route::resource('drivers', DriverController::class);
+  Route::resource('supervisers', SuperviserController::class);
   Route::resource('locations', LocationController::class);
   Route::resource('routes', RouteController::class);
   Route::resource('counters', CounterController::class);

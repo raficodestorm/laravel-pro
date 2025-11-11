@@ -71,6 +71,56 @@
 
 
     <li class="dropdown">
+      <a href="#" onclick="toggleSubmenu(event)" title="location" id="drop">
+        <img src="{{asset('svg/location.svg')}}" />
+        <span>Drivers</span>
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+          fill="#0000F5">
+          <path d="M480-360 280-560h400L480-360Z" />
+        </svg>
+      </a>
+      <ul class="submenu">
+        <div>
+          <li><a href="{{ route('admin.drivers.create') }}" title="Add location" id="sub">
+              <img src="{{asset('svg/addlocation.svg')}}" />
+              <span>Add Driver</span>
+            </a>
+          </li>
+          <li><a href="{{ route('admin.drivers.index') }}" title="All locations" id="sub">
+              <img src="{{asset('svg/list.svg')}}" />
+              <span>All Drivers</span>
+            </a>
+          </li>
+        </div>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="#" onclick="toggleSubmenu(event)" title="location" id="drop">
+        <img src="{{asset('svg/location.svg')}}" />
+        <span>Superviser</span>
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+          fill="#0000F5">
+          <path d="M480-360 280-560h400L480-360Z" />
+        </svg>
+      </a>
+      <ul class="submenu">
+        <div>
+          <li><a href="{{ route('admin.supervisers.create') }}" title="Add location" id="sub">
+              <img src="{{asset('svg/addlocation.svg')}}" />
+              <span>Add Superviser</span>
+            </a>
+          </li>
+          <li><a href="{{ route('admin.supervisers.index') }}" title="All locations" id="sub">
+              <img src="{{asset('svg/list.svg')}}" />
+              <span>All Supervisers</span>
+            </a>
+          </li>
+        </div>
+      </ul>
+    </li>
+
+    <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="Stations" id="drop">
         <img src="{{asset('svg/schedule.svg')}}" />
         <span>Schedule</span>

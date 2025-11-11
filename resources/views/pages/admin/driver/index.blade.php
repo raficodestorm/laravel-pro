@@ -54,8 +54,6 @@
                 @endforelse
             </tbody>
         </table>
-
-        {{ $counters->links() }}
     </div>
 </div>
 
