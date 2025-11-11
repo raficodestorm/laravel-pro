@@ -16,8 +16,25 @@ class ScheduleController extends Controller
 {
     public function index()
     {
-        $schedules = Schedule::latest()->paginate(10);
+        $schedules = Schedule::where('status', 'pending')->latest()->paginate(10);
         return view('pages.admin.schedule.index', compact('schedules'));
+    }
+
+    public function pendingtrip()
+    {
+        $schedules = Schedule::where('status', 'pending')->latest()->paginate(10);
+        return view('pages.admin.trip.pendingtrips', compact('schedules'));
+    }
+
+    public function runningtrip()
+    {
+        $schedules = Schedule::where('status', 'running')->latest()->paginate(10);
+        return view('pages.admin.trip.runningtrips', compact('schedules'));
+    }
+    public function finishedtrip()
+    {
+        $schedules = Schedule::where('status', 'finished')->latest()->paginate(10);
+        return view('pages.admin.trip.finishedtrips', compact('schedules'));
     }
 
     public function create()
@@ -49,6 +66,10 @@ class ScheduleController extends Controller
     public function show(Schedule $schedule)
     {
         return view('pages.admin.schedule.show', compact('schedule'));
+    }
+    public function manage(Schedule $schedule)
+    {
+        return view('pages.admin.trip.manage', compact('schedule'));
     }
 
     public function edit(Schedule $schedule)
@@ -84,6 +105,12 @@ class ScheduleController extends Controller
         return redirect()->route('admin.schedules.index')->with('success', 'Schedule deleted successfully!');
     }
 
+    public function destroytrip(Schedule $schedule)
+    {
+        $schedule->delete();
+        return redirect()->route('admin.finishedtrip')->with('success', 'Trip deleted successfully!');
+    }
+
     public function start(Schedule $schedule)
     {
         $schedule->update(['status' => 'running']);
@@ -94,13 +121,13 @@ class ScheduleController extends Controller
     public function finish(Schedule $schedule)
     {
         $schedule->update(['status' => 'finished']);
-        return redirect()->route('admin.schedules.show', $schedule)->with('success', 'Trip finished successfully!');
+        return back()->with('success', 'Trip finished successfully!');
     }
 
     public function pending(Schedule $schedule)
     {
         $schedule->update(['status' => 'pending']);
-        return redirect()->route('admin.schedules.show', $schedule)->with('success', 'Trip pending successfully!');
+        return back()->with('success', 'Trip pending successfully!');
     }
 
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\SuperviserController;
+use App\Http\Controllers\TripController;
 use App\Http\Controllers\User\SeatReservationController;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
@@ -41,6 +42,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
   Route::get('/get-route-info', [ScheduleController::class, 'getRouteInfo'])->name('get.route.info');
   Route::get('/get-coaches', [ScheduleController::class, 'getCoachesByBusType'])->name('get.coaches');
+
+
+  Route::get('trip/pending', [TripController::class, 'pendingtrip'])->name('pendingtrip');
+  Route::get('trip/running', [TripController::class, 'runningtrip'])->name('runningtrip');
+  Route::get('trip/finished', [TripController::class, 'finishedtrip'])->name('finishedtrip');
+  Route::get('trip/{schedule}/manage', [TripController::class, 'manage'])->name('tripmanage');
+  Route::delete('trip/{schedule}/delete', [ScheduleController::class, 'destroytrip'])->name('tripdelete');
+
 
   Route::get('/reservation/{id}/edit', [SeatReservationController::class, 'edit'])->name('reservation.edit');
   Route::put('/reservation/{id}', [SeatReservationController::class, 'update'])->name('reservation.update');

@@ -5,6 +5,9 @@
       <button class="btn bg-white" type="submit">Search</button>
     </form>
     <div class="col-auto ms-auto">
+      <h4 class="panel">{{ auth()->user()->role }} panel</h4>
+    </div>
+    <div class="col-auto ms-auto">
       <div class="position-relative">
         <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="#ff0000"
           class="notification-icon">

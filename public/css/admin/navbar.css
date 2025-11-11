@@ -28,6 +28,10 @@ h1, h2, h3, h4, h5{
   gap: 15px;                   /* space between icon and image */
 }
 
+.panel{
+  margin-bottom: 0 ;
+  color: #ff8989e0;
+}
 /* Profile image styling */
 .profile-img img {
   width: 40px;
