@@ -10,8 +10,8 @@
     --text-color: #220901;
     --light-hover: #ff0101ca;
   }
-  
-  
+
+
 
   .auth-card {
     background-color: var(--bg-color);
@@ -20,7 +20,7 @@
     padding: 2.5rem 3rem;
     max-width: 550px;
     width: 100%;
-    margin:auto;
+    margin: auto;
     border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
     animation: fadeInUp 0.8s ease;
@@ -31,6 +31,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
@@ -53,7 +54,7 @@
     gap: 1.1rem;
   }
 
-  .adduser-form > div {
+  .adduser-form>div {
     display: flex;
     flex-direction: column;
   }
@@ -120,6 +121,7 @@
     font-size: 0.85rem;
     margin-top: 0.3rem;
   }
+
   .btn-adduser {
     background: linear-gradient(90deg, var(--main-color), var(--second-color));
     color: #fff;
@@ -140,12 +142,13 @@
     box-shadow: 0 6px 25px rgba(255, 0, 0, 0.5);
     background: linear-gradient(90deg, var(--light-hover), var(--second-color));
   }
-  
+
 
   @media (max-width: 576px) {
     .auth-card {
       padding: 2rem 1.5rem;
     }
+
     form {
       gap: 1rem;
     }
@@ -219,6 +222,16 @@
       </div>
 
       <div>
+        <label for="">Counter</label>
+        <select class="input-user" name="counter_id">
+          <option value="">--select counter--</option>
+          @foreach($counters as $counter)
+          <option value="{{$counter->id}}">{{$counter->name}}</option>
+          @endforeach
+        </select>
+      </div>
+
+      <div>
         <label>Profile Picture</label>
         <input class="input-user" type="file" name="profile_photo">
       </div>
@@ -228,5 +241,5 @@
       </div>
     </form>
   </div>
-  </div>
+</div>
 @endsection

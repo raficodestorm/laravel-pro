@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('booked_seats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('schedule_id')->references('id')->on('schedules');
+            $table->foreignId('counter_id')->nullable()->constrained('counters');
+            $table->foreignId('schedule_id')->constrained('schedules');
             $table->string('coach_no');
             $table->string('booked_seats');
+            $table->integer('total');
             $table->timestamps();
         });
     }

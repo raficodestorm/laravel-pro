@@ -8,8 +8,8 @@
     @endif
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h2 class="text-center">All Buses</h2>
-      <a href="{{route('admin.users.create')}}" class="btn btn-info">Add New admin</a>
+      <h2 class="text-center">All Controllers</h2>
+      <a href="{{route('admin.users.create')}}" class="btn btn-info">Add New Controller</a>
     </div>
 
     <table class="table table-bordered table-hover" id="table-same">
@@ -20,6 +20,7 @@
           <th>Username</th>
           <th>Email</th>
           <th>Phone</th>
+          <th>Counter</th>
           <th>Image</th>
           <th>Action</th>
         </tr>
@@ -33,6 +34,7 @@
           <td>{{ $user->username }}</td>
           <td>{{ $user->email }}</td>
           <td>{{ $user->phone }}</td>
+          <td>{{ $user->counter->name ?? " " }}</td>
           <td>
             <img src="{{ asset('storage/' . $user->profile_photo_path) }}" alt="User Image" width="60" height="60"
               style="object-fit: cover; border-radius: 8px;">

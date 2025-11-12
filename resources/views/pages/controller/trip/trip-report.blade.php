@@ -117,6 +117,15 @@
       <th>Status</th>
       <td style="text-transform:capitalize;">{{ $schedule->status }}</td>
     </tr>
+    <tr>
+      <th>Driver</th>
+      <td>{{ $schedule->driver ? $schedule->driver->name : 'Not Assigned' }}</td>
+    </tr>
+    <tr>
+      <th>Supervisor</th>
+      <td>{{ $schedule->supervisor ? $schedule->supervisor->name : 'Not Assigned' }}</td>
+    </tr>
+
   </table>
 
   <h3>Passenger Summary</h3>

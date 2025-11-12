@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Counter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -35,7 +36,7 @@ class UserManagementController extends Controller
 
   public function counterManagers()
   {
-    $users = User::where('role', 'counter_manager')->orderBy('created_at', 'desc')->paginate(20);
+    $users = User::with('counter')->where('role', 'counter_manager')->orderBy('created_at', 'desc')->paginate(20);
     return view('pages.admin.users.index-managers', [
       'users' => $users,
       'roleTitle' => 'Counter Managers'
@@ -53,13 +54,15 @@ class UserManagementController extends Controller
 
   public function show(User $user)
   {
+    $user->load('counter');
     return view('pages.admin.users.show', compact('user'));
   }
 
   public function create()
   {
     // form to create admin or counter_manager
-    return view('pages.admin.users.create');
+    $counters = Counter::orderBy('name', 'asc')->get();
+    return view('pages.admin.users.create', compact('counters'));
   }
 
   public function store(Request $request)
@@ -74,6 +77,7 @@ class UserManagementController extends Controller
       'phone' => ['required', 'string', 'max:30'],
       'address' => ['required', 'string'],
       'nid_no' => ['required', 'string', 'max:100'],
+      'counter_id' => ['nullable', 'integer'],
       'profile_photo' => ['nullable', 'image', 'max:2048'],
     ]);
 
@@ -92,6 +96,7 @@ class UserManagementController extends Controller
       'phone' => $request->phone,
       'address' => $request->address,
       'nid_no' => $request->nid_no,
+      'counter_id' => $request->counter_id,
       'profile_photo_path' => $profilePath,
     ]);
 
@@ -101,7 +106,8 @@ class UserManagementController extends Controller
 
   public function edit(User $user)
   {
-    return view('pages.admin.users.edit', compact('user'));
+    $counters = Counter::orderBy('name', 'asc')->get();
+    return view('pages.admin.users.edit', compact('user', 'counters'));
   }
 
   public function update(Request $request, User $user)
@@ -116,6 +122,7 @@ class UserManagementController extends Controller
       'phone' => ['nullable', 'string', 'max:30'],
       'address' => ['nullable', 'string'],
       'nid_no' => ['nullable', 'string', 'max:100'],
+      'counter_id' => ['nullable', 'integer'],
       'profile_photo' => ['nullable', 'image', 'max:2048'],
       'status' => ['required', 'in:active,inactive'],
     ]);
@@ -135,6 +142,7 @@ class UserManagementController extends Controller
     $user->phone = $request->phone;
     $user->address = $request->address;
     $user->nid_no = $request->nid_no;
+    $user->counter_id = $request->counter_id;
     $user->status = $request->status;
 
     $user->save();

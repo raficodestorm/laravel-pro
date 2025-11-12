@@ -93,6 +93,7 @@
     <p><strong>Address:</strong> {{ $user->address }}</p>
     <p><strong>NID No:</strong> {{ $user->nid_no }}</p>
     <p><strong>Role:</strong> {{ $user->role }}</p>
+    <p><strong>Counter:</strong> {{ $user->counter->name ?? " " }}</p>
     <p><strong>Joined:</strong> {{ $user->created_at }}</p>
   </div>
 

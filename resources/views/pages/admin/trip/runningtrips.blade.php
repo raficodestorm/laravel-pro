@@ -38,7 +38,7 @@
                     <td>{{ $schedule->status }}</td>
 
                     <td>
-                        <a href="{{ route('admin.tripmanage', $schedule->id) }}" class="btn btn-info btn-sm">manage</a>
+                        <a href="{{ route('admin.tripmanage', $schedule->id) }}" class="btn btn-info btn-sm ">manage</a>
                     </td>
                 </tr>
                 @empty

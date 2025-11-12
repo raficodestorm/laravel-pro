@@ -3,7 +3,7 @@
 
 <div class="container-fluid main-area">
     <div class="index-card shadow">
-        <div class="card-header text-white fw-bold p-2 mb-3" style="background-color: #ff0000">Add New Superviser</div>
+        <div class="card-header text-white fw-bold p-2 mb-3" style="background-color: #ff0000">Add New Supervisor</div>
         <div class="card-body">
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -15,7 +15,7 @@
             </div>
             @endif
 
-            <form action="{{ route('admin.supervisers.store') }}" method="POST">
+            <form action="{{ route('admin.supervisors.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Full name</label>
@@ -49,7 +49,7 @@
 
 
                 <button type="submit" class="btn btn-success px-4">Save</button>
-                <a href="{{ route('admin.supervisers.index') }}" class="btn btn-secondary px-4">Back</a>
+                <a href="{{ route('admin.supervisors.index') }}" class="btn btn-secondary px-4">Back</a>
             </form>
         </div>
     </div>

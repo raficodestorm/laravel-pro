@@ -4,8 +4,8 @@
 <div class="container-fluid main-area">
     <div class="index-card shadow">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3>All Supervisers</h3>
-            <a href="{{ route('admin.supervisers.create') }}" class="btn btn-info">+ Add Superviser</a>
+            <h3>All Supervisors</h3>
+            <a href="{{ route('admin.supervisors.create') }}" class="btn btn-info">+ Add Supervisor</a>
         </div>
 
         @if (session('success'))
@@ -26,19 +26,22 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($supervisers as $superviser)
+                @forelse($supervisors as $supervisor)
                 <tr class="text-center">
-                    <td>{{ $superviser->id }}</td>
-                    <td>{{ $superviser->name }}</td>
-                    <td>{{ $superviser->father }}</td>
-                    <td>{{ $superviser->phone }}</td>
-                    <td>{{ $superviser->address }}</td>
-                    <td>{{ $superviser->routeinfo->route_code }}</td>
+                    <td>{{ $supervisor->id }}</td>
+                    <td>{{ $supervisor->name }}</td>
+                    <td>{{ $supervisor->father }}</td>
+                    <td>{{ $supervisor->phone }}</td>
+                    <td>{{ $supervisor->address }}</td>
+                    <td>{{ $supervisor->routeinfo->route_code }}</td>
                     <td>
 
-                        <a href="{{ route('admin.supervisers.show', $superviser->id) }}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{ route('admin.supervisers.edit', $superviser->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('admin.supervisers.destroy', $superviser->id) }}" method="POST" class="d-inline">
+                        <a href="{{ route('admin.supervisors.show', $supervisor->id) }}"
+                            class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('admin.supervisors.edit', $supervisor->id) }}"
+                            class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('admin.supervisors.destroy', $supervisor->id) }}" method="POST"
+                            class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button onclick="return confirm('Are you sure?')"

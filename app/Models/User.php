@@ -20,9 +20,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'address',
         'nid_no',
+        'counter_id',
         'profile_photo_path',
         'role',
         'status',
+
     ];
 
     protected $hidden = [
@@ -53,5 +55,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isUser(): bool
     {
         return $this->role === 'user';
+    }
+
+    public function counter()
+    {
+        return $this->belongsTo(Counter::class);
     }
 }

@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('bus_type');
             $table->string('coach_no');
             $table->enum('status', ['pending', 'running', 'finished'])->default('pending');
+            $table->unsignedBigInteger('driver_id')->nullable();
+            $table->unsignedBigInteger('supervisor_id')->nullable();
             $table->timestamps();
             $table->foreign('route_code')->references('route_code')->on('routes')->onDelete('cascade');
             $table->foreign('start_location')->references('district')->on('locations')->onDelete('cascade');

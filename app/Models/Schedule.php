@@ -21,9 +21,20 @@ class Schedule extends Model
         'bus_type',
         'coach_no',
         'status',
+        'driver_id',
+        'supervisor_id',
     ];
     public function bus()
     {
         return $this->belongsTo(Bus::class, 'coach_no', 'coach_no');
+    }
+    public function driver()
+    {
+        return $this->belongsTo(Driver::class);
+    }
+
+    public function supervisor()
+    {
+        return $this->belongsTo(Supervisor::class);
     }
 }

@@ -8,7 +8,7 @@
     @endif
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h2 class="text-center">All Buses</h2>
+      <h2 class="text-center">All Admins</h2>
       <a href="{{route('admin.users.create')}}" class="btn btn-info">Add New admin</a>
     </div>
 

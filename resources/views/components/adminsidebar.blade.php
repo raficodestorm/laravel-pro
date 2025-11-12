@@ -98,7 +98,7 @@
     <li class="dropdown">
       <a href="#" onclick="toggleSubmenu(event)" title="location" id="drop">
         <img src="{{asset('svg/location.svg')}}" />
-        <span>Superviser</span>
+        <span>Supervisor</span>
         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#0000F5">
           <path d="M480-360 280-560h400L480-360Z" />
@@ -106,14 +106,14 @@
       </a>
       <ul class="submenu">
         <div>
-          <li><a href="{{ route('admin.supervisers.create') }}" title="Add location" id="sub">
+          <li><a href="{{ route('admin.supervisors.create') }}" title="Add location" id="sub">
               <img src="{{asset('svg/addlocation.svg')}}" />
-              <span>Add Superviser</span>
+              <span>Add Supervisor</span>
             </a>
           </li>
-          <li><a href="{{ route('admin.supervisers.index') }}" title="All locations" id="sub">
+          <li><a href="{{ route('admin.supervisors.index') }}" title="All locations" id="sub">
               <img src="{{asset('svg/list.svg')}}" />
-              <span>All Supervisers</span>
+              <span>All Supervisors</span>
             </a>
           </li>
         </div>

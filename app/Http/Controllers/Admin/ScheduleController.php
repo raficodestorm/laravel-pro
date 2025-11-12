@@ -8,6 +8,8 @@ use App\Models\Booked_seat;
 use App\Models\SeatReservation;
 use App\Models\Route;
 use App\Models\Bus;
+use App\Models\Driver;
+use App\Models\Supervisor;
 use App\Models\Bustype;
 use Illuminate\Http\Request;
 use PDF;
@@ -67,9 +69,14 @@ class ScheduleController extends Controller
     {
         return view('pages.admin.schedule.show', compact('schedule'));
     }
-    public function manage(Schedule $schedule)
+
+    public function manage($id)
     {
-        return view('pages.admin.trip.manage', compact('schedule'));
+        $schedule = Schedule::with(['driver', 'supervisor'])->findOrFail($id);
+        $drivers = Driver::orderBy('name')->get();
+        $supervisors = Supervisor::orderBy('name')->get();
+
+        return view('pages.admin.trip.manage', compact('schedule', 'drivers', 'supervisors'));
     }
 
     public function edit(Schedule $schedule)
@@ -93,6 +100,8 @@ class ScheduleController extends Controller
             'bus_type' => 'required|string|max:100',
             'coach_no' => 'required|string|max:50',
             'status' => ['required', 'in:pending,running,finished'],
+            'driver_id' => 'nullable|integer',
+            'supervisor_id' => 'nullable|integer',
         ]);
 
         $schedule->update($validated);
@@ -165,5 +174,30 @@ class ScheduleController extends Controller
     {
         $buses = Bus::where('bus_type', 'LIKE', '%' . $request->bus_type . '%')->pluck('coach_no');
         return response()->json($buses);
+    }
+
+    public function updateDriver(Request $request, $id)
+    {
+        $request->validate([
+            'driver_id' => 'nullable|exists:drivers,id',
+        ]);
+
+        $schedule = Schedule::findOrFail($id);
+        $schedule->driver_id = $request->driver_id;
+        $schedule->save();
+
+        return redirect()->back();
+    }
+    public function updateSupervisor(Request $request, $id)
+    {
+        $request->validate([
+            'supervisor_id' => 'nullable|exists:supervisors,id',
+        ]);
+
+        $schedule = Schedule::findOrFail($id);
+        $schedule->supervisor_id = $request->supervisor_id;
+        $schedule->save();
+
+        return redirect()->back();
     }
 }

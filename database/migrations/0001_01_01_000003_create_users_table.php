@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('phone')->nullable()->index();
             $table->text('address')->nullable();
             $table->string('nid_no')->nullable();
+            $table->foreignId('counter_id')->nullable()->constrained('counters');
             $table->string('profile_photo_path')->nullable();
 
             // roles & status

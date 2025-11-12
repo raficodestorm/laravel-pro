@@ -17,7 +17,7 @@
 
     {{-- Header --}}
     <div class="ticket-header">
-      <img src="{{ asset('assests/image/bus-logo.png') }}" alt="Logo">
+      {{-- <img src="{{ asset('assests/image/bus-logo.png') }}" alt="Logo"> --}}
       <h2 class="ticket-title">RunStar Transport</h2>
       <p class="ticket-subtitle">Your e-ticket has been successfully issued</p>
     </div>
@@ -28,10 +28,18 @@
       <table class="custom-table">
         <tr>
           <td>Issue Date & Time</td>
-          <td>{{ now()->format('d M Y, h:i A') }}</td>
+          <td id="issue-time"></td>
         </tr>
         <tr>
           <td>Journey Date</td>
+          <td>
+            {{ $bookingData->schedule?->set_date ?
+            \Carbon\Carbon::parse($bookingData->schedule->set_date)->format('d/m/y') : '' }}
+          </td>
+
+        </tr>
+        <tr>
+          <td>Departure time</td>
           <td>{{ $bookingData->departure ?? now()->format('d M Y') }}</td>
         </tr>
         <tr>
@@ -127,6 +135,25 @@ async function downloadPDF() {
     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
     pdf.save('BusTicket.pdf');
 }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const issueTimeElement = document.getElementById('issue-time');
+    const now = new Date();
+
+    // Format as: "12 Nov 2025, 10:45 PM"
+    const options = {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    };
+
+    issueTimeElement.textContent = now.toLocaleString(undefined, options);
+  });
+
 </script>
 @endpush
 @endsection

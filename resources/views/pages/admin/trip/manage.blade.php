@@ -24,6 +24,43 @@
           {{ ucfirst($schedule->status) }}
         </span>
       </p>
+      <p><strong>Driver:</strong>
+        @if($schedule->driver)
+        {{ $schedule->driver->name }}
+        @else
+      <form action="{{ route('admin.schedules.updateDriver', $schedule->id) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('PATCH')
+        <select name="driver_id" required>
+          <option value="">Select Driver</option>
+          @foreach($drivers as $driver)
+          <option value="{{ $driver->id }}">{{ $driver->name }}</option>
+          @endforeach
+        </select>
+        <button type="submit" class="btn btn-sm btn-primary">Assign</button>
+      </form>
+      @endif
+      </p>
+
+      <p><strong>Supervisor:</strong>
+        @if($schedule->supervisor)
+        {{ $schedule->supervisor->name }}
+        @else
+      <form action="{{ route('admin.schedules.updateSupervisor', $schedule->id) }}" method="POST"
+        style="display:inline;">
+        @csrf
+        @method('PATCH')
+        <select name="supervisor_id" required>
+          <option value="">Select Supervisor</option>
+          @foreach($supervisors as $supervisor)
+          <option value="{{ $supervisor->id }}">{{ $supervisor->name }}</option>
+          @endforeach
+        </select>
+        <button type="submit" class="btn btn-sm btn-primary">Assign</button>
+      </form>
+      @endif
+      </p>
+
 
       {{-- Start Trip --}}
       @if($schedule->status == 'pending')

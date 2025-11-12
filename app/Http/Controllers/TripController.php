@@ -8,6 +8,8 @@ use App\Models\Booked_seat;
 use App\Models\SeatReservation;
 use App\Models\Route;
 use App\Models\Bus;
+use App\Models\Driver;
+use App\Models\Supervisor;
 use App\Models\Bustype;
 use Illuminate\Http\Request;
 use PDF;
@@ -62,10 +64,15 @@ class TripController extends Controller
   // {
   //     return view('pages.admin.schedule.show', compact('schedule'));
   // }
-  public function manage(Schedule $schedule)
+  public function manage($id)
   {
-    return view('pages.admin.trip.manage', compact('schedule'));
+    $schedule = Schedule::with(['driver', 'supervisor'])->findOrFail($id);
+    $drivers = Driver::orderBy('name')->get();
+    $supervisors = Supervisor::orderBy('name')->get();
+
+    return view('pages.admin.trip.manage', compact('schedule', 'drivers', 'supervisors'));
   }
+
 
   // public function edit(Schedule $schedule)
   // {

@@ -1,20 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
-use App\Models\Superviser;
+use App\Models\Supervisor;
 use App\Models\Route;
 use Illuminate\Http\Request;
 
-class SuperviserController extends Controller
+class SupervisorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $supervisers = Superviser::get();
-        return view('pages.admin.superviser.index', compact('supervisers'));
+        $supervisors = Supervisor::get();
+        return view('pages.admin.supervisor.index', compact('supervisors'));
     }
 
     /**
@@ -23,7 +24,7 @@ class SuperviserController extends Controller
     public function create()
     {
         $routes = Route::orderBy('route_code', 'asc')->get();
-        return view('pages.admin.superviser.create', compact('routes'));
+        return view('pages.admin.supervisor.create', compact('routes'));
     }
 
     /**
@@ -35,17 +36,17 @@ class SuperviserController extends Controller
             'name' => 'required|string|max:100',
             'father' => 'required|string|max:100',
             'phone' => 'required|string|max:100',
-            'address'=> 'required|string|max:100',
+            'address' => 'required|string|max:100',
             'route_id' => 'nullable|integer',
         ]);
-        Superviser::create($validated);
-        return redirect()->route('admin.supervisers.index')->with('success', 'Superviser added successfully!');
+        Supervisor::create($validated);
+        return redirect()->route('admin.supervisors.index')->with('success', 'Supervisor added successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Superviser $superviser)
+    public function show(Supervisor $supervisor)
     {
         return view('pages.admin.superviser.show', compact('superviser'));
     }
@@ -53,35 +54,35 @@ class SuperviserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Superviser $superviser)
+    public function edit(Supervisor $supervisor)
     {
         $routes = Route::orderBy('route_code', 'asc')->get();
-        return view('pages.admin.superviser.edit', compact('superviser', 'routes'));
+        return view('pages.admin.supervisor.edit', compact('supervisor', 'routes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Superviser $superviser)
+    public function update(Request $request, Supervisor $supervisor)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
             'father' => 'required|string|max:100',
             'phone' => 'required|string|max:100',
-            'address'=> 'required|string|max:100',
+            'address' => 'required|string|max:100',
             'route_id' => 'nullable|integer',
         ]);
 
-        $superviser->update($validated);
-        return redirect()->route('admin.supervisers.index')->with('success', 'Supervisers updated successfully');
+        $supervisor->update($validated);
+        return redirect()->route('admin.supervisors.index')->with('success', 'Supervisors updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Superviser $superviser)
+    public function destroy(Supervisor $supervisor)
     {
-        $superviser->delete();
-        return redirect()->route('admin.supervisers.index')->with('success', 'Superviser deleted successfully');
+        $supervisor->delete();
+        return redirect()->route('admin.supervisors.index')->with('success', 'Supervisor deleted successfully');
     }
 }

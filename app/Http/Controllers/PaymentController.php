@@ -15,8 +15,8 @@ class PaymentController extends Controller
      */
     public function showPaymentPage($id)
     {
-        // Fetch reservation from DB
-        $bookingData = SeatReservation::findOrFail($id);
+        // Fetch reservation from D
+        $bookingData = SeatReservation::with('schedule')->findOrFail($id);
 
         return view('pages.user.payment', compact('bookingData'));
     }
@@ -60,6 +60,7 @@ class PaymentController extends Controller
             'schedule_id'  => $reservation->schedule_id,
             'coach_no'     => $reservation->coach_no,
             'booked_seats' => $reservation->selected_seats,
+            'total' => $reservation->total,
             'created_at'   => now(),
             'updated_at'   => now(),
         ]);

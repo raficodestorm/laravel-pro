@@ -39,8 +39,6 @@
                     <td>{{ $schedule->status }}</td>
 
                     <td>
-                        <a href="{{ route('admin.schedules.show', $schedule->id) }}"
-                            class="btn btn-info btn-sm">View</a>
                         <a href="{{ route('admin.schedules.edit', $schedule->id) }}"
                             class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" method="POST"
