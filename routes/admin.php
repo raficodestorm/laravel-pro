@@ -55,4 +55,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
   Route::get('/reservation/{id}/edit', [SeatReservationController::class, 'edit'])->name('reservation.edit');
   Route::put('/reservation/{id}', [SeatReservationController::class, 'update'])->name('reservation.update');
+
+  Route::get('/reservation/index', [SeatReservationController::class, 'index'])->name('reservation.index');
+  Route::delete('/reservation/{seatReservation}', [SeatReservationController::class, 'destroy'])->name('reservation.delete');
 });

@@ -61,4 +61,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Counter::class);
     }
+    public function tickets()
+    {
+        return $this->hasMany(\App\Models\Ticket::class);
+    }
 }

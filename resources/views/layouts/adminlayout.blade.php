@@ -14,14 +14,14 @@
 </head>
 
 <body>
-  
+
   @include('components.adminsidebar')
   <main>
     @include('components.adminnavbar')
     <div>
       @yield('content')
     </div>
-    @include('components.adminfooter')
+    {{-- @include('components.adminfooter') --}}
   </main>
 
   @yield('scripts')

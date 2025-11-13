@@ -26,8 +26,53 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-//  -------------------------------- for sale navbar --------------------------------s
+//  -------------------------------- for dynamic chart --------------------------------s
 
+// document.addEventListener("DOMContentLoaded", function() {
+//   const ctx = document.getElementById("monthlyChart").getContext("2d");
 
+//   const chartData = {
+//     labels: @json($months),
+//     datasets: [{
+//       label: "Bookings",
+//       data: @json($totals),
+//       backgroundColor: "#ff0000",
+//       borderRadius: 6,
+//     }]
+//   };
+
+//   new Chart(ctx, {
+//     type: "bar",
+//     data: chartData,
+//     options: {
+//       responsive: true,
+//       maintainAspectRatio: false,
+//       scales: {
+//         y: {
+//           beginAtZero: true,
+//           grid: { color: "#eee" },
+//           ticks: { color: "#333" }
+//         },
+//         x: {
+//           grid: { display: false },
+//           ticks: { color: "#333" }
+//         }
+//       },
+//       plugins: {
+//         legend: { display: false },
+//         tooltip: {
+//           backgroundColor: "#2c3e50",
+//           titleColor: "#fff",
+//           bodyColor: "#fff",
+//           callbacks: {
+//             label: function(context) {
+//               return ` ${context.parsed.y} passengers`;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   });
+// });
 
 // ==========this script for =========================

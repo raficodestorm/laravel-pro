@@ -29,4 +29,12 @@ class SeatReservation extends Model
     {
         return $this->belongsTo(Schedule::class);
     }
+    public function ticket()
+    {
+        return $this->hasOne(Ticket::class, 'reservation_id', 'id');
+    }
+    public function route()
+    {
+        return $this->belongsTo(Route::class);
+    }
 }

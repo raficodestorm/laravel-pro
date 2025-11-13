@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SeatReservation;
 use Illuminate\Support\Facades\DB;
+use App\Models\Ticket;
+use Illuminate\Support\Str;
 
 
 class PaymentController extends Controller
@@ -56,6 +58,7 @@ class PaymentController extends Controller
 
         // ✅ 2) Store booked seats in booked_seats table
         DB::table('booked_seats')->insert([
+            'reservation_id' => $reservation->id,
             'user_id'      => $reservation->user_id,
             'schedule_id'  => $reservation->schedule_id,
             'coach_no'     => $reservation->coach_no,
@@ -64,11 +67,21 @@ class PaymentController extends Controller
             'created_at'   => now(),
             'updated_at'   => now(),
         ]);
+        // Generate unique PNR
+        $pnr = strtoupper(Str::random(10));
+
+        // ✅ Store ticket record
+        Ticket::create([
+            'user_id'       => $reservation->user_id,
+            'reservation_id' => $reservation->id,
+            'pnr'           => $pnr,
+        ]);
 
         // ✅ 3) Redirect to ticket page with session data
         return redirect()
             ->route('user.ticket')
             ->with('success', '✅ Payment Successful! Your ticket is confirmed.')
-            ->with('bookingData', $reservation);
+            ->with('bookingData', $reservation)
+            ->with('pnr', $pnr);
     }
 }

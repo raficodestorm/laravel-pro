@@ -87,7 +87,7 @@
         </tr>
         <tr>
           <td>PNR Number</td>
-          <td>{{ strtoupper(Str::random(10)) }}</td>
+          <td>{{ session('pnr') ?? $bookingData->ticket->pnr ?? 'N/A' }}</td>
         </tr>
       </table>
     </div>

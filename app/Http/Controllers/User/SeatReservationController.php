@@ -17,8 +17,10 @@ class SeatReservationController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = SeatReservation::latest()->paginate(10); // or any number per page
+        return view('pages.admin.booking.index', compact('reservations'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -162,6 +164,7 @@ class SeatReservationController extends Controller
      */
     public function destroy(SeatReservation $seatReservation)
     {
-        //
+        $seatReservation->delete();
+        return redirect()->back()->with('success', 'Schedule deleted successfully!');
     }
 }

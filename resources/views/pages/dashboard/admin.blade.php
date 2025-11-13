@@ -3,39 +3,44 @@
 @section('content')
 <div class="container-fluid">
   <div class="row g-2">
+
     <div class="col-md-3 p-2">
       <div class="hello p-2">
         <h5>Passenger</h5>
-        <h2>1500p</h2>
-        <p>in september</p>
+        <h2>{{ $totalPassengersThisMonth }}p</h2>
+        <p>in {{ \Carbon\Carbon::now()->format('F') }}</p>
         <div class="style-hello"></div>
       </div>
     </div>
+
     <div class="col-md-3 p-2">
       <div class="hello p-2">
         <h5>Sale</h5>
-        <h2>85000tk</h2>
-        <p>in september</p>
+        <h2>{{ $totalamountThisMonth }} Tk</h2>
+        <p>in {{ \Carbon\Carbon::now()->format('F') }}</p>
         <div class="style-hello"></div>
       </div>
     </div>
+
     <div class="col-md-3 p-2">
       <div class="hello p-2">
-        <h5>Return</h5>
-        <h2>100 pc</h2>
-        <p>in september</p>
+        <h5>Completed Trips</h5>
+        <h2>{{ $totalTripsThisMonth }}</h2>
+        <p>in {{ \Carbon\Carbon::now()->format('F') }}</p>
         <div class="style-hello"></div>
       </div>
     </div>
+
     <div class="col-md-3 p-2">
       <div class="hello p-2">
         <h5>Cost</h5>
-        <h2>9500tk</h2>
-        <p>in september</p>
+        <h2>3500tk</h2>
+        <p>in {{ \Carbon\Carbon::now()->format('F') }}</p>
         <div class="style-hello"></div>
       </div>
     </div>
-  </div>
+
+  </div>{{-- end row --}}
 
   <!-- Sale Chart -->
 
@@ -120,10 +125,53 @@
         </table>
       </div>
       <div class="style-hello-topsale"></div>
-    </div>
+    </div>{{-- end row --}}
 
 
-  </div>
+
+    <div class="row g-2">
+
+      <div class="col-md-3 p-2">
+        <div class="hello p-2">
+          <h5>Passenger</h5>
+          <h2>{{ $totalPassengersThisMonth }}p</h2>
+          <p>in {{ \Carbon\Carbon::now()->format('F') }}</p>
+          <div class="style-hello"></div>
+        </div>
+      </div>
+
+      <div class="col-md-3 p-2">
+        <div class="hello p-2">
+          <h5>Sale</h5>
+          <h2>{{ $totalamountThisMonth }} Tk</h2>
+          <p>in {{ \Carbon\Carbon::now()->format('F') }}</p>
+          <div class="style-hello"></div>
+        </div>
+      </div>
+
+      <div class="col-md-3 p-2">
+        <div class="hello p-2">
+          <h5>Completed Trips</h5>
+          <h2>{{ $totalTripsThisMonth }}</h2>
+          <p>in {{ \Carbon\Carbon::now()->format('F') }}</p>
+          <div class="style-hello"></div>
+        </div>
+      </div>
+
+      <div class="col-md-3 p-2">
+        <div class="hello p-2">
+          <h5>Cost</h5>
+          <h2>9500tk</h2>
+          <p>in {{ \Carbon\Carbon::now()->format('F') }}</p>
+          <div class="style-hello"></div>
+        </div>
+      </div>
+
+    </div> {{-- end row --}}
+
+
+
+  </div> {{-- end container --}}
   @endsection
 
 
