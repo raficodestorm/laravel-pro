@@ -197,6 +197,68 @@
             opacity: 1
         }
     }
+
+    /* Responsive adjustments */
+@media (max-width: 768px) {
+    .login-form-card {
+        width: 90%;
+        padding: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-main {
+        padding: 16px;
+        height: auto;
+        align-items: flex-start;
+    }
+
+    .login-form-card {
+        width: 100%;
+        padding: 18px;
+        border-radius: 14px;
+        margin-top: 40px;
+    }
+
+    .login-form-card h2 {
+        font-size: 22px;
+    }
+
+    .login-form-card p.lead {
+        font-size: 14px;
+    }
+
+    .input-log {
+        height: 44px;
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        height: 46px;
+        font-size: 15px;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .socials-log {
+        flex-direction: column;
+    }
+
+    .socials-log button {
+        width: 100%;
+    }
+
+    .meta {
+        flex-direction: column;
+        gap: 8px;
+        text-align: left;
+    }
+}
+
 </style>
 <div class="login-main">
 <div class="login-form-card enter" aria-labelledby="login-title">

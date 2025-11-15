@@ -33,6 +33,7 @@ class SearchScheduleBusController extends Controller
         $schedules = Schedule::whereDate('set_date', $date)
             ->where('start_location', 'LIKE', "%$from%")
             ->where('end_location', 'LIKE', "%$to%")
+            ->where('status', 'LIKE', "pending")
             ->get();
 
         return view('pages.user.search-schedule-result', compact('schedules', 'from', 'to', 'date'));

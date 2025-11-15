@@ -3,6 +3,8 @@
 @section('title', 'Home Page')
 
 @section('content')
+
+
 <div class="container-fluid master-background">
   <div class="row justify-content-between w-100">
     <div class="col-md-6">
@@ -196,6 +198,7 @@
   fromInput.addEventListener('input', () => fetchLocations(fromInput.value, fromList));
   toInput.addEventListener('input', () => fetchLocations(toInput.value, toList));
 });
+
 </script>
 
 @endsection

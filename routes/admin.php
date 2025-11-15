@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BusController;
-use App\Http\Controllers\admin\BustypeController;
+use App\Http\Controllers\Admin\BustypeController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\LocationController;
@@ -36,6 +36,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
   Route::resource('counters', CounterController::class);
   Route::resource('costs', CostController::class);
   Route::resource('schedules', ScheduleController::class);
+
   Route::patch('/schedules/{schedule}/start', [ScheduleController::class, 'start'])->name('schedules.start');
   Route::patch('/schedules/{schedule}/finish', [ScheduleController::class, 'finish'])->name('schedules.finish');
   Route::patch('/schedules/{schedule}/pending', [ScheduleController::class, 'pending'])->name('schedules.pending');

@@ -72,7 +72,10 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item text-danger" href="{{ route('login') }}">Login</a></li>
+            <li>
+              <!-- <a class="dropdown-item text-danger" href="{{ route('login') }}">Login</a> -->
+              <a href="javascript:void(0)" onclick="openLogin()">Login</a>
+          </li>
           </ul>
         </li>
         @endguest
