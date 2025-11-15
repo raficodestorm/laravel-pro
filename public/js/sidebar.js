@@ -20,17 +20,17 @@
 }
 
 // Close if clicked outside
-document.addEventListener("click", function(e) {
-    const isClickInside = e.target.closest(".dropdown");
-    if (!isClickInside) {
-        document.querySelectorAll(".submenu.showmenu").forEach(menu => {
-            menu.classList.remove("showmenu");
-        });
-        document.querySelectorAll(".arrow").forEach(menu => {
-            menu.classList.remove("rotate");
-        });
-    }
-});
+// document.addEventListener("click", function(e) {
+//     const isClickInside = e.target.closest(".dropdown");
+//     if (!isClickInside) {
+//         document.querySelectorAll(".submenu.showmenu").forEach(menu => {
+//             menu.classList.remove("showmenu");
+//         });
+//         document.querySelectorAll(".arrow").forEach(menu => {
+//             menu.classList.remove("rotate");
+//         });
+//     }
+// });
 
 
 

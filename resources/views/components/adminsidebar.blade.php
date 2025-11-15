@@ -11,7 +11,7 @@
       </button>
     </li>
     <li>
-      <a href="{{ route('dashboard.admin') }}" title="Dashboard">
+      <a href="{{ route('dashboards') }}" title="Dashboard">
         <img src="{{asset('svg/dashboard.svg')}}" alt="Dashboard" />
         <span>Dashboard</span>
       </a>
@@ -305,11 +305,30 @@
     </li>
 
 
-    <li>
-      <a href="#" title="Companies">
-        <img src="{{asset('svg/addbus.svg')}}" />
-        <span>Companies</span>
+    <li class="dropdown">
+      <a href="#" onclick="toggleSubmenu(event)" title="Stations" id="drop">
+        <img src="{{asset('svg/schedule.svg')}}" />
+        <span>Cost</span>
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+          fill="#0000F5">
+          <path d="M480-360 280-560h400L480-360Z" />
+        </svg>
       </a>
+      <ul class="submenu">
+        <div>
+          <li class="{{request()->routeIs('admin.schedules.create')?'active':''}}"><a
+              href="{{ route('admin.costs.create') }}" title="Booking" id="sub">
+              <img src="{{asset('svg/addschedule.svg')}}" />
+              <span>Add Cost</span>
+            </a>
+          </li>
+          <li><a href="{{ route('admin.costs.index') }}" title="All schedules" id="sub">
+              <img src="{{asset('svg/list.svg')}}" />
+              <span>All Costs</span>
+            </a>
+          </li>
+        </div>
+      </ul>
     </li>
 
     <li>

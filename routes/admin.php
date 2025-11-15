@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\SupervisorController;
+use App\Http\Controllers\CostController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\User\SeatReservationController;
 
@@ -33,6 +34,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
   Route::resource('locations', LocationController::class);
   Route::resource('routes', RouteController::class);
   Route::resource('counters', CounterController::class);
+  Route::resource('costs', CostController::class);
   Route::resource('schedules', ScheduleController::class);
   Route::patch('/schedules/{schedule}/start', [ScheduleController::class, 'start'])->name('schedules.start');
   Route::patch('/schedules/{schedule}/finish', [ScheduleController::class, 'finish'])->name('schedules.finish');

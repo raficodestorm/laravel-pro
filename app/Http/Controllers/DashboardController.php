@@ -57,9 +57,11 @@ class DashboardController extends Controller
 
     for ($m = 1; $m <= 12; $m++) {
       $months[] = date('M', mktime(0, 0, 0, $m, 1));
-      $totals[] = $monthlyBookings[$m] ?? 0; // if no data, put 0
+      $totals[] = $monthlyBookings[$m] ?? 0;
     }
 
+
+    $reservations = SeatReservation::latest()->paginate(8); // for booking history
 
     // Role-based dashboard view
     $view = "pages.dashboard.{$role}";
@@ -75,6 +77,7 @@ class DashboardController extends Controller
       'totalTripsThisMonth' => $totalTripsThisMonth,
       'months' => $months,
       'totals' => $totals,
+      'reservations' => $reservations,
     ];
 
     if ($role === 'user') {
