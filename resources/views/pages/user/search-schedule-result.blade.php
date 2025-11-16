@@ -9,7 +9,7 @@
   @if ($schedules->isEmpty())
   <div class="text-center mt-5">
     <h5 class="text-muted">😔 No buses found for your search.</h5>
-    <a href="{{ route('bus.search.form') }}" class="btn btn-danger mt-3">Search Again</a>
+    <a href="{{ route('main.portal') }}" class="btn btn-danger mt-3">Search Again</a>
   </div>
   @else
   <div class="row justify-content-center">
