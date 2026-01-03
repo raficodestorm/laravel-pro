@@ -16,6 +16,6 @@ class CounterTicketController extends Controller
                 ->with('error', 'No ticket information found.');
         }
 
-        return view('pages.user.ticket', compact('bookingData'));
+        return view('pages.counter.ticket', compact('bookingData'));
     }
 }
