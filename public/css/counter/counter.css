@@ -1,0 +1,139 @@
+/* =================== google-font-Roboto & Ek-mesirri =================== */
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* font-family: "Roboto", sans-serif; */
+/* font-family: "El Messiri", sans-serif; */
+:root{
+    --main-color: #ff0000;
+    --second-color: #780116;
+    --bg-color: #fffffc;
+    --back-color: #edf6f9af;
+    --text-color: #220901;
+    --light-hover: #ff0101ca;
+}
+h1, h2, h3, h4, h5{
+    font-family: "El Messiri", sans-serif;
+    font-weight: 800;
+}
+
+/* ===============================
+   COUNTER SEARCH – PREMIUM DESIGN
+   =============================== */
+
+.counter-search-card {
+    position: relative;
+    padding: 32px 30px 36px;
+    border-radius: 18px;
+    border: none;
+    background:
+        linear-gradient(180deg, #ffffff, #fff7f7);
+    box-shadow:
+        0 20px 45px rgba(120, 1, 22, 0.18),
+        inset 0 0 0 1px rgba(255, 0, 0, 0.12);
+    overflow: hidden;
+}
+
+/* subtle animated accent bar */
+.counter-search-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    background: linear-gradient(
+        90deg,
+        #ff0000,
+        #ff7a00,
+        #ff00ff,
+        #780116
+    );
+    background-size: 300% 100%;
+    animation: accentMove 6s linear infinite;
+}
+
+/* Title */
+.counter-search-card .card-title {
+    font-weight: 700;
+    font-size: 18px;
+    color: #220901;
+    letter-spacing: 0.4px;
+}
+
+/* ===== INPUT WRAPPER ===== */
+.smart-input {
+    height: 46px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+    background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(120deg, #ff0000, #ff9800, #780116) border-box;
+    padding: 10px 14px;
+    font-weight: 500;
+    transition: all .3s ease;
+}
+
+/* Hover & focus */
+.smart-input:hover {
+    transform: translateY(-1px);
+}
+
+.smart-input:focus {
+    outline: none;
+    box-shadow: 0 8px 22px rgba(255, 0, 0, 0.25);
+}
+
+/* ===== BUTTON ===== */
+.smart-search-btn {
+    position: relative;
+    padding: 12px 44px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    border-radius: 999px;
+    color: #ffffff;
+    border: none;
+    background: linear-gradient(
+        120deg,
+        #ff0000,
+        #ff9800,
+        #ff00ff,
+        #780116,
+        #ff0000
+    );
+    background-size: 400% 400%;
+    animation: buttonFlow 7s ease infinite;
+    transition: transform .3s ease;
+}
+
+/* floating hover */
+.smart-search-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* press */
+.smart-search-btn:active {
+    transform: scale(.95);
+}
+
+/* glowing aura */
+.smart-search-btn::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: inherit;
+    background: inherit;
+    filter: blur(18px);
+    opacity: .6;
+    z-index: -1;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes buttonFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes accentMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}

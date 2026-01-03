@@ -13,6 +13,10 @@
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
+        {
+        padding: 0;
+    }
+
     .register-form-card {
         background: #fff;
         border-radius: var(--radius-lg);
@@ -119,6 +123,15 @@
         to {
             transform: none;
             opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .register-form-card {
+            padding: 20px;
+            width: 100%;
+            max-width: 700px;
+            margin: 30px auto;
         }
     }
 </style>

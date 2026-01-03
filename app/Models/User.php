@@ -44,7 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isManager(): bool
     {
-        return $this->role === 'counter_manager';
+        return $this->role === 'counter';
     }
 
     public function isController(): bool

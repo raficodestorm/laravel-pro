@@ -1,4 +1,4 @@
-@extends('layouts.adminlayout')
+@extends('layouts.counterlayout')
 
 @section('content')
 <div class="container-fluid">

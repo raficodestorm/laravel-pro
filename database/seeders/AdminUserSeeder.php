@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -32,10 +33,10 @@ class AdminUserSeeder extends Seeder
             ],
             [
                 'fullname' => 'Mr. Manager',
-                'username' => 'manager',
+                'username' => 'counter',
                 'email' => 'counter@system.com',
-                'password' => Hash::make('manager12345'),
-                'role' => 'counter_manager',
+                'password' => Hash::make('counter12345'),
+                'role' => 'counter',
                 'status' => 'active',
                 'phone' => '01711111111',
                 'address' => 'Bus Counter Office',

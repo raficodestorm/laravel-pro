@@ -31,8 +31,8 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.dashboard.user');
     })->name('dashboard.user')->middleware('role:user'); // user page - accessible by user (admin can also view if needed)
 
-    Route::get('/dashboard/manager', function () {
-        return view('pages.dashboard.counter_manager');
+    Route::get('/dashboard/counter', function () {
+        return view('pages.dashboard.counter');
     })->name('dashboard.counter_manager')->middleware('role:counter_manager');
 
     Route::get('/dashboard/controller', function () {
@@ -67,5 +67,5 @@ Route::middleware(['auth'])->group(function () {
 require __DIR__ . '/auth.php';
 require __DIR__ . '/user.php';
 require __DIR__ . '/admin.php';
-require __DIR__ . '/manager.php';
+require __DIR__ . '/counter.php';
 require __DIR__ . '/controller.php';

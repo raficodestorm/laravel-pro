@@ -62,21 +62,8 @@
         @endauth
 
         @guest
-        <li class="nav-item dropdown user-dropdown ms-lg-3">
-          <a class="dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <img style="border-radius: 50%; border: 1px solid gray;" src="{{asset('svg/user.svg')}}" alt="">User
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-            <li><a class="dropdown-item" href="{{ route('register') }}">Registration</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <!-- <a class="dropdown-item text-danger" href="{{ route('login') }}">Login</a> -->
-              <a href="javascript:void(0)" onclick="openLogin()">Login</a>
-          </li>
-          </ul>
+        <li class="nav-item ms-lg-3">
+          <a class="btn-login" href="{{ route('login') }}">Login</a>
         </li>
         @endguest
 

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('profile_photo_path')->nullable();
 
             // roles & status
-            $table->enum('role', ['user', 'counter_manager', 'controller', 'admin'])->default('user')->index();
+            $table->enum('role', ['user', 'counter', 'controller', 'admin'])->default('user')->index();
             $table->enum('status', ['active', 'inactive'])->default('active')->index();
 
             $table->timestamp('email_verified_at')->nullable();
