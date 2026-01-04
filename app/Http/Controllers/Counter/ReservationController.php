@@ -102,7 +102,7 @@ class ReservationController extends Controller
         $validated['user_id'] = auth()->id();
         $validated['status'] = $validated['status'] ?? 'pending';
         $reservation = SeatReservation::create($validated);
-        return redirect()->route('counter.payment.for', ['id' => $reservation->id]);
+        return redirect()->route('counter.payment', ['id' => $reservation->id]);
     }
 
     /**

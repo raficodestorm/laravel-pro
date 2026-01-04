@@ -53,7 +53,7 @@
       <div class="card shadow-lg p-4 rounded-4">
         <h4 class="mb-3">💳 Payment Details</h4>
 
-        <form method="POST" action="{{ route('payment.process') }}">
+        <form method="POST" action="{{ route('counter.payment.process') }}">
           @csrf
           <input type="hidden" name="bookingData" value='@json($bookingData)'>
 

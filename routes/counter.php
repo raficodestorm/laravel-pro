@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Counter\CounterTicketController;
+use App\Http\Controllers\Counter\PayController;
 use App\Http\Controllers\Counter\SearchBusController;
 use App\Http\Controllers\Counter\ReservationController;
 
@@ -11,8 +13,8 @@ Route::prefix('counter')->name('counter.')->middleware(['auth', 'role:counter'])
   Route::get('/seat-reservation/{id}', [ReservationController::class, 'see'])->name('seat.reservation');
   Route::post('/go-to-payment', [ReservationController::class, 'store'])->name('go.payment');
 
-  Route::get('/payment/{id}', [PaymentController::class, 'showPaymentPage'])->name('payment.for');
+  Route::get('/payment/{id}', [PayController::class, 'showPaymentPage'])->name('payment.for');
 
-  Route::get('/ticket', [TicketController::class, 'show'])->name('user.ticket');
-  Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
+  Route::get('/ticket', [CounterTicketController::class, 'show'])->name('ticket');
+  Route::post('/payment/process', [PayController::class, 'processPayment'])->name('payment.process');
 });

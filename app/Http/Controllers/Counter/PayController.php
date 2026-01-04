@@ -20,7 +20,7 @@ class PayController extends Controller
         // Fetch reservation from D
         $bookingData = SeatReservation::with('schedule')->findOrFail($id);
 
-        return view('pages.counter.payment', compact('bookingData'));
+        return view('pages.counter.booking.payment', compact('bookingData'));
     }
 
     /**
