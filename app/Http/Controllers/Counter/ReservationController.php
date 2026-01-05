@@ -65,7 +65,7 @@ class ReservationController extends Controller
             ->toArray();
 
 
-        return view('pages.user.seat-reservation', compact(
+        return view('pages.counter.booking.seat-reservation', compact(
             'schedule',
             'seatLayout',
             'seatCapacity',
@@ -102,7 +102,7 @@ class ReservationController extends Controller
         $validated['user_id'] = auth()->id();
         $validated['status'] = $validated['status'] ?? 'pending';
         $reservation = SeatReservation::create($validated);
-        return redirect()->route('counter.payment', ['id' => $reservation->id]);
+        return redirect()->route('counter.payment.for', ['id' => $reservation->id]);
     }
 
     /**
@@ -123,7 +123,7 @@ class ReservationController extends Controller
     {
         $reservation = SeatReservation::findOrFail($id);
 
-        return view('pages.user.edit-reservation', compact('reservation'));
+        return view('pages.counter.edit-reservation', compact('reservation'));
     }
 
     /**

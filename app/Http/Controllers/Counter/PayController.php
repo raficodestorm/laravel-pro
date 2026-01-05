@@ -79,7 +79,7 @@ class PayController extends Controller
 
         // ✅ 3) Redirect to ticket page with session data
         return redirect()
-            ->route('counter.ticket')
+            ->route('counter.eticket')
             ->with('success', '✅ Payment Successful! Your ticket is confirmed.')
             ->with('bookingData', $reservation)
             ->with('pnr', $pnr);

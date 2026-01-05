@@ -333,7 +333,7 @@
     {{-- RIGHT SIDE - Reservation Form --}}
     <div class="col-md-6">
       <div class="reservation-form">
-        <form id="reservationForm" action="{{ route('counter/go-to-payment') }}" method="POST">
+        <form id="reservationForm" action="{{ route('counter.go.payment') }}" method="POST">
           @csrf
           <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
 
